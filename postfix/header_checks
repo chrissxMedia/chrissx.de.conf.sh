@@ -1,0 +1,3 @@
+# Warning: bad jokes
+/^Date: .* 199[0-9]/ REJECT GET RTC
+/^X-LinkedIn-Class: / REJECT rm -r LinkedIn
