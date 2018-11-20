@@ -83,4 +83,6 @@ sudo nano /etc/apache2/sites-enabled/default-ssl.conf
 sudo a2enmod ssl
 sudo a2enmod headers
 sudo service apache2 restart
+sudo rm /usr/share/modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf
+sudo service apache2 restart
 echo Set up new server.
