@@ -6,7 +6,7 @@
 # is /etc/mailname.
 #myorigin = /etc/mailname
 
-smtpd_banner = $myhostname ESMTP $mail_name (chrissx Media)
+smtpd_banner = $myhostname ESMTP $mail_name (chrissx Media Inc.)
 biff = no
 
 # appending .domain is the MUA's job.
@@ -28,7 +28,7 @@ smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtpd_tls_security_level=may
-smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+smtpd_tls_protocols = !SSLv2, !SSLv3
 smtp_sasl_security_options = noplaintext noanonymous
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
@@ -42,18 +42,19 @@ alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
 mydestination = chrissx.ga, www.chrissx.ga, localhost.localdomain, localhost
 relayhost =
-mynetworks = 127.0.0.0/8 79.221.57.37
+mynetworks = 127.0.0.0/8 91.51.122.89
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 inet_protocols = all
 
+# Convert 5xx (permanent fail) to 4xx (temporary fail)
 soft_bounce = yes
 
 milter_default_action = accept
-milter_protocol   = 6
-smtpd_milters     = inet:localhost:12345
-non_smtpd_milters = inet:localhost:12345
+milter_protocol   = 2
+smtpd_milters     =
+non_smtpd_milters =
 
 # Block spam
 smtpd_helo_required = yes

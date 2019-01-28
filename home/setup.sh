@@ -48,7 +48,7 @@ echo |4096 dhparams and installing packages will take some time|
 echo -----------------------------------------------------------
 sudo apt -y update
 sudo apt -y upgrade
-sudo apt -y install openssl apache2 postfix postfix-pcre dovecot-core default-jre vim tmux libapache2-modsecurity dovecot-imapd dkim-filter
+sudo apt -y install openssl apache2 postfix postfix-pcre dovecot-core default-jre vim tmux dovecot-imapd dkim-filter python-certbot-apache
 sudo service postfix restart
 sudo openssl dhparam -out /etc/ssl/private/dhparam.pem 4096
 sudo sh -c "echo \"chrissx.ga\" > /etc/mailname"
@@ -75,14 +75,13 @@ sudo chmod +x update.sh
 sudo sh -c "echo \"#insert dovecot.conf here\" > /etc/dovecot/dovecot.conf"
 sudo nano /etc/dovecot/dovecot.conf
 sudo service dovecot restart
-sudo vim /etc/apache2/apache2.conf
+sudo sh -c "echo \"#insert apache2.conf here\" > /etc/apache2/apache2.conf"
+sudo nano /etc/apache2/apache2.conf
 sudo sh -c "echo \"#insert 000-default.conf here\" > /etc/apache2/sites-enabled/000-default.conf"
 sudo nano /etc/apache2/sites-enabled/000-default.conf
 sudo sh -c "echo \"#insert default-ssl.conf here\" > /etc/apache2/sites-enabled/default-ssl.conf"
 sudo nano /etc/apache2/sites-enabled/default-ssl.conf
 sudo a2enmod ssl
 sudo a2enmod headers
-sudo service apache2 restart
-sudo rm /usr/share/modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf
 sudo service apache2 restart
 echo Set up new server.
