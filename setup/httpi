@@ -1,0 +1,32 @@
+#!/bin/sh
+curl -L https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/install_sources.sh | sh
+sudo apt install apache2 pygopherd certbot
+sudo service pygopherd stop
+sudo rm -rf /var/gopher
+sudo git clone https://github.com/chrissxYT/chrissx.ga-70.git /var/gopher
+sudo service pygopherd start
+sudo service pygopherd enable
+sudo service apache2 stop
+sudo rm -rf /var/www/html
+sudo git clone https://github.com/chrissxYT/chrissx.ga.git /var/www/html
+sudo git clone https://github.com/chrissxYT/zerm.chrissx.ga.git /var/www/zerm
+sudo curl -Lo /etc/apache2/sites-enabled/default-ssl.conf https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/apache2/default-ssl.conf
+sudo curl -Lo /etc/apache2/sites-enabled/000-default.conf https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/apache2/000-default.conf
+sudo curl -Lo /etc/apache2/apache2.conf https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/apache2/apache2.conf
+sudo a2enmod ssl http2 headers
+sudo openssl dhparam -out /etc/ssl/private/dhparams.pem 4096
+echo "schedule downtime, change router settings and press enter"
+read _quatschistan
+sudo certbot certonly
+echo "enter cloudflare api key"
+read api_key
+sudo service apache2 start
+sudo service apache2 enable
+curl -L https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/home/dyndns.sh | sed "s/WHATEVER/$api_key/" > dyndns
+chmod +x dyndns
+curl -Lo gitpull https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/home/gitpull.sh
+chmod +x gitpull
+echo "tmux
+./dyndns
+<C-B>c./gitpull
+<C-B>d<C-D>"
