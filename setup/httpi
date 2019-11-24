@@ -28,5 +28,5 @@ curl -Lo gitpull https://github.com/chrissxYT/chrissx.ga.conf.sh/raw/master/home
 chmod +x gitpull
 echo "tmux
 ./dyndns
-<C-B>c./gitpull
+<C-B>csudo ./gitpull
 <C-B>d<C-D>"
