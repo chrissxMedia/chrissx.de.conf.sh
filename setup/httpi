@@ -17,7 +17,7 @@ sudo a2enmod ssl http2 headers
 sudo openssl dhparam -out /etc/ssl/private/dhparams.pem 4096
 echo "schedule downtime, change router settings and press enter"
 read _quatschistan
-sudo certbot certonly
+sudo certbot certonly --standalone -d chrissx.de,chrissx.eu,zerm.eu,zerm.link
 echo "enter cloudflare api key"
 read api_key
 sudo service apache2 start
