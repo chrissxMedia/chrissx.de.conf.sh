@@ -1,11 +1,30 @@
-# [chrissx.ga](https://chrissx.ga) config files
+# [chrissx.de](https://chrissx.de) config files
 
-These are all the config files and scripts used for chrissx.ga.  
-Available services:
+These are most of the config files and scripts used for chrissx.de.
 
-* Apache2 HTTPD webserver
-* Postfix rMTA or whatever it does for mail
-* Dovecot MDA or...I don't know this
-* A few monitoring tools (only available over internal ssh)
+## Servers
+We currently have around 7 servers, 4 of which are usually running at
+the moment:
 
-All the files in this git repository are licensed under GPLv3. (LICENSE)  
+* Veldenstein-Server (12 TB Windows NAS; running)
+* httpi (RasPi 3B+; web servers; running)
+* postpi (RasPi 3B+; mail servers; running)
+* optiplex3020 (Dell OptiPlex 3020; APT cache and Minecraft; running)
+* ldapi (RasPi 3B+; planned for LDAP; not running)
+* nextpi (RasPi 4B; Nextcloud; not running)
+* dlpi/grabpi (RasPi 3B+; youtube-dl; not running)
+
+## Used programs
+
+* redirector (HTTP)
+* static-short (zerm.link backend)
+* Apache2/HTTPD (HTTPS)
+* PyGopherD (Gopher)
+* Postfix (SMTP/Submission)
+* Dovecot (IMAP/POP3)
+* OpenSSHD (SSH)
+* A few tools (in this repo)
+
+## Licensing
+
+All the files in this git repository are GPLv3-licensed. (LICENSE)  
