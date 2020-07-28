@@ -3,4 +3,4 @@ sudo curl -fsSLo /etc/apt/sources.list https://github.com/chrissxYT/chrissx.ga.c
 sudo rm -rf /etc/apt/sources.list.d
 sudo apt update
 sudo apt upgrade
-sudo apt install vim tmux openssl
+sudo apt install vim tmux
