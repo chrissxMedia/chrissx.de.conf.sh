@@ -1,0 +1,24 @@
+#!/bin/sh
+sudo apt -y update
+sudo apt -y upgrade
+sudo apt -y install postfix postfix-pcre \
+        dovecot-core default-jre dovecot-imapd dkim-filter \
+        python-certbot-apache
+sudo service postfix restart
+sudo sh -c "echo chrissx.de > /etc/mailname"
+cd
+git clone https://github.com/chrissxyt/chrissx.ga.conf.sh
+cd chrissx.ga.conf.sh
+cd postfix
+sudo cp main.cf /etc/postfix/main.cf
+sudo cp master.cf /etc/postfix/master.cf
+sudo cp header_checks /etc/postfix/header_checks
+sudo postmap -q "string" regexp:/etc/postfix/header_checks
+sudo postmap -q "string" hash:/etc/aliases
+sudo service postfix restart
+cd ../home
+cp * ~
+cd ../dovecot
+sudo cp dovecot.conf /etc/dovecot/dovecot.conf
+sudo service dovecot restart
+echo Set up new server.
