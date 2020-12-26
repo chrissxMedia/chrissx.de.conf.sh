@@ -1,12 +1,11 @@
 #!/bin/sh
 curl -L https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/install_sources.sh | sh
 sudo apt install -y git apache2 pygopherd certbot
-sudo service pygopherd stop
+sudo systemctl stop pygopherd
 sudo rm -rf /var/gopher
 sudo git clone https://github.com/chrissxYT/chrissx.de-70.git /var/gopher
-sudo service pygopherd start
-sudo service pygopherd enable
-sudo service apache2 stop
+sudo systemctl enable --now pygopherd.service
+sudo systemctl stop apache2
 sudo rm -rf /var/www/html
 sudo git clone https://github.com/chrissxYT/chrissx.de.git /var/www/html &
 sudo git clone https://github.com/Ampless/ampless.chrissx.de.git /var/www/ampless &
@@ -21,9 +20,10 @@ sudo openssl dhparam -out /etc/ssl/private/dhparams.pem 4096 &
 echo "schedule downtime, change router settings and press enter"
 read _quatschistan
 wait
-sudo certbot certonly --standalone -d 'chrissx.de www.chrissx.de chrissx.eu www.chrissx.eu ampless.chrissx.de amplus.chrissx.de apt.chrissx.de i3b.chrissx.de git.chrissx.de meme.chrissx.de penis.chrissx.de www.zerm.eu zerm.eu zerm.link'
-sudo service apache2 start
-sudo service apache2 enable
+sudo systemctl stop redirector.service
+sudo certbot certonly --standalone -d 'chrissx.de,www.chrissx.de,chrissx.eu,www.chrissx.eu,ampless.chrissx.de,amplus.chrissx.de,apt.chrissx.de,i3b.chrissx.de,git.chrissx.de,meme.chrissx.de,penis.chrissx.de,www.zerm.eu,zerm.eu,zerm.link'
+sudo systemctl enable --now redirector.service
+sudo systemctl enable --now apache2.service
 echo "enter cloudflare api key"
 read api_key
 curl -L https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/home/dyndns.sh | sed "s/WHATEVER/$api_key/" > dyndns.sh
