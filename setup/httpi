@@ -1,6 +1,6 @@
 #!/bin/sh
 curl -L https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/install_sources.sh | sh
-sudo apt install -y apache2 pygopherd certbot
+sudo apt install -y git apache2 pygopherd certbot
 sudo service pygopherd stop
 sudo rm -rf /var/gopher
 sudo git clone https://github.com/chrissxYT/chrissx.de-70.git /var/gopher
