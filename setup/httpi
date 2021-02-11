@@ -1,6 +1,9 @@
 #!/bin/sh
 curl -L https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/install_sources.sh | sh
+sudo curl -Lo /usr/bin/install.sh https://github.com/chrissxYT/install.sh/raw/master/install.sh
+sudo chmod +x /usr/bin/install.sh
 sudo apt install -y git apache2 pygopherd certbot
+sudo openssl dhparam -out /etc/ssl/private/dhparams.pem 4096 &
 sudo systemctl stop pygopherd
 sudo rm -rf /var/gopher
 sudo git clone https://github.com/chrissxYT/chrissx.de-70.git /var/gopher
@@ -15,14 +18,13 @@ sudo curl -Lo /etc/apache2/sites-enabled/default-ssl.conf https://github.com/chr
 sudo curl -Lo /etc/apache2/apache2.conf https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/apache2/apache2.conf &
 sudo a2enmod ssl http2 headers proxy proxy_http proxy_http2 &
 curl -L https://github.com/chrissxYT/chrissx.de-80/raw/master/install.sh | sudo sh &
-curl -L https://github.com/chrissxYT/zerm.link/raw/master/install.sh | sudo sh &
-sudo openssl dhparam -out /etc/ssl/private/dhparams.pem 4096 &
+sudo install.sh jasmin sha256 4989b7140a3d4544b98cceb620db3815daea6c02acc7714ef4212db3cadfcda9 https://github.com/ZERMZeitung/jasmin/releases/download/4/jasmin-arm
 echo "schedule downtime, change router settings and press enter"
 read _quatschistan
 wait
-sudo systemctl stop redirector.service
+sudo systemctl stop jasmin.service
 sudo certbot certonly --standalone -d 'chrissx.de,www.chrissx.de,chrissx.eu,www.chrissx.eu,ampless.chrissx.de,amplus.chrissx.de,apt.chrissx.de,i3b.chrissx.de,git.chrissx.de,meme.chrissx.de,penis.chrissx.de,www.zerm.eu,zerm.eu,zerm.link'
-sudo systemctl enable --now redirector.service
+sudo systemctl enable --now jasmin.service
 sudo systemctl enable --now apache2.service
 echo "enter cloudflare api key"
 read api_key
