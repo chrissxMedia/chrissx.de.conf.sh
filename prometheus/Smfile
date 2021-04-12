@@ -1,0 +1,11 @@
+all {
+        !docker build . -t cm-prometheus
+}
+
+run (all) {
+        !docker run -p 9090:9090 -dv $PWD/generic:/etc/prometheus cm-prometheus prometheus
+}
+
+test (all) {
+        !docker run -p 9090:9090 -itv $PWD/test:/etc/prometheus cm-prometheus prometheus
+}
