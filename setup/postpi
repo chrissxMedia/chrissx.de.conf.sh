@@ -1,24 +1,24 @@
 #!/bin/sh
-sudo apt -y update
+sudo apt update
 sudo apt -y upgrade
 sudo apt -y install postfix postfix-pcre \
         dovecot-core default-jre dovecot-imapd dkim-filter \
-        python-certbot-apache
-sudo service postfix restart
+        python3-certbot tmux curl vim git
+sudo systemctl stop postfix
+sudo systemctl stop dovecot
+echo "press enter to run certbot"
+read ehre
+sudo certbot certonly --standalone -d 'mail.chrissx.de,chrissx.de,imap.chrissx.de,smtp.chrissx.de'
 sudo sh -c "echo chrissx.de > /etc/mailname"
-cd
-git clone https://github.com/chrissxyt/chrissx.ga.conf.sh
-cd chrissx.ga.conf.sh
-cd postfix
+git clone https://github.com/chrissxYT/chrissx.de.conf.sh ~/chrissx.de.conf.sh
+cd ~/chrissx.de.conf.sh/postfix
 sudo cp main.cf /etc/postfix/main.cf
 sudo cp master.cf /etc/postfix/master.cf
 sudo cp header_checks /etc/postfix/header_checks
 sudo postmap -q "string" regexp:/etc/postfix/header_checks
 sudo postmap -q "string" hash:/etc/aliases
-sudo service postfix restart
-cd ../home
-cp * ~
+sudo systemctl restart postfix
 cd ../dovecot
 sudo cp dovecot.conf /etc/dovecot/dovecot.conf
-sudo service dovecot restart
-echo Set up new server.
+sudo systemctl restart dovecot
+echo Set postpi.
