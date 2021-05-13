@@ -1,2 +1,0 @@
-deb http://apt-cache.chrissx.de:3142/archive.raspberrypi.org/debian/ buster main
-deb http://apt-cache.chrissx.de:3142/raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi
