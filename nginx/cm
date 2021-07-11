@@ -1,0 +1,103 @@
+server {
+	include /etc/nginx/html_server;
+	server_name _;
+	root /new;
+
+        rewrite ^/merch$ /shop permanent;
+        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/twitter$ https://twitter.com/nichtchrissx permanent;
+        rewrite ^/instagram$ https://instagram.com/chrissxYT permanent;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name old.chrissx.de;
+	root /old;
+
+        rewrite ^/merch$ /shop permanent;
+        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/twitter$ https://twitter.com/nichtchrissx permanent;
+        rewrite ^/instagram$ https://instagram.com/chrissxYT permanent;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name amplissimus.chrissx.de;
+	root /amplissimus;
+}
+
+server {
+	include /etc/nginx/server;
+	server_name proxy.amplissimus.chrissx.de;
+
+	add_header Access-Control-Allow-Origin https://amplissimus.chrissx.de always;
+
+	location / {
+		proxy_pass http://localhost:8066;
+		include /etc/nginx/proxy_params;
+#		proxy_pass https://mobileapi.dsbcontrol.de;
+#		proxy_set_header Host mobileapi.dsbcontrol.de;
+#		proxy_set_header Referrer "";
+#		proxy_buffering off;
+#		proxy_pass_request_body on;
+#		proxy_pass_request_headers on;
+#		proxy_http_version 1.0;
+#		proxy_ssl_protocols TLSv1.2;
+	}
+}
+
+server {
+	include /etc/nginx/server;
+	server_name ampless.chrissx.de;
+	root /ampless;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name amplus.chrissx.de;
+	root /amplus;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name i3b.chrissx.de;
+	root /i3b;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name meme.chrissx.de;
+	root /meme;
+}
+
+server {
+	include /etc/nginx/server;
+	server_name zerm.eu;
+
+	location / {
+		proxy_pass http://localhost:8099;
+		include /etc/nginx/proxy_params;
+	}
+}
+
+server {
+	include /etc/nginx/server;
+	server_name zerm.link;
+
+	location / {
+		proxy_pass http://localhost:8099;
+		include /etc/nginx/proxy_params;
+	}
+}
+
+server {
+	include /etc/nginx/server;
+	server_name qa.chrissx.de;
+
+	location / {
+		proxy_pass https://sites.teespring.com;
+		include /etc/nginx/proxy_params;
+	}
+}

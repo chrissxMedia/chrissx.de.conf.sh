@@ -1,0 +1,8 @@
+include /etc/nginx/server;
+
+index index.html;
+error_page 404 https://chrissx.de/404.html;
+
+location / {
+	try_files $uri $uri/ =404;
+}
