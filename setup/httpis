@@ -34,12 +34,8 @@ sudo curl -Lo /etc/apache2/sites-enabled/default-ssl.conf https://github.com/chr
 sudo curl -Lo /etc/apache2/apache2.conf https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/apache2/apache2.conf
 sudo curl -Lo /etc/apache2/ports.conf https://github.com/chrissxYT/chrissx.de.conf.sh/raw/master/apache2/ports.conf
 sudo a2enmod ssl http2 headers proxy proxy_http proxy_http2
-curl -Lo jasmin.deb https://github.com/ZERMZeitung/jasmin/releases/download/15/jasmin_15_linux_armv6.deb
 curl -Lo red.deb https://github.com/chrissxYT/redirector/releases/download/3.3/redirector_3.3_linux_armv6.deb
-sudo dpkg -i jasmin.deb
 sudo dpkg -i red.deb
-rm -f jasmin.deb red.deb
-newservice jasmin "The 2021 ZERM backend."
 newservice redirector "A simple HTTPS upgrador"
 echo "schedule downtime, change router settings and press enter"
 read _quatschistan
