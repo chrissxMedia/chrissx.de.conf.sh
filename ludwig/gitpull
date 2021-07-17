@@ -1,0 +1,5 @@
+#!/bin/sh
+cd /var/gopher
+while sleep 3 ; do
+        git pull
+done
