@@ -1,0 +1,42 @@
+graph {
+  "Big Bad Internet™" -- Rosenhof
+
+  Rosenhof -- "FB 7530 AX"
+  "FB 7530 AX" -- "Powerline Baba"
+  "FB 7530 AX" -- "QNAP QSW-1105-5T"
+  "QNAP QSW-1105-5T" -- "NETGEAR XS505M"
+  "NETGEAR XS505M" -- dergerät
+  "QNAP QSW-1105-5T" -- "Powerline Pixel"
+  "Powerline Pixel" -- "GWiFi Pixel"
+  "GWiFi Pixel" -- "TB Dock Pixel"
+  "Powerline Baba" -- "TP-Link TL-SG108"
+
+  "NETGEAR XS505M" -- rotmain
+
+  "TP-Link TL-SG108" -- httpis
+  httpis -- httpd
+  httpis -- redirector
+  httpis -- pygopherd
+  httpis -- dyndns
+
+  "TP-Link TL-SG108" -- postpi
+  postpi -- postfix
+  postpi -- dovecot
+
+  "TP-Link TL-SG108" -- optiplex3020
+  optiplex3020 -- bucket
+  optiplex3020 -- "tor-proxy"
+  optiplex3020 -- aggregamus
+  optiplex3020 -- inspiriererin
+  optiplex3020 -- murmur
+
+  "Big Bad Internet™" -- Nuremberg
+  Nuremberg -- sophia
+  pygopherdkek [label=pygopherd]
+  redirectorkek [label=redirector]
+  sophia -- nginx
+  sophia -- pygopherdkek
+  sophia -- redirectorkek
+  sophia -- jasmin
+  sophia -- hanna
+}
