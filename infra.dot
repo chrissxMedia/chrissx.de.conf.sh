@@ -15,8 +15,6 @@ graph {
 
   "TP-Link TL-SG108" -- httpis
   httpis -- httpd
-  httpis -- redirector
-  httpis -- pygopherd
   httpis -- dyndns
 
   "TP-Link TL-SG108" -- postpi
@@ -43,4 +41,5 @@ graph {
   sophia -- redirectorkek
   sophia -- jasmin
   sophia -- hanna
+  sophia -- deployment
 }
