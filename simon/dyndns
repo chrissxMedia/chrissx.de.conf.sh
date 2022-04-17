@@ -1,12 +1,10 @@
 #!/bin/sh
-API_KEY="WHATEVER"
-EMAIL="chrissx@chrissx.de"
 
 while true ; do
         IP=$(curl http://ipinfo.io/ip)
         [ "$LAST_IP" = "$IP" ] && sleep 60 && continue
-        curl -L -H "X-Auth-Email: $EMAIL" \
-                -H "X-Auth-Key: $API_KEY" \
+        curl -L -H "X-Auth-Email: $1" \
+                -H "X-Auth-Key: $2" \
                 -H "Content-Type: application/json" \
                 --data '{"type":"A","name":"rosenhof.chrissx.de","content":"'"$IP"'","ttl":120,"proxied":false}' \
                 -X PUT \
