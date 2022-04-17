@@ -1,13 +1,14 @@
 server {
 	include /etc/nginx/html_server;
 	server_name _;
-	root /new;
+	root /new/dist;
 
         rewrite ^/merch$ /shop permanent;
-        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+        rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
+        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
         rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
-        rewrite ^/twitter$ https://twitter.com/nichtchrissx permanent;
-        rewrite ^/instagram$ https://instagram.com/chrissxYT permanent;
+        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
 server {
@@ -17,9 +18,23 @@ server {
 
         rewrite ^/merch$ /shop permanent;
         rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
         rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
-        rewrite ^/twitter$ https://twitter.com/nichtchrissx permanent;
-        rewrite ^/instagram$ https://instagram.com/chrissxYT permanent;
+        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name pixel.chrissx.de;
+	root /pixel/dist;
+
+        rewrite ^/merch$ /shop permanent;
+        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
+        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
 server {
@@ -32,19 +47,9 @@ server {
 	include /etc/nginx/server;
 	server_name proxy.amplissimus.chrissx.de;
 
-	add_header Access-Control-Allow-Origin https://amplissimus.chrissx.de always;
-
 	location / {
-		proxy_pass http://localhost:8066;
+		proxy_pass http://localhost:8043;
 		include /etc/nginx/proxy_params;
-#		proxy_pass https://mobileapi.dsbcontrol.de;
-#		proxy_set_header Host mobileapi.dsbcontrol.de;
-#		proxy_set_header Referrer "";
-#		proxy_buffering off;
-#		proxy_pass_request_body on;
-#		proxy_pass_request_headers on;
-#		proxy_http_version 1.0;
-#		proxy_ssl_protocols TLSv1.2;
 	}
 }
 
@@ -73,6 +78,12 @@ server {
 }
 
 server {
+	include /etc/nginx/html_server;
+	server_name lyrics.chrissx.de;
+	root /lyrics/dist;
+}
+
+server {
 	include /etc/nginx/server;
 	server_name zerm.eu;
 
@@ -86,6 +97,8 @@ server {
 	include /etc/nginx/server;
 	server_name zerm.link;
 
+        rewrite ^/P41531.pdf$ https://youtu.be/dQw4w9WgXcQ permanent;
+
 	location / {
 		proxy_pass http://localhost:8099;
 		include /etc/nginx/proxy_params;
@@ -94,10 +107,20 @@ server {
 
 server {
 	include /etc/nginx/server;
-	server_name qa.chrissx.de;
+	server_name fonts.chrissx.de;
 
 	location / {
-		proxy_pass https://sites.teespring.com;
+		proxy_pass http://localhost:8042;
+		include /etc/nginx/proxy_params;
+	}
+}
+
+server {
+	include /etc/nginx/server;
+	server_name wiki.chrissx.de;
+
+	location / {
+		proxy_pass http://localhost:8942;
 		include /etc/nginx/proxy_params;
 	}
 }
