@@ -14,32 +14,32 @@ graph {
   "NETGEAR XS505M" -- rotmain
 
   "TP-Link TL-SG108" -- httpis
-  httpis -- httpd
+  httpis -- "httpd@443,80"
   httpis -- dyndns
 
   "TP-Link TL-SG108" -- postpi
-  postpi -- postfix
-  postpi -- dovecot
+  postpi -- "postfix@587,25"
+  postpi -- "dovecot@993,143"
 
   "TP-Link TL-SG108" -- optiplex3020
-  dockerop [label=docker]
+  dockerop [label="docker@9323"]
   optiplex3020 -- dockerop
-  dockerop -- "tor-proxy"
-  optiplex3020 -- bucket
-  optiplex3020 -- aggregamus
-  optiplex3020 -- inspiriererin
+  dockerop -- "tor-proxy@9053,9052,9050"
+  optiplex3020 -- "bucket@8022"
+  optiplex3020 -- "aggregamus@8669"
+  optiplex3020 -- "inspiriererin@8989"
   optiplex3020 -- murmur
 
   "Big Bad Internet™" -- Nuremberg
   Nuremberg -- sophia
-  redirectorkek [label=redirector]
-  dockersophia [label=docker]
-  sophia -- nginx
+  redirectorkek [label="redirector@80"]
+  dockersophia [label="docker@9323"]
+  sophia -- "nginx@8169,443"
   sophia -- dockersophia
-  dockersophia -- "ludwig (pygopherd)"
-  dockersophia -- mediawiki
+  dockersophia -- "ludwig (pygopherd@70)"
+  dockersophia -- "mediawiki@8942"
   sophia -- redirectorkek
-  sophia -- jasmin
-  sophia -- hanna
+  sophia -- "jasmin@8099"
+  sophia -- "hanna@8042"
   sophia -- deployment
 }
