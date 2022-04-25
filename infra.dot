@@ -1,17 +1,18 @@
 graph {
+  node [fontname = "Unifont"]
+
   "Big Bad Internet™" -- Rosenhof
 
   Rosenhof -- "FB 7530 AX"
-  "FB 7530 AX" -- "Powerline Baba"
-  "FB 7530 AX" -- "QNAP QSW-1105-5T"
-  "QNAP QSW-1105-5T" -- "NETGEAR XS505M"
+  "FB 7530 AX" -- "NETGEAR XS505M"
   "NETGEAR XS505M" -- dergerät
-  "QNAP QSW-1105-5T" -- "Powerline Pixel"
-  "Powerline Pixel" -- "GWiFi Pixel"
-  "GWiFi Pixel" -- "TB Dock Pixel"
+  "NETGEAR XS505M" -- "rotmain"
+  "NETGEAR XS505M" -- "QNAP QSW-1105-5T"
+  "QNAP QSW-1105-5T" -- "GWiFi ServerRoom"
+  "FB 7530 AX" -- "Powerline Baba"
   "Powerline Baba" -- "TP-Link TL-SG108"
-
-  "NETGEAR XS505M" -- rotmain
+  "TP-Link TL-SG108" -- "GWiFi Baba"
+  "TP-Link TL-SG108" -- "Baba PC"
 
   "TP-Link TL-SG108" -- httpis
   httpis -- "httpd@443,80"
