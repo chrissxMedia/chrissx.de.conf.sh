@@ -1,0 +1,34 @@
+global:
+  external_labels:
+      monitor: generic
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['localhost:9093']
+
+rule_files:
+  # - "rules.yml"
+
+scrape_configs:
+  - job_name: self
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: sophia
+    static_configs:
+      - targets:
+        - 'sophia.chrissx.de:9323' # docker
+        - 'sophia.chrissx.de:9113' # nginx
+        - 'sophia.chrissx.de:8099' # jasmin
+        - 'sophia.chrissx.de:8042' # hanna
+        - 'sophia.chrissx.de:80' # redirector
+
+  - job_name: optiplex3020
+    static_configs:
+      - targets:
+        - 'op.chrissx.de:9323' # docker
+        - 'op.chrissx.de:8989' # inspiriererin
+        - 'op.chrissx.de:8669' # aggregamus
+        - 'op.chrissx.de:8022' # bucket
