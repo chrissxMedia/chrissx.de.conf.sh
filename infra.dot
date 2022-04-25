@@ -1,4 +1,5 @@
 graph {
+  stylesheet="unifont.css"
   node [fontname = "Unifont"]
 
   "Big Bad Internet™" -- Rosenhof
