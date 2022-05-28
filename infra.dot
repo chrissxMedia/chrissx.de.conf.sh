@@ -1,13 +1,14 @@
 graph {
   stylesheet="unifont.css"
-  node [fontname = "Unifont"]
+  node [fontname = Unifont]
+  edge [fontname = Unifont]
 
   "Big Bad Internet™" -- Rosenhof
 
   Rosenhof -- "FB 7530 AX"
   "FB 7530 AX" -- "NETGEAR XS505M"
   "NETGEAR XS505M" -- dergerät
-  "NETGEAR XS505M" -- "rotmain"
+  "NETGEAR XS505M" -- rotmain
   "NETGEAR XS505M" -- "QNAP QSW-1105-5T"
   "QNAP QSW-1105-5T" -- "GWiFi ServerRoom"
   "FB 7530 AX" -- "Powerline Baba"
@@ -15,33 +16,33 @@ graph {
   "TP-Link TL-SG108" -- "GWiFi Baba"
   "TP-Link TL-SG108" -- "Baba PC"
 
-  "TP-Link TL-SG108" -- httpis
-  httpis -- "httpd@443,80"
+  "TP-Link TL-SG108" -- httpis [label="443,80"]
+  httpis -- httpd [label="443,80"]
   httpis -- dyndns
 
-  "TP-Link TL-SG108" -- postpi
-  postpi -- "postfix@587,25"
-  postpi -- "dovecot@993,143"
+  "TP-Link TL-SG108" -- postpi [label="993,587,143,25"]
+  postpi -- postfix [label="587,25"]
+  postpi -- dovecot [label="993,143"]
 
   "TP-Link TL-SG108" -- optiplex3020
-  dockerop [label="docker@9323"]
-  optiplex3020 -- dockerop
-  dockerop -- "tor-proxy@9053,9052,9050"
-  optiplex3020 -- "bucket@8022"
-  optiplex3020 -- "aggregamus@8669"
-  optiplex3020 -- "inspiriererin@8989"
-  optiplex3020 -- murmur
+  dockerop [label=docker]
+  optiplex3020 -- dockerop [label="9323,9053,9052,9050"]
+  dockerop -- "tor-proxy" [label="9053,9052,9050"]
+  optiplex3020 -- bucket [label=8022]
+  optiplex3020 -- aggregamus [label=8669]
+  optiplex3020 -- inspiriererin [label=8989]
+  optiplex3020 -- murmur [label=64738]
 
   "Big Bad Internet™" -- Nuremberg
-  Nuremberg -- sophia
-  redirectorkek [label="redirector@80"]
-  dockersophia [label="docker@9323"]
-  sophia -- "nginx@8169,443"
-  sophia -- dockersophia
-  dockersophia -- "ludwig (pygopherd@70)"
-  dockersophia -- "mediawiki@8942"
-  sophia -- redirectorkek
-  sophia -- "jasmin@8099"
-  sophia -- "hanna@8042"
+  Nuremberg -- sophia [label="443,80,70"]
+  redirectorkek [label=redirector]
+  dockersophia [label=docker]
+  sophia -- nginx [label="8169,443"]
+  sophia -- dockersophia [label="9323,8942,70"]
+  dockersophia -- "ludwig (pygopherd)" [label=70]
+  dockersophia -- "mediawiki" [label=8942]
+  sophia -- redirectorkek [label=80]
+  sophia -- "jasmin" [label=8099]
+  sophia -- "hanna" [label=8042]
   sophia -- deployment
 }
