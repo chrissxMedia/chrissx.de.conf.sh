@@ -18,6 +18,7 @@ graph {
 
   "TP-Link TL-SG108" -- httpis [label="443,80"]
   httpis -- httpd [label="443,80"]
+  httpis -- pygopherd [label=70]
   httpis -- dyndns
 
   "TP-Link TL-SG108" -- postpi [label="993,587,143,25"]
