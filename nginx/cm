@@ -9,6 +9,10 @@ server {
         rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
         rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
+
+	location /metrics {
+		stub_status on;
+	}
 }
 
 server {
@@ -35,22 +39,6 @@ server {
         rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
         rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
-}
-
-server {
-	include /etc/nginx/html_server;
-	server_name amplissimus.chrissx.de;
-	root /amplissimus;
-}
-
-server {
-	include /etc/nginx/server;
-	server_name proxy.amplissimus.chrissx.de;
-
-	location / {
-		proxy_pass http://localhost:8043;
-		include /etc/nginx/proxy_params;
-	}
 }
 
 server {
@@ -84,33 +72,28 @@ server {
 }
 
 server {
-	include /etc/nginx/server;
-	server_name zerm.eu;
-
-	location / {
-		proxy_pass http://localhost:8099;
-		include /etc/nginx/proxy_params;
-	}
-}
-
-server {
-	include /etc/nginx/server;
-	server_name zerm.link;
-
-        rewrite ^/P41531.pdf$ https://youtu.be/dQw4w9WgXcQ permanent;
-
-	location / {
-		proxy_pass http://localhost:8099;
-		include /etc/nginx/proxy_params;
-	}
+	include /etc/nginx/html_server;
+	server_name fuxgames.com www.fuxgames.com;
+	root /fux/dist;
 }
 
 server {
 	include /etc/nginx/server;
 	server_name fonts.chrissx.de;
+	root /fonts/dist;
+	index "index";
+	types { } default_type "text/css";
+	add_header Access-Control-Allow-Origin *;
+}
+
+server {
+	include /etc/nginx/server;
+	server_name zerm.eu zerm.link;
+
+	rewrite ^/P41531.pdf$ https://youtu.be/dQw4w9WgXcQ permanent;
 
 	location / {
-		proxy_pass http://localhost:8042;
+		proxy_pass http://localhost:8099;
 		include /etc/nginx/proxy_params;
 	}
 }
