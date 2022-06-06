@@ -8,14 +8,14 @@ These are most of the config files and scripts used for chrissx.de.
 
 ### Hardware
 
-| Hostname     | Hardware                                    | Location  | OS                   | Status                        | Cost     |
-| ------------ | ------------------------------------------- | --------- | -------------------- | ----------------------------- | -------- |
-| sophia       | Hetzner CX11                                | Nuremberg | Ubuntu Server 22.04  | running                       | 3.56€/mo |
-| rotmain      | Synology DS1821+, 8x Seagate IronWolf 8TB   | Pegnitz   | DSM 7                | running                       | 3500€    |
-| httpis       | Raspberry Pi 3B+                            | Pegnitz   | Raspbian Bullseye    | running                       | 35€      |
-| postpi       | Raspberry Pi 3B+                            | Pegnitz   | Raspbian Bullseye    | running                       | 35€      |
-| optiplex3020 | Dell OptiPlex 3020                          | Pegnitz   | Ubuntu Server 22.04  | running                       | 80€      |
-| veldenstein  | Custom (Pentium G4400 based), 4x WD Red 4TB | Pegnitz   | Ubuntu Desktop 22.04 | not running, emergency backup | 1000€    |
+| Hostname     | Hardware                                    | Location  | OS                   | Status                        | Cost    |
+| ------------ | ------------------------------------------- | --------- | -------------------- | ----------------------------- | ------- |
+| sophia       | Hetzner CX11                                | Nuremberg | Ubuntu Server 22.04  | running                       | 3.5€/mo |
+| rotmain      | Synology DS1821+, 8x Seagate IronWolf 8TB   | Pegnitz   | DSM 7                | running                       | 3500€   |
+| httpis       | Raspberry Pi 3B+                            | Pegnitz   | Raspbian Bullseye    | dead, to be removed           | 35€     |
+| postpi       | Raspberry Pi 3B+                            | Pegnitz   | Raspbian Bullseye    | running                       | 35€     |
+| optiplex3020 | Dell OptiPlex 3020                          | Pegnitz   | Ubuntu Server 22.04  | running                       | 80€     |
+| veldenstein  | Custom (Pentium G4400 based), 4x WD Red 4TB | Pegnitz   | Ubuntu Desktop 22.04 | not running, emergency backup | 1000€   |
 
 ### DNS
 
@@ -23,8 +23,6 @@ These are most of the config files and scripts used for chrissx.de.
 
 | Type  | Name                   | Content               |
 | ----- | ---------------------- | --------------------- |
-| A     | `httpis.chrissx.de`    | `192.168.178.32`      |
-| A     | `iven.chrissx.de`      | `192.168.88.1`        |
 | A     | `op.chrissx.de`        | `192.168.178.30`      |
 | A     | `postpi.chrissx.de`    | `192.168.178.31`      |
 | A     | `rotmain.chrissx.de`   | `192.168.178.29`      |
@@ -52,7 +50,6 @@ These are most of the config files and scripts used for chrissx.de.
 | CNAME | `get.cpm.chrissx.de`           | `sophia.chrissx.de`       |
 | CNAME | `git.chrissx.de`               | `rosenhof.chrissx.de`     |
 | CNAME | `i3b.chrissx.de`               | `sophia.chrissx.de`       |
-| CNAME | `imap.chrissx.de`              | `mail.chrissx.de`         |
 | CNAME | `lyrics.chrissx.de`            | `sophia.chrissx.de`       |
 | CNAME | `mail.chrissx.de`              | `rosenhof.chrissx.de`     |
 | CNAME | `mc.chrissx.de`                | `rosenhof.chrissx.de`     |
@@ -66,7 +63,6 @@ These are most of the config files and scripts used for chrissx.de.
 | CNAME | `porn.chrissx.de`              | `sophia.chrissx.de`       |
 | CNAME | `proxy.amplissimus.chrissx.de` | `sophia.chrissx.de`       |
 | CNAME | `qa.chrissx.de`                | `sophia.chrissx.de`       |
-| CNAME | `smtp.chrissx.de`              | `mail.chrissx.de`         |
 | CNAME | `tor.chrissx.de`               | `op.chrissx.de`           |
 | CNAME | `wiki.chrissx.de`              | `sophia.chrissx.de`       |
 | CNAME | `www.chrissx.de`               | `chrissx.de`              |

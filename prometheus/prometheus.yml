@@ -23,7 +23,7 @@ scrape_configs:
         - 'sophia.chrissx.de:9113' # nginx
         - 'sophia.chrissx.de:8099' # jasmin
         - 'sophia.chrissx.de:8042' # hanna
-        - 'sophia.chrissx.de:80' # redirector
+        - 'sophia.chrissx.de:80'   # redirector
 
   - job_name: optiplex3020
     static_configs:
@@ -32,3 +32,6 @@ scrape_configs:
         - 'op.chrissx.de:8989' # inspiriererin
         - 'op.chrissx.de:8669' # aggregamus
         - 'op.chrissx.de:8022' # bucket
+        # this is down because it is in nginx format
+        # TODO: generic fix
+        - 'op.chrissx.de:80'   # nginx
