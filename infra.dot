@@ -3,32 +3,24 @@ graph {
   node [fontname = Unifont]
   edge [fontname = Unifont]
 
-  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX"
-  "FB 7530 AX" -- "NETGEAR XS505M"
-  "NETGEAR XS505M" -- dergerät
-  "NETGEAR XS505M" -- rotmain
-  "FB 7530 AX" -- "Powerline Baba" -- "TP-Link TL-SG108"
-  "TP-Link TL-SG108" -- "Baba PC"
+  "FB 7530 AX" -- "NETGEAR XS505M" -- rotmain
 
-  "TP-Link TL-SG108" -- postpi [label="993\n587\n143\n25"]
-  postpi -- postfix [label="587\n25"]
-  postpi -- dovecot [label="993\n143"]
-
-  "TP-Link TL-SG108" -- optiplex3020 [label="443\n80\n70"]
+  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- "Powerline Baba" -- "TP-Link TL-SG108" -- optiplex3020 [label="993,143\n587,25\n443,80\n70"]
   dockerop [label=docker]
   ludwigop [label=ludwig]
   nginxop [label=nginx]
-  optiplex3020 -- dockerop [label="9323\n9053\n9052\n9050\n443\n80\n70"]
+  optiplex3020 -- dockerop [label="9323\n9053,9052,9050\n993,143\n587,25\n443,80\n70"]
   dockerop -- "tor-proxy" [label="9053\n9052\n9050"]
   dockerop -- nginxop [label="443\n80"]
   dockerop -- ludwigop [label=70]
   dockerop -- simon
+  dockerop -- ali [label="993,143\n587,25"]
   optiplex3020 -- bucket [label=8022]
   optiplex3020 -- aggregamus [label=8669]
   optiplex3020 -- inspiriererin [label=8989]
   optiplex3020 -- murmur [label=64738]
 
-  "Big Bad Internet™" -- Nuremberg -- sophia [label="443\n80\n70"]
+  "Big Bad Internet™" -- Nuremberg -- sophia [label="443,80\n70"]
   redirectorkek [label=redirector]
   dockersophia [label=docker]
   ludwigsophia [label=ludwig]
