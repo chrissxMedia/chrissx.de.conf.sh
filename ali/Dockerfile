@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #ARG DOMAIN=chrissx.de
 
 RUN apt update && apt upgrade -y && apt autoremove -y
-RUN apt install -y postfix dovecot-imapd opendkim
+RUN apt install -y postfix dovecot-imapd dovecot-lmtpd opendkim
 
 RUN service postfix stop
 RUN service dovecot stop
