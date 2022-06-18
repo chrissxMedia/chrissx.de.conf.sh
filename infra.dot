@@ -3,9 +3,9 @@ graph {
   node [fontname = Unifont]
   edge [fontname = Unifont]
 
-  "FB 7530 AX" -- "NETGEAR XS505M" -- rotmain
+  "FB 7530 AX" -- rotmain
 
-  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- "Powerline Baba" -- "TP-Link TL-SG108" -- optiplex3020 [label="993,143\n587,25\n443,80\n70"]
+  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- optiplex3020 [label="993,143\n587,25\n443,80\n70"]
   dockerop [label=docker]
   ludwigop [label=ludwig]
   nginxop [label=nginx]

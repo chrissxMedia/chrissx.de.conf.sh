@@ -17,5 +17,9 @@ accordingly, and the current directory contains the following files:
 Then run the following command:
 
 ```sh
-sudo docker run -d --restart=always -v$PWD:/mail -v/etc/letsencrypt/live/rosenhof.chrissx.de/cert.pem:/mail/cert.pem -v/etc/letsencrypt/live/rosenhof.chrissx.de/fullchain.pem:/mail/fullchain.pem -v/etc/letsencrypt/live/rosenhof.chrissx.de/privkey.pem:/mail/privkey.pem -p25:25 -p143:143 -p587:587 -p993:993 chrissx/ali
+sudo docker run -d --restart=always -v$PWD:/mail \
+-v/etc/letsencrypt/live/rosenhof.chrissx.de/cert.pem:/mail/cert.pem \
+-v/etc/letsencrypt/live/rosenhof.chrissx.de/fullchain.pem:/mail/fullchain.pem \
+-v/etc/letsencrypt/live/rosenhof.chrissx.de/privkey.pem:/mail/privkey.pem \
+-p25:25 -p143:143 -p587:587 -p993:993 chrissx/ali
 ```
