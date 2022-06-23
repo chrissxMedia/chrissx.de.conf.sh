@@ -19,6 +19,7 @@ graph {
   optiplex3020 -- aggregamus [label=8669]
   optiplex3020 -- inspiriererin [label=8989]
   optiplex3020 -- murmur [label=64738]
+  optiplex3020 -- "backup.timer"
 
   "Big Bad Internet™" -- Nuremberg -- sophia [label="443,80\n70"]
   redirectorkek [label=redirector]
