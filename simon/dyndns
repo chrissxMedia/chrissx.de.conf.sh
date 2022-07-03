@@ -1,10 +1,9 @@
 #!/bin/sh
 
 while true ; do
-        IP=$(curl http://ipinfo.io/ip)
+        IP=$(curl -$TYPE http://sophia.chrissx.de:8080)
         [ "$LAST_IP" = "$IP" ] && sleep 60 && continue
-        curl -L -H "X-Auth-Email: $1" \
-                -H "X-Auth-Key: $2" \
+        curl -L -H "Authorization: Bearer $TOKEN" \
                 -H "Content-Type: application/json" \
                 --data '{"type":"A","name":"rosenhof.chrissx.de","content":"'"$IP"'","ttl":120,"proxied":false}' \
                 -X PUT \
