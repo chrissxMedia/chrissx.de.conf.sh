@@ -1,13 +1,30 @@
 #!/bin/sh
+set -uxe
+
+LAST4=
+LAST6=
 
 while true ; do
-        IP=$(curl -$TYPE http://sophia.chrissx.de:8080)
-        [ "$LAST_IP" = "$IP" ] && sleep 60 && continue
-        curl -L -H "Authorization: Bearer $TOKEN" \
-                -H "Content-Type: application/json" \
-                --data '{"type":"A","name":"rosenhof.chrissx.de","content":"'"$IP"'","ttl":120,"proxied":false}' \
-                -X PUT \
-                https://api.cloudflare.com/client/v4/zones/08bd4c50de27d76b981bfe6b8c911a97/dns_records/6016d3dd55f04e871a5ef61df41f52d0
-        LAST_IP="$IP"
-        sleep 120
+        IP4=`curl -4 http://sophia.chrissx.de:8080`
+        IP6=`curl -6 http://sophia.chrissx.de:8080 | sed 's/\[//;s/\]//'`
+
+        if [ "$LAST4" != "$IP4" ] ; then
+                curl -L -H "Authorization: Bearer $TOKEN" \
+                        -H "Content-Type: application/json" \
+                        --data '{"type":"A","name":"'"$DOMAIN"'","content":"'"$IP4"'","ttl":120,"proxied":false}' \
+                        -X PUT \
+                        "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records/$RECORD4"
+                LAST4="$IP4"
+        fi
+
+        if [ "$LAST6" != "$IP6" ] ; then
+                curl -L -H "Authorization: Bearer $TOKEN" \
+                        -H "Content-Type: application/json" \
+                        --data '{"type":"AAAA","name":"'"$DOMAIN"'","content":"'"$IP6"'","ttl":120,"proxied":false}' \
+                        -X PUT \
+                        "https://api.cloudflare.com/client/v4/zones/$ZONE/dns_records/$RECORD6"
+                LAST6="$IP6"
+        fi
+
+        sleep 60
 done
