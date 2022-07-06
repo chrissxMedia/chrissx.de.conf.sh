@@ -72,8 +72,9 @@
 <g id="edge16" class="edge">
 <title>Big Bad Internet™&#45;&#45;Nuremberg</title>
 <path fill="none" stroke="black" d="M906.74,-675.24C912.54,-669.68 918.79,-663.29 924.05,-657 945.47,-631.36 966.34,-598.46 978.15,-578.87"/>
-<text text-anchor="middle" x="987.55" y="-630.8" font-family="Unifont" font-size="14.00">443,80</text>
-<text text-anchor="middle" x="987.55" y="-615.8" font-family="Unifont" font-size="14.00">70</text>
+<text text-anchor="middle" x="987.55" y="-638.3" font-family="Unifont" font-size="14.00">8080</text>
+<text text-anchor="middle" x="987.55" y="-623.3" font-family="Unifont" font-size="14.00">443,80</text>
+<text text-anchor="middle" x="987.55" y="-608.3" font-family="Unifont" font-size="14.00">70</text>
 </g>
 <!-- Rosenhof&#45;&#45;FB 7530 AX -->
 <g id="edge3" class="edge">
@@ -233,8 +234,9 @@
 <g id="edge17" class="edge">
 <title>Nuremberg&#45;&#45;sophia</title>
 <path fill="none" stroke="black" d="M993.54,-543C1001.59,-518.09 1016.5,-471.92 1024.55,-447"/>
-<text text-anchor="middle" x="1038.55" y="-498.8" font-family="Unifont" font-size="14.00">443,80</text>
-<text text-anchor="middle" x="1038.55" y="-483.8" font-family="Unifont" font-size="14.00">70</text>
+<text text-anchor="middle" x="1038.55" y="-506.3" font-family="Unifont" font-size="14.00">8080</text>
+<text text-anchor="middle" x="1038.55" y="-491.3" font-family="Unifont" font-size="14.00">443,80</text>
+<text text-anchor="middle" x="1038.55" y="-476.3" font-family="Unifont" font-size="14.00">70</text>
 </g>
 <!-- redirectorkek -->
 <g id="node19" class="node">
@@ -287,17 +289,17 @@
 <path fill="none" stroke="black" d="M1045.43,-412.57C1050.96,-406.68 1057.05,-399.75 1062.05,-393 1081.17,-367.14 1099.31,-334.31 1109.52,-314.79"/>
 <text text-anchor="middle" x="1114.05" y="-359.3" font-family="Unifont" font-size="14.00">8099</text>
 </g>
-<!-- hanna -->
+<!-- erwin -->
 <g id="node25" class="node">
-<title>hanna</title>
+<title>erwin</title>
 <ellipse fill="none" stroke="black" cx="1206.05" cy="-297" rx="32.49" ry="18"/>
-<text text-anchor="middle" x="1206.05" y="-293.3" font-family="Unifont" font-size="14.00">hanna</text>
+<text text-anchor="middle" x="1206.05" y="-293.3" font-family="Unifont" font-size="14.00">erwin</text>
 </g>
-<!-- sophia&#45;&#45;hanna -->
+<!-- sophia&#45;&#45;erwin -->
 <g id="edge24" class="edge">
-<title>sophia&#45;&#45;hanna</title>
+<title>sophia&#45;&#45;erwin</title>
 <path fill="none" stroke="black" d="M1064.02,-421.54C1085.04,-416.35 1111.78,-407.46 1132.05,-393 1161.66,-371.87 1185.2,-335.58 1197.25,-314.49"/>
-<text text-anchor="middle" x="1200.05" y="-359.3" font-family="Unifont" font-size="14.00">8042</text>
+<text text-anchor="middle" x="1200.05" y="-359.3" font-family="Unifont" font-size="14.00">8080</text>
 </g>
 <!-- deployment -->
 <g id="node26" class="node">
@@ -322,17 +324,17 @@
 <path fill="none" stroke="black" d="M942.05,-278.88C942.05,-248.24 942.05,-184.38 942.05,-153.48"/>
 <text text-anchor="middle" x="949.05" y="-212.3" font-family="Unifont" font-size="14.00">70</text>
 </g>
-<!-- mediawiki -->
+<!-- viktor2 -->
 <g id="node23" class="node">
-<title>mediawiki</title>
-<ellipse fill="none" stroke="black" cx="1047.05" cy="-135" rx="50.09" ry="18"/>
-<text text-anchor="middle" x="1047.05" y="-131.3" font-family="Unifont" font-size="14.00">mediawiki</text>
+<title>viktor2</title>
+<ellipse fill="none" stroke="black" cx="1039.05" cy="-135" rx="41.69" ry="18"/>
+<text text-anchor="middle" x="1039.05" y="-131.3" font-family="Unifont" font-size="14.00">viktor2</text>
 </g>
-<!-- dockersophia&#45;&#45;mediawiki -->
+<!-- dockersophia&#45;&#45;viktor2 -->
 <g id="edge21" class="edge">
-<title>dockersophia&#45;&#45;mediawiki</title>
-<path fill="none" stroke="black" d="M952.89,-279.48C973.01,-248.82 1015.91,-183.44 1036.11,-152.67"/>
-<text text-anchor="middle" x="1036.05" y="-212.3" font-family="Unifont" font-size="14.00">8942</text>
+<title>dockersophia&#45;&#45;viktor2</title>
+<path fill="none" stroke="black" d="M952.06,-279.48C970.65,-248.82 1010.28,-183.44 1028.94,-152.67"/>
+<text text-anchor="middle" x="1030.05" y="-212.3" font-family="Unifont" font-size="14.00">8942</text>
 </g>
 </g>
 </svg>

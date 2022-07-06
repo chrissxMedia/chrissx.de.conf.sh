@@ -21,7 +21,7 @@ graph {
   optiplex3020 -- murmur [label=64738]
   optiplex3020 -- "backup.timer"
 
-  "Big Bad Internet™" -- Nuremberg -- sophia [label="443,80\n70"]
+  "Big Bad Internet™" -- Nuremberg -- sophia [label="8080\n443,80\n70"]
   redirectorkek [label=redirector]
   dockersophia [label=docker]
   ludwigsophia [label=ludwig]
@@ -29,9 +29,9 @@ graph {
   sophia -- nginxsophia [label="8169\n443"]
   sophia -- dockersophia [label="9323\n8942\n70"]
   dockersophia -- ludwigsophia [label=70]
-  dockersophia -- mediawiki [label=8942]
+  dockersophia -- viktor2 [label=8942]
   sophia -- redirectorkek [label=80]
   sophia -- jasmin [label=8099]
-  sophia -- hanna [label=8042]
+  sophia -- erwin [label=8080]
   sophia -- deployment
 }
