@@ -21,5 +21,14 @@ sudo docker run -d --restart=always -v$PWD:/mail \
 -v/etc/letsencrypt/live/rosenhof.chrissx.de/cert.pem:/mail/cert.pem \
 -v/etc/letsencrypt/live/rosenhof.chrissx.de/fullchain.pem:/mail/fullchain.pem \
 -v/etc/letsencrypt/live/rosenhof.chrissx.de/privkey.pem:/mail/privkey.pem \
--p25:25 -p143:143 -p587:587 -p993:993 chrissx/ali
+-p25:25 -p143:143 -p587:587 -p993:993 chrissx/ali:latest
+```
+
+## Adding new users
+
+```sh
+sudo docker exec -it my_ali_instance doveadm pw
+vim users.passwd
+mkdir $username
+sudo chown -R $userid:8 $username
 ```
