@@ -3,7 +3,7 @@ graph {
   node [fontname = Unifont]
   edge [fontname = Unifont]
 
-  "FB 7530 AX" -- rotmain
+  "FB 7530 AX" -- rotmain [label="21\n548\n873\n2049\n…"]
 
   "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- optiplex3020 [label="993,143\n587,25\n443,80\n70"]
   dockerop [label=docker]
