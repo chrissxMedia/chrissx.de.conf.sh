@@ -6,7 +6,7 @@ server {
         rewrite ^/merch$ /shop permanent;
         rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
         rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
         rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 
@@ -23,7 +23,7 @@ server {
         rewrite ^/merch$ /shop permanent;
         rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
         rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
         rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
@@ -36,7 +36,7 @@ server {
         rewrite ^/merch$ /shop permanent;
         rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
         rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/mtBcSEc permanent;
+        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
         rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
@@ -62,7 +62,7 @@ server {
 server {
 	include /etc/nginx/html_server;
 	server_name meme.chrissx.de;
-	root /meme;
+	root /meme/dist;
 }
 
 server {
@@ -84,6 +84,10 @@ server {
 	index "index";
 	types { } default_type "text/css";
 	add_header Access-Control-Allow-Origin *;
+	expires 86400;
+	location ~ .+\.([ot]tf|woff2?) {
+		expires 31536000;
+	}
 }
 
 server {
