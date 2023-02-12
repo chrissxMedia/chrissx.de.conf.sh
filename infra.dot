@@ -1,4 +1,5 @@
 graph {
+// TODO: <-> comms
   stylesheet="unifont.css"
   node [fontname = Unifont]
   edge [fontname = Unifont]
@@ -18,7 +19,9 @@ graph {
   optiplex3020 -- bucket [label=8022]
   optiplex3020 -- aggregamus [label=8669]
   optiplex3020 -- inspiriererin [label=8989]
+  optiplex3020 -- jana
   optiplex3020 -- murmur [label=64738]
+  optiplex3020 -- inventree
   optiplex3020 -- "backup.timer"
 
   "Big Bad Internet™" -- Nuremberg -- sophia [label="8080\n443,80\n70"]
