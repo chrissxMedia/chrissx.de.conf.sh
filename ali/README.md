@@ -12,7 +12,7 @@ accordingly, and the current directory contains the following files:
 - `mail.private`: the private key for `opendkim` signing (please `chown 104:106`
   and `chmod 0600`)
 - a `maildir` with the name of every user (remember to `chown -R uid:8`, `uid`
-  is the User ID from the `users.passwd`)
+  being the User ID from `users.passwd`)
 
 Then run the following command:
 
@@ -27,8 +27,10 @@ sudo docker run -d --restart=always -v$PWD:/mail \
 ## Adding new users
 
 ```sh
-sudo docker exec -it my_ali_instance doveadm pw
-vim users.passwd
+userid=10$(wc -l users.passwd | awk '{ print $1 }')
+hash=$(sudo docker exec -it $my_ali_instance doveadm pw)
+echo "$username:$hash:$userid:8:,,,:/home/$username:/bin/bash" >> users.passwd
 mkdir $username
 sudo chown -R $userid:8 $username
+sudo docker restart $my_ali_instance
 ```
