@@ -7,7 +7,7 @@ server {
         rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
         rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
         rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
-        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+        rewrite ^/twitter$ https://twitter.com/chrissxMedia permanent;
         rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 
 	location /metrics {
@@ -51,12 +51,6 @@ server {
 	include /etc/nginx/html_server;
 	server_name amplus.chrissx.de;
 	root /amplus;
-}
-
-server {
-	include /etc/nginx/html_server;
-	server_name i3b.chrissx.de;
-	root /i3b;
 }
 
 server {
