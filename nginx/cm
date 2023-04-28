@@ -72,6 +72,12 @@ server {
 }
 
 server {
+	include /etc/nginx/html_server;
+	server_name screwed.chrissx.de;
+	root /screwed/dist;
+}
+
+server {
 	include /etc/nginx/server;
 	server_name fonts.chrissx.de;
 	root /fonts/dist;
