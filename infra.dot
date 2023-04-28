@@ -10,7 +10,7 @@ graph {
   dockerop [label=docker]
   ludwigop [label=ludwig]
   nginxop [label=nginx]
-  optiplex3020 -- dockerop [label="9323\n9053,9052,9050\n993,143\n587,25\n443,80\n70"]
+  optiplex3020 -- dockerop [label="25565\n9323\n9053,9052,9050\n993,143\n587,25\n443,80\n70"]
   dockerop -- "tor-proxy" [label="9053\n9052\n9050"]
   dockerop -- nginxop [label="443\n80"]
   dockerop -- ludwigop [label=70]
@@ -22,6 +22,7 @@ graph {
   optiplex3020 -- jana
   optiplex3020 -- murmur [label=64738]
   optiplex3020 -- inventree
+  optiplex3020 -- minecraft [label=25565]
   optiplex3020 -- "backup.timer"
 
   "Big Bad Internet™" -- Nuremberg -- sophia [label="8080\n443,80\n70"]
