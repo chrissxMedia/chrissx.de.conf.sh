@@ -6,22 +6,23 @@ graph {
 
   "FB 7530 AX" -- rotmain [label="21\n548\n873\n2049\n…"]
 
-  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- optiplex3020 [label="993,143\n587,25\n443,80\n70"]
+  "Big Bad Internet™" -- Rosenhof -- "FB 7530 AX" -- tobias [label="993,143\n587,25\n443,80\n70"]
   dockerop [label=docker]
   ludwigop [label=ludwig]
   nginxop [label=nginx]
-  optiplex3020 -- dockerop [label="25565\n9323\n9053,9052,9050\n993,143\n587,25\n443,80\n70"]
+  tobias -- dockerop [label="25565\n9323\n9053,9052,9050\n993,143\n587,25\n443,80\n70"]
   dockerop -- "tor-proxy" [label="9053\n9052\n9050"]
   dockerop -- nginxop [label="443\n80"]
   dockerop -- ludwigop [label=70]
   dockerop -- simon
   dockerop -- ali [label="993,143\n587,25"]
-  optiplex3020 -- bucket [label=8022]
-  optiplex3020 -- aggregamus [label=8669]
-  optiplex3020 -- murmur [label=64738]
-  optiplex3020 -- inventree
-  optiplex3020 -- minecraft [label=25565]
-  optiplex3020 -- "backup.timer"
+  dockerop -- murmur [label=64738]
+  dockerop -- minecraft [label=25565]
+  dockerop -- "home-assistant" [label=8123]
+  dockerop -- inventree
+  tobias -- bucket [label=8022]
+  tobias -- aggregamus [label=8669]
+  tobias -- "backup.timer"
 
   "Big Bad Internet™" -- Nuremberg -- sophia [label="8080\n443,80\n70"]
   redirectorkek [label=redirector]
