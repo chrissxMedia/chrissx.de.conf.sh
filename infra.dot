@@ -18,8 +18,6 @@ graph {
   dockerop -- ali [label="993,143\n587,25"]
   optiplex3020 -- bucket [label=8022]
   optiplex3020 -- aggregamus [label=8669]
-  optiplex3020 -- inspiriererin [label=8989]
-  optiplex3020 -- jana
   optiplex3020 -- murmur [label=64738]
   optiplex3020 -- inventree
   optiplex3020 -- minecraft [label=25565]
@@ -38,4 +36,6 @@ graph {
   sophia -- jasmin [label=8099]
   sophia -- erwin [label=8080]
   sophia -- deployment
+  sophia -- inspiriererin [label=8989]
+  sophia -- jana
 }
