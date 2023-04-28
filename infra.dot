@@ -32,6 +32,7 @@ graph {
   sophia -- nginxsophia [label="8169\n443"]
   sophia -- dockersophia [label="9323\n8942\n70"]
   dockersophia -- ludwigsophia [label=70]
+  dockersophia -- etherpad [label=9001]
   sophia -- redirectorkek [label=80]
   sophia -- jasmin [label=8099]
   sophia -- erwin [label=8080]
