@@ -35,7 +35,7 @@ jobs:
         with:
           push: true
           context: simon
-          platforms: linux/amd64,linux/arm64,linux/arm
+          platforms: linux/amd64
           tags: chrissx/simon:latest
   ali:
     runs-on: ubuntu-latest
