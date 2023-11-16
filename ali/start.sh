@@ -7,7 +7,6 @@ service opendkim start
 
 while true ; do
         sleep 10
-        service postfix status
-        service dovecot status
-        service opendkim status
+        service postfix status >/dev/null 2>/dev/null || service postfix status
+        service dovecot status >/dev/null 2>/dev/null || service dovecot status
 done
