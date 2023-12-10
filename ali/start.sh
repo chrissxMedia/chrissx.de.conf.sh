@@ -1,5 +1,5 @@
 #!/bin/sh
-set -uxe
+set -ue
 
 service postfix start
 service dovecot start
