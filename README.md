@@ -1,6 +1,6 @@
-# [chrissx.de](https://chrissx.de) config files
+# chrissx.de config files
 
-These are most of the config files and scripts used for chrissx.de.
+These are most of the config files and scripts used on chrissx Media operated infrastructure.
 
 ## Infrastructure
 
@@ -64,21 +64,18 @@ These are most of the config files and scripts used for chrissx.de.
 | CNAME | `screwed.chrissx.de`           | `sophia.chrissx.de`        |
 | CNAME | `tor.chrissx.de`               | `op.chrissx.de`            |
 | CNAME | `wiki.chrissx.de`              | `sophia.chrissx.de`        |
+| CNAME | `alditalk-kundenbetrug.de`     | `sophia.chrissx.de`        |
 | CNAME | `chrissx.de`                   | `sophia.chrissx.de`        |
-| CNAME | `chrissx.eu`                   | `sophia.chrissx.de`        |
+| CNAME | `chrisxeric.de`                | `sophia.chrissx.de`        |
+| CNAME | `elonisnwichser.de`            | `sophia.chrissx.de`        |
+| CNAME | `fuxgames.com`                 | `sophia.chrissx.de`        |
+| CNAME | `gock.dev`                     | `sophia.chrissx.de`        |
+| CNAME | `kinkcheck.top`                | `sophia.chrissx.de`        |
+| CNAME | `lowlevelmusic.com`            | `sophia.chrissx.de`        |
 | CNAME | `zerm.eu`                      | `sophia.chrissx.de`        |
 | CNAME | `zerm.link`                    | `sophia.chrissx.de`        |
-| CNAME | `fuxgames.com`                 | `sophia.chrissx.de`        |
-| CNAME | `lowlevelmusic.com`            | `sophia.chrissx.de`        |
-| CNAME | `alditalk-kundenbetrug.de`     | `sophia.chrissx.de`        |
-| CNAME | `chrisxeric.de`                | `sophia.chrissx.de`        |
 | CNAME | `www.alditalk-kundenbetrug.de` | `alditalk-kundenbetrug.de` |
-| CNAME | `www.chrissx.de`               | `chrissx.de`               |
-| CNAME | `www.chrissx.eu`               | `chrissx.eu`               |
-| CNAME | `www.chrisxeric.de`            | `chrisxeric.de`            |
-| CNAME | `www.fuxgames.com`             | `fuxgames.com`             |
-| CNAME | `www.lowlevelmusic.com`        | `lowlevelmusic.com`        |
-| CNAME | `www.zerm.eu`                  | `zerm.eu`                  |
+| CNAME | …                              | …                          |
 | CNAME | `www.zerm.link`                | `zerm.link`                |
 
 <!-- vim: set wrap! : -->
