@@ -20,7 +20,7 @@ graph {
   dockerop -- minecraft [label=25565]
   dockerop -- "home-assistant" [label=8123]
   dockerop -- inventree
-  tobias -- bucket [label=8022]
+  dockerop -- bucket [label=8022]
   tobias -- aggregamus [label=8669]
   tobias -- "backup.timer"
 
@@ -33,10 +33,11 @@ graph {
   sophia -- dockersophia [label="9323\n8942\n70"]
   dockersophia -- ludwigsophia [label=70]
   dockersophia -- etherpad [label=9001]
-  sophia -- redirectorkek [label=80]
+  dockersophia -- inspiriererin [label=8989]
+  dockersophia -- jana
+  dockersophia -- redirectorkek [label=80]
+  dockersophia -- watchtower
   sophia -- jasmin [label=8099]
   sophia -- erwin [label=8080]
   sophia -- deployment
-  sophia -- inspiriererin [label=8989]
-  sophia -- jana
 }
