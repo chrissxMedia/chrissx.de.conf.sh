@@ -5,8 +5,8 @@ LAST4=
 LAST6=
 
 while true ; do
-        IP4=`curl -4 http://sophia.chrissx.de:8080`
-        IP6=`curl -6 http://sophia.chrissx.de:8080 | sed 's/\[//;s/\]//'`
+        IP4="$(curl -4 https://erwin.chrissx.de)"
+        IP6="$(curl -6 https://erwin.chrissx.de | sed 's/\[//;s/\]//')"
 
         if [ "$LAST4" != "$IP4" ] ; then
                 curl -L -H "Authorization: Bearer $TOKEN" \
