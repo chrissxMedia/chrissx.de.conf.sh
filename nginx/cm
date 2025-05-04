@@ -3,12 +3,13 @@ server {
 	server_name _;
 	root /var/deployment/dist/new/dist;
 
-        rewrite ^/merch$ /shop permanent;
-        rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
-        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
-        rewrite ^/twitter$ https://twitter.com/chrissxMedia permanent;
-        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
+	rewrite ^/merch$ /shop permanent;
+	#rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
+	#rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
+	rewrite ^/dycc$ /discord permanent;
+	rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
+	rewrite ^/twitter$ https://twitter.com/chrissxMedia permanent;
+	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 
 	location /metrics {
 		stub_status on;
@@ -77,6 +78,32 @@ server {
 	include /etc/nginx/html_server;
 	server_name screwed.chrissx.de;
 	root /var/deployment/dist/screwed/dist;
+}
+
+#server {
+#	include /etc/nginx/html_server;
+#	server_name kinkcheck.top www.kinkcheck.top;
+#	root /var/deployment/dist/kinkcheck/dist;
+#}
+
+server {
+	include /etc/nginx/server;
+	server_name kinkcheck.top www.kinkcheck.top;
+
+	location / {
+		proxy_pass http://localhost:4321;
+		include /etc/nginx/proxy_params;
+	}
+}
+
+server {
+	include /etc/nginx/server;
+	server_name bottom.kinkcheck.top;
+
+	location / {
+		proxy_pass http://localhost:4322;
+		include /etc/nginx/proxy_params;
+	}
 }
 
 server {
