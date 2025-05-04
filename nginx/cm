@@ -106,10 +106,10 @@ server {
 
 server {
 	include /etc/nginx/server;
-	server_name wiki.chrissx.de;
+	server_name erwin.chrissx.de;
 
 	location / {
-		proxy_pass http://localhost:8942;
+		proxy_pass http://localhost:8080;
 		include /etc/nginx/proxy_params;
 	}
 }
