@@ -1,7 +1,7 @@
 server {
 	include /etc/nginx/html_server;
 	server_name _;
-	root /new/dist;
+	root /var/deployment/dist/new/dist;
 
         rewrite ^/merch$ /shop permanent;
         rewrite ^/shop$ https://chrissx-media-ts-merch.creator-spring.com/ permanent;
@@ -18,69 +18,71 @@ server {
 server {
 	include /etc/nginx/html_server;
 	server_name old.chrissx.de;
-	root /old;
+	root /var/deployment/old;
 
-        rewrite ^/merch$ /shop permanent;
-        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
-        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
-        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
-        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
+	rewrite ^/merch$ /shop permanent;
+	#rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+	#rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
+	rewrite ^/dycc$ /discord permanent;
+	rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
+	rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
 server {
 	include /etc/nginx/html_server;
-	server_name pixel.chrissx.de;
-	root /pixel/dist;
+	server_name pixel.chrissx.de gock.dev www.gock.dev;
+	root /var/deployment/dist/pixel/dist;
 
-        rewrite ^/merch$ /shop permanent;
-        rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
-        rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-        rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
-        rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
-        rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
+	rewrite ^/merch$ /shop permanent;
+	#rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
+	#rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
+	rewrite ^/dycc$ /discord permanent;
+	rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
+	rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
+	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
 server {
-	include /etc/nginx/server;
+	include /etc/nginx/html_server;
 	server_name ampless.chrissx.de;
-	root /ampless;
+	root /var/deployment/ampless;
 }
 
 server {
 	include /etc/nginx/html_server;
 	server_name amplus.chrissx.de;
-	root /amplus;
+	root /var/deployment/amplus;
 }
 
 server {
 	include /etc/nginx/html_server;
 	server_name meme.chrissx.de;
-	root /meme/dist;
+	root /var/deployment/dist/meme/dist;
 }
 
 server {
 	include /etc/nginx/html_server;
 	server_name lyrics.chrissx.de;
-	root /lyrics/dist;
+	root /var/deployment/dist/lyrics/dist;
 }
 
 server {
 	include /etc/nginx/html_server;
 	server_name fuxgames.com www.fuxgames.com;
-	root /fux/dist;
+	root /var/deployment/dist/fux/dist;
 }
 
 server {
 	include /etc/nginx/html_server;
 	server_name screwed.chrissx.de;
-	root /screwed/dist;
+	root /var/deployment/dist/screwed/dist;
 }
 
 server {
 	include /etc/nginx/server;
 	server_name fonts.chrissx.de;
-	root /fonts/dist;
+	root /var/deployment/dist/fonts/dist;
 	index "index";
 	types { } default_type "text/css";
 	add_header Access-Control-Allow-Origin *;
@@ -92,7 +94,7 @@ server {
 
 server {
 	include /etc/nginx/server;
-	server_name zerm.eu zerm.link;
+	server_name zerm.eu zerm.link www.zerm.eu www.zerm.link;
 
 	rewrite ^/P41531.pdf$ https://youtu.be/dQw4w9WgXcQ permanent;
 
