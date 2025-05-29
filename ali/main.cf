@@ -21,7 +21,12 @@ smtp_tls_security_level = may
 smtpd_banner = $myhostname ESMTP $mail_name (chrissx Media ali)
 smtpd_helo_required = yes
 smtpd_milters = inet:localhost:12301
+smtpd_delay_reject = yes
+smtpd_sender_restrictions = reject_unknown_sender_domain
+smtpd_relay_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination
 smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination
+smtpd_reject_footer = \c. For assistance, contact Pixel by any means listed at <https://gock.dev/>.
+ Please provide the following information: $localtime; $client_address
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_path = private/auth
 smtpd_sasl_security_options = noanonymous, noplaintext
