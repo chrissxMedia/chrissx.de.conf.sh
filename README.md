@@ -4,7 +4,106 @@ These are most of the config files and scripts used on chrissx Media operated in
 
 ## Infrastructure
 
-![infra](infra.svg)
+```mermaid
+graph LR
+
+subgraph rosenhof["Rosenhof (cM Infra)"]
+  rotmain
+
+  subgraph tobias
+    subgraph dockerop[docker]
+      tor-proxy
+      nginxop[nginx]
+      ludwigop[ludwig]
+      simon
+      ali
+      murmur
+      minecraft
+      home-assistant
+      inventree
+      bucket
+      watchtowertobias[watchtower]
+    end
+    aggregamus --> tor-proxy
+    backup.timer
+    nginxop -- 1339 --> inventree
+    nginxop -- 8123 --> home-assistant
+    nginxop -- 8022 --> bucket
+  end
+  backup.timer -- 873 --> rotmain
+end
+
+subgraph nuremberg["Nuremberg (Hetzner Infra)"]
+  subgraph sophia
+    nginxsophia[nginx]
+    subgraph dockersophia[docker]
+      ludwigsophia[ludwig]
+      inspiriererin
+      jana -- 2333 --> lavalink
+      redirector
+      watchtowersophia[watchtower]
+      kinkcheck.top
+      bottom.kinkcheck.top
+    end
+    nginxsophia -- 4321 --> kinkcheck.top
+    nginxsophia -- 4322 --> bottom.kinkcheck.top
+    nginxsophia --> jasmin
+    nginxsophia -- 8080 --> erwin
+    deployment
+  end
+end
+
+simon --> nginxsophia;
+
+internet(Users)
+internet -- "9053, 9052, 9050" --> tor-proxy
+internet -- "443, 80" --> nginxop[nginx]
+internet -- 70 --> ludwigop[ludwig]
+internet -- "993, 143, 587, 25" --> ali
+internet -- 64738 --> murmur
+internet -- 25565 --> minecraft
+internet -- 70 --> ludwigsophia[ludwig]
+internet -- 80 --> redirector
+internet -- 443 --> nginxsophia
+internet -- 8080 --> erwin
+discord(discord.com)
+inspiriererin --> discord
+jana --> discord
+
+classDef docker fill:#0092e7,stroke:#000
+class dockerop docker
+class dockersophia docker
+classDef location fill:#000,stroke:#808080
+class rosenhof location
+class nuremberg location
+classDef server fill:#222,stroke:#000
+class tobias server
+class rotmain server
+class sophia server
+
+click tor-proxy "https://github.com/pixelcmtd/docker-containers/tree/master/tor-proxy" _blank
+click ludwigop "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ludwig" _blank
+click simon "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/simon" _blank
+click ali "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ali" _blank
+click murmur "https://github.com/mumble-voip/mumble-docker" _blank
+click minecraft "https://github.com/itzg/docker-minecraft-server" _blank
+click home-assistant "https://github.com/home-assistant/core" _blank
+click inventree "https://docs.inventree.org/en/latest/start/docker/" _blank
+click bucket "https://github.com/pixelcmtd/bucket" _blank
+click watchtowertobias "https://containrrr.dev/watchtower/" _blank
+click aggregamus "https://github.com/Ampless/aggregamus" _blank
+click ludwigsophia "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ludwig" _blank
+click inspiriererin "https://github.com/pixelcmtd/Inspiriererin" _blank
+click jana "https://github.com/chrissxMedia/jana" _blank
+click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
+click redirector "https://github.com/chrissxMedia/redirector" _blank
+click watchtowersophia "https://containrrr.dev/watchtower/" _blank
+click kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top" _blank
+click bottom.kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top/tree/bottom" _blank
+click jasmin "https://github.com/ZERMZeitung/jasmin" _blank
+click erwin "https://github.com/chrissxMedia/erwin" _blank
+click deployment "https://github.com/chrissxMedia/deployment" _blank
+```
 
 ### Hardware
 
