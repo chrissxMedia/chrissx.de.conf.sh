@@ -118,13 +118,13 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 
 #### Internal
 
+> [!NOTE]
+> For some reason `tobias.chrissx.de` gets lost somewhere in the chain of DNS servers most of the time, so we use `op.chrissx.de` (named after the old `optiplex`) instead.
+
 | Type  | Name                   | Content               |
 | ----- | ---------------------- | --------------------- |
 | A     | `op.chrissx.de`        | `192.168.178.68`      |
 | A     | `rotmain.chrissx.de`   | `192.168.178.29`      |
-| A     | `dergerät.chrissx.de`  | `192.168.178.34`      |
-| CNAME | `dergeraet.chrissx.de` | `dergerät.chrissx.de` |
-| CNAME | `dergerat.chrissx.de`  | `dergerät.chrissx.de` |
 
 #### External
 
