@@ -109,7 +109,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 
 | Hostname    | Hardware                                    | Location  | OS                   | Status                | Cost    |
 | ----------- | ------------------------------------------- | --------- | -------------------- | --------------------- | ------- |
-| sophia      | Hetzner CX11                                | Nuremberg | Ubuntu Server 22.04  | running               | 3.5€/mo |
+| sophia      | Hetzner CX11                                | Nuremberg | Ubuntu Server 22.04  | running               | 5.3€/mo |
 | tobias      | Lenovo ThinkCentre M710s                    | Rosenhof  | Ubuntu Server 22.04  | running               | 140€    |
 | rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Rosenhof  | DSM 7                | running               | 3500€   |
 | veldenstein | Custom (Pentium G4400 based), 4x WD Red 4TB | Rosenhof  | Ubuntu Desktop 22.04 | emergency cold backup | 1000€   |
