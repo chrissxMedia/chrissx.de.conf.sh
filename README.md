@@ -43,6 +43,7 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
       watchtowersophia[watchtower]
       kinkcheck.top
       bottom.kinkcheck.top
+      erwin
     end
     nginxsophia -- 4321 --> kinkcheck.top
     nginxsophia -- 4322 --> bottom.kinkcheck.top
@@ -61,9 +62,9 @@ internet -- 70 --> ludwigop[ludwig]
 internet -- "993, 143, 587, 25" --> ali
 internet -- 64738 --> murmur
 internet -- 25565 --> minecraft
+internet -- 443 --> nginxsophia
 internet -- 70 --> ludwigsophia[ludwig]
 internet -- 80 --> redirector
-internet -- 443 --> nginxsophia
 internet -- 8080 --> erwin
 discord(discord.com)
 inspiriererin --> discord
