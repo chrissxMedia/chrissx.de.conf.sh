@@ -163,7 +163,6 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `screwed.chrissx.de`           | `sophia.chrissx.de`        |
 | CNAME | `tor.chrissx.de`               | `op.chrissx.de`            |
 | CNAME | `wiki.chrissx.de`              | `sophia.chrissx.de`        |
-| CNAME | `alditalk-kundenbetrug.de`     | `sophia.chrissx.de`        |
 | CNAME | `chrissx.de`                   | `sophia.chrissx.de`        |
 | CNAME | `chrisxeric.de`                | `sophia.chrissx.de`        |
 | CNAME | `elonisnwichser.de`            | `sophia.chrissx.de`        |
@@ -173,7 +172,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `lowlevelmusic.com`            | `sophia.chrissx.de`        |
 | CNAME | `zerm.eu`                      | `sophia.chrissx.de`        |
 | CNAME | `zerm.link`                    | `sophia.chrissx.de`        |
-| CNAME | `www.alditalk-kundenbetrug.de` | `alditalk-kundenbetrug.de` |
+| CNAME | `www.chrissx.de`               | `chrissx.de`               |
 | CNAME | …                              | …                          |
 | CNAME | `www.zerm.link`                | `zerm.link`                |
 
