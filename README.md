@@ -24,7 +24,6 @@ subgraph rosenhof["Rosenhof (cM Infra)"]
       bucket
       watchtowertobias[watchtower]
     end
-    aggregamus --> tor-proxy
     backup.timer
     nginxop -- 1339 --> inventree
     nginxop -- 8123 --> home-assistant
