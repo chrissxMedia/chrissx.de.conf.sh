@@ -12,10 +12,10 @@ subgraph rosenhof["Rosenhof (cM Infra)"]
 
   subgraph tobias
     subgraph dockerop[docker]
+      simon
       tor-proxy
       nginxop[nginx]
       ludwigop[ludwig]
-      simon
       ali
       murmur
       minecraft
@@ -36,18 +36,18 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
   subgraph sophia
     nginxsophia[nginx]
     subgraph dockersophia[docker]
-      ludwigsophia[ludwig]
       inspiriererin
       jana -- 2333 --> lavalink
+      ludwigsophia[ludwig]
       redirector
-      watchtowersophia[watchtower]
       kinkcheck.top
       bottom.kinkcheck.top
       erwin
+      watchtowersophia[watchtower]
     end
     nginxsophia -- 4321 --> kinkcheck.top
     nginxsophia -- 4322 --> bottom.kinkcheck.top
-    nginxsophia --> jasmin
+    nginxsophia -- 8099 --> jasmin
     nginxsophia -- 8080 --> erwin
     deployment
   end
