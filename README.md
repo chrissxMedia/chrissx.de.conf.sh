@@ -42,6 +42,7 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
       redirector
       kinkcheck.top
       bottom.kinkcheck.top
+      jasmin
       erwin
       watchtowersophia[watchtower]
     end
