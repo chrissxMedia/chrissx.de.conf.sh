@@ -43,6 +43,7 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
       jana -- 2333 --> lavalink
       ludwigsophia[ludwig]
       redirector
+      deployment
       kinkcheck.top
       bottom.kinkcheck.top
       jasmin
@@ -53,7 +54,6 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
     nginxsophia -- 4322 --> bottom.kinkcheck.top
     nginxsophia -- 8099 --> jasmin
     nginxsophia -- 8080 --> erwin
-    deployment
   end
 end
 
