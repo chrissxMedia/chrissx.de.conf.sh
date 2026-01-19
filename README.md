@@ -1,5 +1,8 @@
 # chrissx.de config files
 
+> [!NOTE]
+> We have big changes coming, which are [listed on our website](https://chrissx.de/#notices).
+
 These are most of the config files and scripts used on chrissx Media operated infrastructure.
 
 ## Infrastructure
