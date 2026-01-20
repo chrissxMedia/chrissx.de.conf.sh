@@ -1,4 +1,4 @@
-include server;
+include conf.d/server;
 
 gzip on;
 
