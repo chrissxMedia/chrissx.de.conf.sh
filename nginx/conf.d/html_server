@@ -1,5 +1,7 @@
 include server;
 
+gzip on;
+
 index index.html;
 error_page 404 https://chrissx.de/404.html;
 
