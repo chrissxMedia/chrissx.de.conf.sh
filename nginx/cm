@@ -16,6 +16,7 @@ server {
 	}
 }
 
+# TODO: remove (after 2026-01-21)
 server {
 	include /etc/nginx/html_server;
 	server_name old.chrissx.de;
@@ -44,12 +45,14 @@ server {
 	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
+# TODO: remove (after 2026-01-21)
 server {
 	include /etc/nginx/html_server;
 	server_name ampless.chrissx.de;
 	root /var/deployment/ampless;
 }
 
+# TODO: remove (after 2026-01-21)
 server {
 	include /etc/nginx/html_server;
 	server_name amplus.chrissx.de;
@@ -78,6 +81,12 @@ server {
 	include /etc/nginx/html_server;
 	server_name screwed.chrissx.de;
 	root /var/deployment/dist/screwed/dist;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name emilycatgirl.de www.emilycatgirl.de;
+	root /var/deployment/dist/emily/dist;
 }
 
 #server {
