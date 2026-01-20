@@ -1,4 +1,4 @@
-include /etc/nginx/server;
+include server;
 
 index index.html;
 error_page 404 https://chrissx.de/404.html;

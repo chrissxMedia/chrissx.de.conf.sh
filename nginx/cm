@@ -85,6 +85,18 @@ server {
 
 server {
 	include /etc/nginx/html_server;
+	server_name chrisxeric.de www.chrisxeric.de;
+	root /var/deployment/dist/cxe/dist;
+}
+
+server {
+	include /etc/nginx/html_server;
+	server_name snapdomfonts.gock.dev;
+	root /var/deployment/dist/snapdom-font-bug/dist;
+}
+
+server {
+	include /etc/nginx/html_server;
 	server_name emilycatgirl.de www.emilycatgirl.de;
 	root /var/deployment/dist/emily/dist;
 }
@@ -128,9 +140,9 @@ server {
 	}
 	default_type "text/css";
 	add_header Access-Control-Allow-Origin *;
-	expires 86400;
+	expires modified +1h;
 	location /fonts/ {
-		expires 31536000;
+		expires 365d;
 	}
 }
 
