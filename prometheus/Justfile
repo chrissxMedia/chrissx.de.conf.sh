@@ -1,2 +1,2 @@
 run:
-        docker run -p 9090:9090 -dv $PWD:/etc/prometheus chrissx/prometheus:latest
+        docker run -p 9090:9090 -dv $PWD:/etc/prometheus ubuntu/prometheus:latest
