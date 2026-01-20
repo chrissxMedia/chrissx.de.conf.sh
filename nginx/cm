@@ -111,10 +111,16 @@ server {
 	server_name fonts.chrissx.de;
 	root /var/deployment/dist/fonts/dist;
 	index "index";
-	types { } default_type "text/css";
+	types {
+		font/woff  woff;
+		font/woff2 woff2;
+		font/otf   otf;
+		font/ttf   ttf;
+	}
+	default_type "text/css";
 	add_header Access-Control-Allow-Origin *;
 	expires 86400;
-	location ~ .+\.([ot]tf|woff2?) {
+	location /fonts/ {
 		expires 31536000;
 	}
 }
