@@ -25,7 +25,7 @@ scrape_configs:
         - 'sophia.chrissx.de:8042' # hanna
         - 'sophia.chrissx.de:80'   # redirector
 
-  - job_name: optiplex3020
+  - job_name: tobias
     static_configs:
       - targets:
         - 'op.chrissx.de:9323' # docker
