@@ -140,27 +140,19 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | AAAA  | `sophia.chrissx.de`            | `2a01:4f8:c0c:69c8::`      |
 | CAA   | `chrissx.de`                   | `0 issue letsencrypt.org`  |
 | MX    | `chrissx.de`                   | `mail.chrissx.de`          |
-| CNAME | `ampless.chrissx.de`           | `sophia.chrissx.de`        |
-| CNAME | `amplus.chrissx.de`            | `sophia.chrissx.de`        |
 | CNAME | `autoconfig.chrissx.de`        | `rosenhof.chrissx.de`      |
 | CNAME | `bucket.chrissx.de`            | `rosenhof.chrissx.de`      |
 | CNAME | `cpm.chrissx.de`               | `sophia.chrissx.de`        |
 | CNAME | `fonts.chrissx.de`             | `sophia.chrissx.de`        |
-| CNAME | `ftp.chrissx.de`               | `rosenhof.chrissx.de`      |
-| CNAME | `get.cpm.chrissx.de`           | `sophia.chrissx.de`        |
 | CNAME | `git.chrissx.de`               | `rosenhof.chrissx.de`      |
 | CNAME | `ha.chrissx.de`                | `rosenhof.chrissx.de`      |
 | CNAME | `inv.chrissx.de`               | `rosenhof.chrissx.de`      |
 | CNAME | `lyrics.chrissx.de`            | `sophia.chrissx.de`        |
 | CNAME | `mail.chrissx.de`              | `rosenhof.chrissx.de`      |
-| CNAME | `mc.chrissx.de`                | `rosenhof.chrissx.de`      |
 | CNAME | `media.chrissx.de`             | `sophia.chrissx.de`        |
 | CNAME | `meme.chrissx.de`              | `sophia.chrissx.de`        |
 | CNAME | `mumble.chrissx.de`            | `rosenhof.chrissx.de`      |
 | CNAME | `new.chrissx.de`               | `sophia.chrissx.de`        |
-| CNAME | `old.chrissx.de`               | `sophia.chrissx.de`        |
-| CNAME | `pad.chrissx.de`               | `sophia.chrissx.de`        |
-| CNAME | `penis.chrissx.de`             | `sophia.chrissx.de`        |
 | CNAME | `pixel.chrissx.de`             | `sophia.chrissx.de`        |
 | CNAME | `porn.chrissx.de`              | `sophia.chrissx.de`        |
 | CNAME | `qa.chrissx.de`                | `sophia.chrissx.de`        |
