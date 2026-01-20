@@ -140,3 +140,10 @@ server {
 		include /etc/nginx/proxy_params;
 	}
 }
+
+server {
+	include /etc/nginx/server;
+	server_name elonisnwichser.de www.elonisnwichser.de;
+
+	rewrite ^/.*$ https://twitter.com/pixelcmtd;
+}
