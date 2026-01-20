@@ -1,7 +1,7 @@
 # ludwig
 
 > [!CAUTION]
-> This image has been deprecated and will be archived after 2026-02-31.
+> This image has been deprecated and will be archived after 2026-02-28.
 > Do not use it for new deployments!
 
 `pygopherd` (2.0.18.5) in a Docker container. (Ubuntu 18.04 Bionic)
