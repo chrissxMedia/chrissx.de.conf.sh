@@ -1,5 +1,5 @@
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name _;
 	root /var/deployment/dist/new/dist;
 
@@ -16,23 +16,8 @@ server {
 	}
 }
 
-# TODO: remove (after 2026-01-21)
 server {
-	include /etc/nginx/html_server;
-	server_name old.chrissx.de;
-	root /var/deployment/old;
-
-	rewrite ^/merch$ /shop permanent;
-	#rewrite ^/shop$ https://teespring.com/stores/chrissx-media-ts-merch permanent;
-	#rewrite ^/qa$ https://quod-arbor.creator-spring.com/ permanent;
-	rewrite ^/dycc$ /discord permanent;
-	rewrite ^/discord$ https://discord.gg/a2eAnvUscU permanent;
-	rewrite ^/twitter$ https://twitter.com/pixelcmtd permanent;
-	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
-}
-
-server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name pixel.chrissx.de gock.dev www.gock.dev;
 	root /var/deployment/dist/pixel/dist;
 
@@ -45,90 +30,70 @@ server {
 	rewrite ^/instagram$ https://instagram.com/pixelcmtd permanent;
 }
 
-# TODO: remove (after 2026-01-21)
 server {
-	include /etc/nginx/html_server;
-	server_name ampless.chrissx.de;
-	root /var/deployment/ampless;
-}
-
-# TODO: remove (after 2026-01-21)
-server {
-	include /etc/nginx/html_server;
-	server_name amplus.chrissx.de;
-	root /var/deployment/amplus;
-}
-
-server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name meme.chrissx.de;
 	root /var/deployment/dist/meme/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name lyrics.chrissx.de;
 	root /var/deployment/dist/lyrics/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name fuxgames.com www.fuxgames.com;
 	root /var/deployment/dist/fux/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name screwed.chrissx.de;
 	root /var/deployment/dist/screwed/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name chrisxeric.de www.chrisxeric.de;
 	root /var/deployment/dist/cxe/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name snapdomfonts.gock.dev;
 	root /var/deployment/dist/snapdom-font-bug/dist;
 }
 
 server {
-	include /etc/nginx/html_server;
+	include html_server;
 	server_name emilycatgirl.de www.emilycatgirl.de;
 	root /var/deployment/dist/emily/dist;
 }
 
-#server {
-#	include /etc/nginx/html_server;
-#	server_name kinkcheck.top www.kinkcheck.top;
-#	root /var/deployment/dist/kinkcheck/dist;
-#}
-
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name kinkcheck.top www.kinkcheck.top;
 
 	location / {
 		proxy_pass http://localhost:4321;
-		include /etc/nginx/proxy_params;
+		include proxy_params;
 	}
 }
 
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name bottom.kinkcheck.top;
 
 	location / {
 		proxy_pass http://localhost:4322;
-		include /etc/nginx/proxy_params;
+		include proxy_params;
 	}
 }
 
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name fonts.chrissx.de;
 	root /var/deployment/dist/fonts/dist;
 	index "index";
@@ -147,29 +112,29 @@ server {
 }
 
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name zerm.eu zerm.link www.zerm.eu www.zerm.link;
 
 	rewrite ^/P41531.pdf$ https://youtu.be/dQw4w9WgXcQ permanent;
 
 	location / {
 		proxy_pass http://localhost:8099;
-		include /etc/nginx/proxy_params;
+		include proxy_params;
 	}
 }
 
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name erwin.chrissx.de;
 
 	location / {
 		proxy_pass http://localhost:8080;
-		include /etc/nginx/proxy_params;
+		include proxy_params;
 	}
 }
 
 server {
-	include /etc/nginx/server;
+	include server;
 	server_name elonisnwichser.de www.elonisnwichser.de;
 
 	rewrite ^/.*$ https://twitter.com/pixelcmtd;
