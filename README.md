@@ -57,7 +57,9 @@ subgraph nuremberg["Nuremberg (Hetzner Infra)"]
   end
 end
 
-simon --> nginxsophia;
+cloudflare(cloudflare.com)
+simon --> cloudflare
+simon --> nginxsophia
 
 internet(Users)
 internet -- "9053, 9052, 9050" --> tor-proxy
