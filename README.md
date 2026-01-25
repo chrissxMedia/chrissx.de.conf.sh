@@ -5,7 +5,7 @@
 
 These are most of the config files and scripts used on chrissx Media operated infrastructure.
 
-## Infrastructure
+## Overview
 
 ```mermaid
 graph LR
@@ -111,7 +111,7 @@ click erwin "https://github.com/chrissxMedia/erwin" _blank
 click deployment "https://github.com/chrissxMedia/deployment" _blank
 ```
 
-### Hardware
+## Hardware
 
 | Hostname    | Hardware                                    | Location  | OS                   | Status                | Cost    |
 | ----------- | ------------------------------------------- | --------- | -------------------- | --------------------- | ------- |
@@ -120,9 +120,9 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Rosenhof  | DSM 7                | running               | 3500€   |
 | veldenstein | Custom (Pentium G4400 based), 4x WD Red 4TB | Rosenhof  | Ubuntu Desktop 22.04 | emergency cold backup | 1000€   |
 
-### DNS
+## DNS
 
-#### Internal
+### Internal
 
 > [!NOTE]
 > For some reason `tobias.chrissx.de` gets lost somewhere in the chain of DNS servers most of the time, so we use `op.chrissx.de` (named after the old `optiplex`) instead.
@@ -132,7 +132,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | A     | `op.chrissx.de`        | `192.168.178.68`      |
 | A     | `rotmain.chrissx.de`   | `192.168.178.29`      |
 
-#### External
+### External
 
 | Type  | Name                           | Content                    |
 | ----- | ------------------------------ | -------------------------- |
@@ -174,9 +174,9 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | …                              | …                          |
 | CNAME | `www.zerm.link`                | `zerm.link`                |
 
-### Software
+## Software
 
-#### sophia → ruby (nuremberg server)
+### sophia → ruby (nuremberg server)
 
 A rough description of the current setup on `sophia` and planned changes (especially for its replacement, Project NEV, Server `ruby`) can be found below. A semi-automatic `cloud-config` + `docker-compose` install is under preparation. `cloud-init` will automatically install:
 
@@ -202,7 +202,7 @@ The following steps are left to the admin:
 - kinkcheck.top
 - nginx
 
-##### Misc
+#### Misc
 
 ```sh
 docker run -d --restart=unless-stopped --pull=always --name ludwig -p70:70 chrissx/ludwig:latest
@@ -218,7 +218,7 @@ docker run -d --restart=unless-stopped --pull=always --name watchtower -v/var/ru
 
 > For simplicity, we will be treating `redirector` and `erwin` as Web services, thereby eliminating the Misc category for NEV.
 
-##### Web
+#### Web
 
 ```sh
 docker run -d --restart=unless-stopped --pull=always --name deployment -v/var/deployment:/var/deployment -v/root/.gitconfig:/root/.gitconfig -v/ghpass:/ghpass -e GIT_ASKPASS=/ghpass chrissx/deployment:latest -D -H /var/deployment -d /var/deployment/conf/ruby/deployments.csv
@@ -230,7 +230,7 @@ docker run -d --restart=unless-stopped --pull=always --name kct-main -p4321:4321
 
 nginx runs through systemd. certbot is still only executed manually. All domains share a single certificate.
 
-###### NEV changes
+##### NEV changes
 
 There has not been a final decision on whether nginx will be deployed with Docker. We're also currently exploring options for configuration management. The most likely setup looks like this:
 
@@ -251,7 +251,7 @@ docker run -d --restart=unless-stopped --pull=always --name certbot-XXX -e CERTB
 
 The KCT Bottom instance will get its own directory.
 
-##### Discord Bots
+#### Discord Bots
 
 > The Lavalink config is currently missing from this repo.
 
@@ -262,11 +262,11 @@ docker run -d --restart=unless-stopped --pull=always --name jana --network laval
 docker run -d --restart=unless-stopped --pull=always --name insp -p8989:8989 -e INSP_DISCORD_TOKEN=XXX chrissx/inspiriererin:latest
 ```
 
-###### Issues & possible changes (mostly unrelated to NEV)
+##### Issues & possible changes (mostly unrelated to NEV)
 
 The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other ("Explode API" based) YouTube services. Therefore, it has been disabled for a while. There are a few possible solutions to this (e.g. OAuth authentication, `poToken`, the official YouTube API, ...), but the easiest would be to migrate `jana` (and, to concentrate the Discord bots on a single server, also `inspiriererin`) back to Rosenhof (i.e. `tobias`). A decision on this has not been made yet.
 
-###### Temporary NEV state / postponed migration
+##### Temporary NEV state / postponed migration
 
 `ruby` will be set up without any of the three Discord-related containers. They will keep running on `sophia` for a while. During that, a Docker Compose recipe will be written. Where and when said recipe will be deployed is still undetermined. A future rework (or replacement) of `tobias` is the most likely target.
 
