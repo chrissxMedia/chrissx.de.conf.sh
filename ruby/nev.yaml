@@ -1,0 +1,26 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+packages:
+  - curl
+  - git
+  - tmux
+  - vim
+  - ncdu
+  - tree
+
+write_files:
+  - path: /etc/docker/daemon.json
+    content: |
+      {
+        "metrics-addr" : "0.0.0.0:9323"
+      }
+  - path: /root/.gitconfig
+    content: |
+      [credential "https://github.com"]
+        username = pixelcmtd
+
+runcmd:
+  - git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf
+  - docker run -d --restart=unless-stopped --pull=always --name watchtower -v/var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 3600
