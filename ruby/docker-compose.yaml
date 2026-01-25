@@ -1,0 +1,180 @@
+name: ruby
+
+# .env:
+# CERTBOT_EMAIL="XXX+isrgletsencrypt@chrissx.de"
+# CLOUDFLARE_API_TOKEN="XXX"
+# CLOUDFLARE_PROPAGATION_SECONDS=30
+
+# echo ... > /ghpass
+# chmod 0100 /ghpass
+
+services:
+  certbot-cm:
+    container_name: certbot-chrissx.de
+    image: serversideup/certbot-dns-cloudflare:latest
+    env_file: .env
+    environment:
+      CERTBOT_DOMAINS: chrissx.de,*.chrissx.de,chrisxeric.de,*.chrisxeric.de,fuxgames.com,*.fuxgames.com,lowlevelmusic.com,*.lowlevelmusic.com
+    volumes:
+      - cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    pull_policy: always
+  certbot-kct:
+    container_name: certbot-kinkcheck.top
+    image: serversideup/certbot-dns-cloudflare:latest
+    # NOTE: these dependencies exist to not spam letsencrypt
+    # for a proper solution we'd need a multi-cert image
+    depends_on:
+      certbot-cm:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      CERTBOT_DOMAINS: kinkcheck.top,*.kinkcheck.top
+    volumes:
+      - cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    pull_policy: always
+  certbot-pixel:
+    container_name: certbot-gock.dev
+    image: serversideup/certbot-dns-cloudflare:latest
+    depends_on:
+      certbot-kct:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      CERTBOT_DOMAINS: gock.dev,*.gock.dev,pixel.chrissx.de,elonisnwichser.de,*.elonisnwichser.de
+    volumes:
+      - cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    pull_policy: always
+  certbot-zerm:
+    container_name: certbot-zerm.eu
+    image: serversideup/certbot-dns-cloudflare:latest
+    depends_on:
+      certbot-pixel:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      CERTBOT_DOMAINS: zerm.eu,*.zerm.eu,zerm.link,*.zerm.link
+    volumes:
+      - cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    pull_policy: always
+  certbot-emily:
+    container_name: certbot-emilycatgirl.de
+    image: serversideup/certbot-dns-cloudflare:latest
+    depends_on:
+      certbot-zerm:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      CERTBOT_DOMAINS: emilycatgirl.de,*.emilycatgirl.de
+    volumes:
+      - cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    pull_policy: always
+  deployment:
+    container_name: deployment
+    image: chrissx/deployment:latest
+    init: true
+    command: -D -H /var/deployment -d /var/deployment/conf/ruby/deployments.csv
+    volumes:
+      - /var/deployment:/var/deployment
+      - /root/.gitconfig:/root/.gitconfig:ro
+      - /ghpass:/ghpass:ro
+    environment:
+      - GIT_ASKPASS=/ghpass
+    # FIXME: very hacky
+    healthcheck:
+      test: "while [ -n \"$(deployment -cnd /var/deployment/conf/ruby/deployments.csv || exit 1)\" ] ; do sleep 1 ; done ; true"
+      interval: 30s
+      timeout: 2m
+      retries: 3
+    restart: unless-stopped
+    pull_policy: always
+  redirector:
+    container_name: redirector
+    image: chrissx/redirector:latest
+    networks:
+      - webservices
+    ports:
+      - 80:80
+    restart: unless-stopped
+    pull_policy: always
+  erwin:
+    container_name: erwin
+    image: chrissx/erwin:latest
+    networks:
+      - webservices
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    pull_policy: always
+  jasmin:
+    container_name: jasmin
+    image: ghcr.io/zermzeitung/jasmin:latest
+    depends_on:
+      deployment:
+        condition: service_healthy
+    networks:
+      - webservices
+    volumes:
+      - /var/deployment/zerm:/var/www/zerm.eu:ro
+    restart: unless-stopped
+    pull_policy: always
+  kct-bottom:
+    container_name: kct-bottom
+    image: chrissx/kinkcheck.top:bottom
+    networks:
+      - webservices
+    volumes:
+      - /var/kct/bottom:/data
+    restart: unless-stopped
+    pull_policy: always
+  kct-main:
+    container_name: kct-main
+    image: chrissx/kinkcheck.top:latest
+    networks:
+      - webservices
+    volumes:
+      - /var/kct/prod:/data
+    restart: unless-stopped
+    pull_policy: always
+  nginx:
+    container_name: nginx
+    image: nginx:stable-alpine
+    depends_on:
+      certbot-cm:
+        condition: service_healthy
+      certbot-kct:
+        condition: service_healthy
+      certbot-pixel:
+        condition: service_healthy
+      certbot-zerm:
+        condition: service_healthy
+      certbot-emily:
+        condition: service_healthy
+      deployment:
+        condition: service_healthy
+    networks:
+      - webservices
+    ports:
+      - 443:443
+    volumes:
+      - /var/deployment/conf/nginx/conf.d:/etc/nginx/conf.d:ro
+      - cert-data:/etc/letsencrypt:ro
+      - /var/deployment/dist:/var/www:ro
+    restart: unless-stopped
+    pull_policy: always
+
+networks:
+  webservices:
+    enable_ipv6: true
+
+volumes:
+  cert-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /etc/letsencrypt
