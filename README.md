@@ -185,6 +185,12 @@ A rough description of the current setup on `sophia` and planned changes (especi
 - /root/.gitconfig
 - watchtower
 
+The following steps are left to the admin:
+
+- Git key (/ghpass)
+- Cloudflare key (.env)
+- Lavalink, jana, insp8n (will be dealt with later)
+
 `docker-compose` will start the following services:
 
 - 5x certbot
@@ -195,12 +201,6 @@ A rough description of the current setup on `sophia` and planned changes (especi
 - bottom.kinkcheck.top
 - kinkcheck.top
 - nginx
-
-As things are at the moment, this will leave the following steps to the admin:
-
-- Git key (/ghpass)
-- Cloudflare key (.env)
-- Lavalink, jana, insp8n
 
 ##### Misc
 
@@ -221,7 +221,7 @@ docker run -d --restart=unless-stopped --pull=always --name watchtower -v/var/ru
 ##### Web
 
 ```sh
-docker run -d --restart=unless-stopped --pull=always --name deployment -v/etc/deployments.csv:/etc/deployments.csv -v/var/deployment:/var/deployment -v/root/.gitconfig:/root/.gitconfig -v/ghpass:/ghpass -e GIT_ASKPASS=/ghpass chrissx/deployment:latest -D
+docker run -d --restart=unless-stopped --pull=always --name deployment -v/var/deployment:/var/deployment -v/root/.gitconfig:/root/.gitconfig -v/ghpass:/ghpass -e GIT_ASKPASS=/ghpass chrissx/deployment:latest -D -H /var/deployment -d /var/deployment/conf/ruby/deployments.csv
 
 docker run -d --restart=unless-stopped --pull=always --name jasmin -p8099:8099 -v/var/deployment/zerm:/var/www/zerm.eu ghcr.io/zermzeitung/jasmin:latest
 docker run -d --restart=unless-stopped --pull=always --name kct-bottom -p4322:4321 -v$PWD/bottom.db:/data/kinkcheck.db chrissx/kinkcheck.top:bottom
