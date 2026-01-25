@@ -1,6 +1,8 @@
 include conf.d/server;
 
 gzip on;
+sendfile on;
+tcp_nopush on;
 
 index index.html;
 error_page 404 https://chrissx.de/404.html;
