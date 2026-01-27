@@ -22,5 +22,6 @@ write_files:
         username = pixelcmtd
 
 runcmd:
+  - mkdir -p /etc/letsencrypt
   - git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf
   - docker run -d --restart=unless-stopped --pull=always --name watchtower -v/var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 3600
