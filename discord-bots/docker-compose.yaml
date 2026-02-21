@@ -1,0 +1,34 @@
+name: discord-bots
+
+services:
+  lavalink:
+    container_name: lavalink
+    image: ghcr.io/lavalink-devs/lavalink:4
+    env_file: .env
+    networks:
+      - lavalink
+    volumes:
+      - ./lavalink.yml:/opt/Lavalink/application.yml:ro
+    restart: unless-stopped
+    pull_policy: always
+  jana:
+    container_name: jana
+    image: chrissx/jana:latest
+    env_file: .env
+    environment:
+      - JANA_LAVALINK_BASE=http://lavalink:2333
+    networks:
+      - lavalink
+    volumes:
+      - ./lavalink.yml:/opt/Lavalink/application.yml:ro
+    restart: unless-stopped
+    pull_policy: always
+  insp8n:
+    container_name: insp8n
+    image: chrissx/inspiriererin:latest
+    env_file: .env
+    restart: unless-stopped
+    pull_policy: always
+
+networks:
+  lavalink:
