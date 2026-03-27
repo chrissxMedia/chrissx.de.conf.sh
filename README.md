@@ -25,6 +25,8 @@ subgraph rosenhof["Rosenhof (cM Infra)"]
       inventree
       bucket
       watchtowertobias[watchtower]
+      inspiriererin
+      jana -- 2333 --> lavalink
     end
     backup.timer
     nginxop -- 1339 --> inventree
@@ -50,18 +52,6 @@ subgraph falkenstein["Falkenstein (Hetzner Infra)"]
     nginxruby -- 4322 --> bottom.kinkcheck.top
     nginxruby -- 8099 --> jasmin
     nginxruby -- 8080 --> erwin
-  end
-end
-
-subgraph nuremberg["Nuremberg (Hetzner Infra)"]
-  subgraph sophia
-    nginxsophia[nginx]
-    subgraph dockersophia[docker]
-      inspiriererin
-      jana -- 2333 --> lavalink
-      redirectorsophia[redirector]
-      watchtowersophia[watchtower]
-    end
   end
 end
 
