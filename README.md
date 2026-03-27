@@ -38,8 +38,8 @@ end
 
 subgraph falkenstein["Falkenstein (Hetzner Infra)"]
   subgraph ruby
-    nginxruby[nginx]
     subgraph dockerruby[docker]
+      nginxruby[nginx]
       redirector
       deployment
       kinkcheck.top
@@ -65,9 +65,7 @@ internet -- "443, 80" --> nginxop[nginx]
 internet -- "993, 143, 587, 25" --> ali
 internet -- 64738 --> murmur
 internet -- 25565 --> minecraft
-internet -- 443 --> nginxsophia
 internet -- 443 --> nginxruby
-internet -- 80 --> redirectorsophia
 internet -- 80 --> redirector
 internet -- 8080 --> erwin
 discord(discord.com)
@@ -76,7 +74,6 @@ jana --> discord
 
 classDef docker fill:#0092e7,stroke:#000
 class dockerop docker
-class dockersophia docker
 class dockerruby docker
 classDef location fill:#000,stroke:#808080
 class rosenhof location
@@ -85,7 +82,6 @@ class falkenstein location
 classDef server fill:#222,stroke:#000
 class tobias server
 class rotmain server
-class sophia server
 class ruby server
 
 click tor-proxy "https://github.com/pixelcmtd/docker-containers/tree/master/tor-proxy" _blank
