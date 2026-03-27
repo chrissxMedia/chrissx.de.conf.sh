@@ -1,5 +1,0 @@
-#!/bin/sh
-cd /var/gopher
-while sleep 120 ; do
-        git pull
-done
