@@ -111,8 +111,8 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 ## Hardware
 
 | Hostname    | Hardware                                    | Location  | OS                   | Status                | Cost    |
-| ----------- | ------------------------------------------- | --------- | -------------------- | --------------------- | ------- |
-| sophia      | Hetzner CX11                                | Nuremberg | Ubuntu Server 22.04  | running               | 5.3€/mo |
+|-------------|---------------------------------------------|-----------|----------------------|-----------------------|---------|
+| ruby        | Hetzner CX23                                | Nuremberg | Ubuntu Server 24.04  | running               | 4.9€/mo |
 | tobias      | Lenovo ThinkCentre M710s                    | Rosenhof  | Ubuntu Server 22.04  | running               | 140€    |
 | rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Rosenhof  | DSM 7                | running               | 3500€   |
 | veldenstein | Custom (Pentium G4400 based), 4x WD Red 4TB | Rosenhof  | Ubuntu Desktop 22.04 | emergency cold backup | 1000€   |
@@ -124,56 +124,57 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 > [!NOTE]
 > For some reason `tobias.chrissx.de` gets lost somewhere in the chain of DNS servers most of the time, so we use `op.chrissx.de` (named after the old `optiplex`) instead.
 
-| Type  | Name                   | Content               |
-| ----- | ---------------------- | --------------------- |
-| A     | `op.chrissx.de`        | `192.168.178.68`      |
-| A     | `rotmain.chrissx.de`   | `192.168.178.29`      |
+| Type | Name                 | Content          |
+|------|----------------------|------------------|
+| A    | `op.chrissx.de`      | `192.168.178.68` |
+| A    | `rotmain.chrissx.de` | `192.168.178.29` |
 
 ### External
 
-| Type  | Name                           | Content                    |
-| ----- | ------------------------------ | -------------------------- |
-| A     | `rosenhof.chrissx.de`          | (DynDNS)                   |
-| AAAA  | `rosenhof.chrissx.de`          | (DynDNS)                   |
-| A     | `sophia.chrissx.de`            | `78.47.163.103`            |
-| AAAA  | `sophia.chrissx.de`            | `2a01:4f8:c0c:69c8::`      |
-| CAA   | `chrissx.de`                   | `0 issue letsencrypt.org`  |
-| MX    | `chrissx.de`                   | `mail.chrissx.de`          |
-| CNAME | `autoconfig.chrissx.de`        | `rosenhof.chrissx.de`      |
-| CNAME | `bucket.chrissx.de`            | `rosenhof.chrissx.de`      |
-| CNAME | `cpm.chrissx.de`               | `sophia.chrissx.de`        |
-| CNAME | `fonts.chrissx.de`             | `sophia.chrissx.de`        |
-| CNAME | `git.chrissx.de`               | `rosenhof.chrissx.de`      |
-| CNAME | `ha.chrissx.de`                | `rosenhof.chrissx.de`      |
-| CNAME | `inv.chrissx.de`               | `rosenhof.chrissx.de`      |
-| CNAME | `lyrics.chrissx.de`            | `sophia.chrissx.de`        |
-| CNAME | `mail.chrissx.de`              | `rosenhof.chrissx.de`      |
-| CNAME | `media.chrissx.de`             | `sophia.chrissx.de`        |
-| CNAME | `meme.chrissx.de`              | `sophia.chrissx.de`        |
-| CNAME | `mumble.chrissx.de`            | `rosenhof.chrissx.de`      |
-| CNAME | `new.chrissx.de`               | `sophia.chrissx.de`        |
-| CNAME | `pixel.chrissx.de`             | `sophia.chrissx.de`        |
-| CNAME | `porn.chrissx.de`              | `sophia.chrissx.de`        |
-| CNAME | `qa.chrissx.de`                | `sophia.chrissx.de`        |
-| CNAME | `screwed.chrissx.de`           | `sophia.chrissx.de`        |
-| CNAME | `tor.chrissx.de`               | `op.chrissx.de`            |
-| CNAME | `wiki.chrissx.de`              | `sophia.chrissx.de`        |
-| CNAME | `chrissx.de`                   | `sophia.chrissx.de`        |
-| CNAME | `chrisxeric.de`                | `sophia.chrissx.de`        |
-| CNAME | `elonisnwichser.de`            | `sophia.chrissx.de`        |
-| CNAME | `fuxgames.com`                 | `sophia.chrissx.de`        |
-| CNAME | `gock.dev`                     | `sophia.chrissx.de`        |
-| CNAME | `kinkcheck.top`                | `sophia.chrissx.de`        |
-| CNAME | `lowlevelmusic.com`            | `sophia.chrissx.de`        |
-| CNAME | `zerm.eu`                      | `sophia.chrissx.de`        |
-| CNAME | `zerm.link`                    | `sophia.chrissx.de`        |
-| CNAME | `www.chrissx.de`               | `chrissx.de`               |
-| CNAME | …                              | …                          |
-| CNAME | `www.zerm.link`                | `zerm.link`                |
+| Type  | Name                    | Content                   |
+|-------|-------------------------|---------------------------|
+| A     | `rosenhof.chrissx.de`   | (DynDNS)                  |
+| AAAA  | `rosenhof.chrissx.de`   | (DynDNS)                  |
+| A     | `ruby.chrissx.de`       | `188.34.186.24`           |
+| AAAA  | `ruby.chrissx.de`       | `2a01:4f8:c013:438f::1`   |
+| CAA   | `chrissx.de`            | `0 issue letsencrypt.org` |
+| MX    | `chrissx.de`            | `mail.chrissx.de`         |
+| CNAME | `autoconfig.chrissx.de` | `rosenhof.chrissx.de`     |
+| CNAME | `bucket.chrissx.de`     | `rosenhof.chrissx.de`     |
+| CNAME | `cpm.chrissx.de`        | `ruby.chrissx.de`         |
+| CNAME | `erwin.chrissx.de`      | `ruby.chrissx.de`         |
+| CNAME | `fonts.chrissx.de`      | `ruby.chrissx.de`         |
+| CNAME | `git.chrissx.de`        | `rosenhof.chrissx.de`     |
+| CNAME | `ha.chrissx.de`         | `rosenhof.chrissx.de`     |
+| CNAME | `inv.chrissx.de`        | `rosenhof.chrissx.de`     |
+| CNAME | `lyrics.chrissx.de`     | `ruby.chrissx.de`         |
+| CNAME | `mail.chrissx.de`       | `rosenhof.chrissx.de`     |
+| CNAME | `media.chrissx.de`      | `ruby.chrissx.de`         |
+| CNAME | `meme.chrissx.de`       | `ruby.chrissx.de`         |
+| CNAME | `mumble.chrissx.de`     | `rosenhof.chrissx.de`     |
+| CNAME | `new.chrissx.de`        | `ruby.chrissx.de`         |
+| CNAME | `pixel.chrissx.de`      | `ruby.chrissx.de`         |
+| CNAME | `porn.chrissx.de`       | `ruby.chrissx.de`         |
+| CNAME | `qa.chrissx.de`         | `ruby.chrissx.de`         |
+| CNAME | `screwed.chrissx.de`    | `ruby.chrissx.de`         |
+| CNAME | `tor.chrissx.de`        | `op.chrissx.de`           |
+| CNAME | `wiki.chrissx.de`       | `ruby.chrissx.de`         |
+| CNAME | `chrissx.de`            | `ruby.chrissx.de`         |
+| CNAME | `chrisxeric.de`         | `ruby.chrissx.de`         |
+| CNAME | `elonisnwichser.de`     | `ruby.chrissx.de`         |
+| CNAME | `fuxgames.com`          | `ruby.chrissx.de`         |
+| CNAME | `gock.dev`              | `ruby.chrissx.de`         |
+| CNAME | `kinkcheck.top`         | `ruby.chrissx.de`         |
+| CNAME | `lowlevelmusic.com`     | `ruby.chrissx.de`         |
+| CNAME | `zerm.eu`               | `ruby.chrissx.de`         |
+| CNAME | `zerm.link`             | `ruby.chrissx.de`         |
+| CNAME | `www.chrissx.de`        | `chrissx.de`              |
+| CNAME | …                       | …                         |
+| CNAME | `www.zerm.link`         | `zerm.link`               |
 
 ## Software
 
-### sophia → ruby (nuremberg server)
+### ruby (falkenstein)
 
 A rough description of the current setup on `sophia` and planned changes (especially for its replacement `ruby`, aka. Project NEV) can be found below. A semi-automatic `cloud-config` + `docker-compose` install is under preparation. `cloud-init` will automatically install:
 
@@ -202,14 +203,11 @@ The following steps are left to the admin:
 #### Misc
 
 ```sh
-docker run -d --restart=unless-stopped --pull=always --name ludwig -p70:70 chrissx/ludwig:latest
 docker run -d --restart=unless-stopped --pull=always --name redirector -p80:80 chrissx/redirector:latest
 docker run -d --restart=unless-stopped --pull=always --name erwin --network host chrissx/erwin:latest
 
 docker run -d --restart=unless-stopped --pull=always --name watchtower -v/var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 3600
 ```
-
-> ludwig will not be deployed on `ruby`.
 
 > We will not be able to evaluate watchtower replacements in time for the NEV migration.
 
@@ -250,7 +248,7 @@ The KCT Bottom instance will get its own directory.
 
 #### Discord Bots
 
-> The Lavalink config is currently missing from this repo.
+Discord bots now run on tobias (see below):
 
 ```sh
 docker network create lavalink
@@ -259,12 +257,8 @@ docker run -d --restart=unless-stopped --pull=always --name jana --network laval
 docker run -d --restart=unless-stopped --pull=always --name insp -p8989:8989 -e INSP_DISCORD_TOKEN=XXX chrissx/inspiriererin:latest
 ```
 
-##### Issues & possible changes (mostly unrelated to NEV)
+##### Issues & changes (mostly unrelated to NEV)
 
 The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other ("Explode API" based) YouTube services. Therefore, it has been disabled for a while. There are a few possible solutions to this (e.g. OAuth authentication, `poToken`, the official YouTube API, ...), but the easiest would be to migrate `jana` (and, to concentrate the Discord bots on a single server, also `inspiriererin`) back to Rosenhof (i.e. `tobias`). A decision on this has not been made yet.
-
-##### Temporary NEV state / postponed migration
-
-`ruby` will be set up without any of the three Discord-related containers. They will keep running on `sophia` for a while. During that, a Docker Compose recipe will be written. Where and when said recipe will be deployed is still undetermined. A future rework (or replacement) of `tobias` is the most likely target.
 
 <!-- vim: set wrap! : -->
