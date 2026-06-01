@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:noble
 ENV DEBIAN_FRONTEND=noninteractive
 
 # TODO: configurability
@@ -22,4 +22,4 @@ COPY keytable /etc/postfix/dkim/keytable
 COPY signingtable /etc/postfix/dkim/signingtable
 
 COPY start.sh /start.sh
-CMD /start.sh
+CMD ["sh", "/start.sh"]
