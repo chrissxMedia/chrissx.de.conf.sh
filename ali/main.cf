@@ -1,5 +1,3 @@
-alias_database = hash:/mail/aliases
-alias_maps = hash:/mail/aliases
 compatibility_level = 3.7
 header_checks = regexp:/etc/postfix/header_checks
 inet_protocols = all
@@ -42,5 +40,6 @@ smtpd_tls_security_level = may
 # TODO: verify the config works and set to no
 soft_bounce = yes
 tls_preempt_cipherlist = yes
+virtual_alias_maps = hash:/mail/aliases
 virtual_mailbox_domains = chrissx.de
 virtual_transport = lmtp:unix:private/dovecot-lmtp
