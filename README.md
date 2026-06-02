@@ -13,11 +13,9 @@ subgraph rosenhof["Rosenhof (cM Infra)"]
   subgraph tobias
     subgraph dockerop[docker]
       simon
-      tor-proxy
       nginxop[nginx]
       ali
       murmur
-      minecraft
       home-assistant
       inventree
       bucket
@@ -57,11 +55,9 @@ simon --> cloudflare
 simon --> nginxruby
 
 internet(Users)
-internet -- "9053, 9052, 9050" --> tor-proxy
 internet -- "443, 80" --> nginxop[nginx]
 internet -- "993, 143, 587, 25" --> ali
 internet -- 64738 --> murmur
-internet -- 25565 --> minecraft
 internet -- 443 --> nginxruby
 internet -- 80 --> redirector
 internet -- 8080 --> erwin
