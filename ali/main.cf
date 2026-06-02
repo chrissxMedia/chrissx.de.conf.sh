@@ -7,10 +7,10 @@ maillog_file = /mail/postfix.log
 milter_default_action = accept
 milter_protocol = 6
 mydestination =
-myhostname = chrissx.de
+mydomain = chrissx.de
+myhostname = mail.chrissx.de
 non_smtpd_milters = inet:localhost:12301
-recipient_delimiter = +
-# TODO: requiretls_enable
+recipient_delimiter = +-.
 smtp_sasl_security_options = noplaintext noanonymous
 smtp_tls_CAfile = /mail/cert.pem
 smtp_tls_mandatory_protocols = >=TLSv1.2
@@ -32,7 +32,7 @@ smtpd_sasl_tls_security_options = noanonymous
 smtpd_sasl_type = dovecot
 smtpd_tls_auth_only = yes
 smtpd_tls_cert_file = /mail/fullchain.pem
-smtpd_tls_exclude_ciphers = aNULL, LOW, EXP, MEDIUM, ADH, AECDH, MD5, DSS, CAMELLIA128, 3DES, CAMELLIA256, eNULL
+smtpd_tls_exclude_ciphers = aNULL, LOW, EXP, MEDIUM, ADH, AECDH, MD5, DSS, 3DES, eNULL
 smtpd_tls_key_file = /mail/privkey.pem
 smtpd_tls_mandatory_protocols = >=TLSv1.2
 smtpd_tls_protocols = >=TLSv1.2
