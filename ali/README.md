@@ -17,7 +17,7 @@ Then run the following command:
 
 ```sh
 sudo docker run -d --restart=unless-stopped --pull=always -v$PWD:/mail \
--p25:25 -p143:143 -p587:587 -p993:993 chrissx/ali:latest
+-p25:25 -p143:143 -p465:465 -p587:587 -p993:993 chrissx/ali:latest
 ```
 
 ## Adding new users
