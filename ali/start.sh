@@ -1,12 +1,32 @@
 #!/bin/sh
 set -ue
 
-service postfix start
-service dovecot start
-service opendkim start
+pids=""
+start_svc() {
+  ( "$@" ) &
+  p="$!"
+  pids="$pids $p"
+}
 
-while true ; do
-        sleep 10
-        service postfix status >/dev/null 2>/dev/null || service postfix status
-        service dovecot status >/dev/null 2>/dev/null || service dovecot status
+start_svc postfix start-fg
+start_svc dovecot -F
+start_svc opendkim -f
+
+kill_and_exit() {
+  for pid in $pids; do
+    kill "$pid" 2>/dev/null || true
+  done
+  exit $1
+}
+
+trap 'kill_and_exit 130' INT TERM
+
+while true; do
+  for pid in $pids; do
+    if ! kill -0 "$pid" 2>/dev/null; then
+      wait "$pid"
+      kill_and_exit $?
+    fi
+  done
+  sleep 1
 done
