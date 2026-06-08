@@ -1,4 +1,4 @@
-/^From: .*@(wink-dates\.art|forest-host\.fit|digital-ix\.tech|mydigital-ai\.tech|arteones\.life|declass\.business)>$/ REJECT Your domain has been associated with spam. You can file an appeal at <https://github.com/chrissxMedia/chrissx.de.conf.sh/issues>
+/^From: .*@(wink-dates\.art|forest-host\.fit|digital-ix\.tech|mydigital-ai\.tech|arteones\.life|declass\.business|on-server\.tech|timlord\.autos|arbentio\.buzz|doublewin\.co\.ke|fixyourhost\.autos|wink-server\.de)>$/ REJECT Your domain has been associated with spam. You can file an appeal at <https://github.com/chrissxMedia/chrissx.de.conf.sh/issues>
 # Warning: bad jokes
 /^Date: .* 199[0-9]/ REJECT GET RTC
 /^X-LinkedIn-Class: / REJECT rm -r LinkedIn
