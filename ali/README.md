@@ -17,7 +17,7 @@ Then run the following command:
 
 ```sh
 sudo docker run -d --restart=unless-stopped --pull=always -v$PWD:/mail \
--p25:25 -p143:143 -p465:465 -p587:587 -p993:993 chrissx/ali:latest
+-p25:25 -p143:143 -p465:465 -p587:587 -p993:993 --name ali chrissx/ali:latest
 ```
 
 ## Adding new users
@@ -25,16 +25,16 @@ sudo docker run -d --restart=unless-stopped --pull=always -v$PWD:/mail \
 ```sh
 userid=$((1000 + $(wc -l <users.passwd)))
 grep $userid users.passwd # double-check that the uid isn't taken
-hash=$(sudo docker exec -it $my_ali_instance doveadm pw)
+hash=$(sudo docker exec -it ali doveadm pw)
 echo "$username:$hash:$userid:8:,,,:/home/$username:/bin/bash" >> users.passwd
 mkdir $username
 sudo chown -R $userid:8 $username
-sudo docker restart $my_ali_instance
+sudo docker restart ali
 ```
 
 ## Adding new aliases
 
 ```sh
 echo 'bar@chrissx.de foo@chrissx.de' >> aliases
-sudo docker exec -it $my_ali_instance postmap hash:/mail/aliases
+sudo docker exec -it ali postmap hash:/mail/aliases
 ```
