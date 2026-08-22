@@ -1,6 +1,7 @@
 # chrissx.de config files
 
-These are most of the config files and scripts used on chrissx Media operated infrastructure.
+These are most of the config files and scripts used on chrissx Media operated
+infrastructure.
 
 ## Overview
 
@@ -102,7 +103,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 ## Hardware
 
 | Hostname    | Hardware                                    | Location    | OS                   | Status                | Cost    |
-|-------------|---------------------------------------------|-------------|----------------------|-----------------------|---------|
+| ----------- | ------------------------------------------- | ----------- | -------------------- | --------------------- | ------- |
 | ruby        | Hetzner CX23                                | Falkenstein | Ubuntu Server 24.04  | running               | 4.9€/mo |
 | tobias      | Lenovo ThinkCentre M710s                    | Rosenhof    | Ubuntu Server 22.04  | running               | 140€    |
 | rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Rosenhof    | DSM 7                | running               | 3500€   |
@@ -113,17 +114,18 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 ### Internal
 
 > [!NOTE]
-> For some reason `tobias.chrissx.de` gets lost somewhere in the chain of DNS servers most of the time, so we use `op.chrissx.de` (named after the old `optiplex`) instead.
+> For historical reasons `tobias` is still called `op.chrissx.de`.
 
 | Type | Name                 | Content          |
-|------|----------------------|------------------|
+| ---- | -------------------- | ---------------- |
 | A    | `op.chrissx.de`      | `192.168.178.68` |
+| A    | `ppc.chrissx.de`     | `192.168.180.28` |
 | A    | `rotmain.chrissx.de` | `192.168.178.29` |
 
 ### External
 
 | Type  | Name                    | Content                   |
-|-------|-------------------------|---------------------------|
+| ----- | ----------------------- | ------------------------- |
 | A     | `rosenhof.chrissx.de`   | (DynDNS)                  |
 | AAAA  | `rosenhof.chrissx.de`   | (DynDNS)                  |
 | A     | `ruby.chrissx.de`       | `188.34.186.24`           |
@@ -134,6 +136,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `bucket.chrissx.de`     | `rosenhof.chrissx.de`     |
 | CNAME | `cpm.chrissx.de`        | `ruby.chrissx.de`         |
 | CNAME | `erwin.chrissx.de`      | `ruby.chrissx.de`         |
+| CNAME | `ferdium.chrissx.de`    | `rosenhof.chrissx.de`     |
 | CNAME | `fonts.chrissx.de`      | `ruby.chrissx.de`         |
 | CNAME | `git.chrissx.de`        | `rosenhof.chrissx.de`     |
 | CNAME | `ha.chrissx.de`         | `rosenhof.chrissx.de`     |
@@ -196,7 +199,12 @@ The following steps are left to the admin:
 
 #### Discord Bots
 
-The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other ("Explode API" based) YouTube services. Therefore, it was disabled for a while. There are a few possible solutions to this (e.g. OAuth authentication, `poToken`, the official YouTube API, ...), but the easiest is to migrate `jana` (and, to concentrate the Discord bots on a single server, also `inspiriererin`) back to Rosenhof. Therefore, Discord bots now run on `tobias`:
+The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other
+("Explode API" based) YouTube services. Therefore, it was disabled for a while.
+There are a few possible solutions to this (e.g. OAuth authentication,
+`poToken`, the official YouTube API, ...), but the easiest is to migrate `jana`
+(and, to concentrate the Discord bots on a single server, also `inspiriererin`)
+back to Rosenhof. Therefore, Discord bots now run on `tobias`:
 
 ```sh
 docker network create lavalink
