@@ -1,0 +1,5 @@
+type = "http"
+name = "elonisnwichser.de"
+url = "https://elonisnwichser.de/"
+max_redirects = 0
+accepted_statuscodes = ["301", "302", "307", "308"]

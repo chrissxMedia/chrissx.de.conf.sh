@@ -1,0 +1,4 @@
+type = "keyword"
+name = "erwin-metrics"
+url = "https://erwin.chrissx.de/metrics"
+keyword = "# HELP erwin_requests"

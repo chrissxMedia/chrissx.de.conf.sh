@@ -1,0 +1,4 @@
+type = "keyword"
+name = "bucket"
+url = "https://bucket.chrissx.de/metrics"
+keyword = "# HELP go_goroutines "

@@ -1,0 +1,51 @@
+name: monitoring
+
+services:
+  kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    environment:
+      UPTIME_KUMA_DB_TYPE: sqlite
+    ports:
+      - ${KUMA_BIND_ADDRESS:-127.0.0.1}:3001:3001
+    volumes:
+      - kuma-data:/app/data
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
+  autokuma:
+    image: ghcr.io/bigboot/autokuma:2
+    restart: unless-stopped
+    depends_on:
+      kuma:
+        condition: service_started
+    environment:
+      AUTOKUMA__KUMA__USERNAME: ${KUMA_USERNAME:?Set KUMA_USERNAME in .env}
+      AUTOKUMA__KUMA__PASSWORD: ${KUMA_PASSWORD:?Set KUMA_PASSWORD in .env}
+      AUTOKUMA__ENV__SITE: ${SITE:?Set SITE to ruby or rotmain}
+      AUTOKUMA__ENV__NOTIFICATIONS_HIGH: '["notifications/discord-high", "notifications/email", "notifications/pushover-high"]'
+      AUTOKUMA__ENV__NOTIFICATIONS_LOW: '["notifications/discord-low", "notifications/email", "notifications/pushover-low"]'
+      AUTOKUMA__ENV__DISCORD_WEBHOOK: ${DISCORD_WEBHOOK:?Set DISCORD_WEBHOOK}
+      AUTOKUMA__ENV__DISCORD_MENTION: ${DISCORD_MENTION:-}
+      AUTOKUMA__ENV__SMTP_HOST: ${SMTP_HOST:-mail.chrissx.de}
+      AUTOKUMA__ENV__SMTP_USERNAME: ${SMTP_USERNAME:?Set SMTP_USERNAME}
+      AUTOKUMA__ENV__SMTP_PASSWORD: ${SMTP_PASSWORD:?Set SMTP_PASSWORD}
+      AUTOKUMA__ENV__SMTP_TO: ${SMTP_TO:?Set SMTP_TO}
+      AUTOKUMA__ENV__PUSHOVER_APP_TOKEN: ${PUSHOVER_APP_TOKEN:?Set PUSHOVER_APP_TOKEN}
+      AUTOKUMA__ENV__PUSHOVER_USER_KEY: ${PUSHOVER_USER_KEY:?Set PUSHOVER_USER_KEY}
+      AUTOKUMA__ENV__OWN_PUSH_TOKEN: ${OWN_PUSH_TOKEN:?Set OWN_PUSH_TOKEN}
+      AUTOKUMA__ENV__PEER_PUSH_TOKEN: ${PEER_PUSH_TOKEN:?Set PEER_PUSH_TOKEN}
+      AUTOKUMA__ENV__PEER_URL: ${PEER_URL:?Set PEER_URL to the other Kuma instance}
+    volumes:
+      - ./autokuma.toml:/autokuma.toml:ro
+      - ./monitors/public:/etc/autokuma/monitors/public:ro
+      - ./monitors/notifications:/etc/autokuma/monitors/notifications:ro
+      - ./monitors/peer:/etc/autokuma/monitors/peer:ro
+      - ./monitors/${SITE:?Set SITE to ruby or rotmain}:/etc/autokuma/monitors/internal:ro
+      - autokuma-data:/data
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
+volumes:
+  kuma-data:
+  autokuma-data:

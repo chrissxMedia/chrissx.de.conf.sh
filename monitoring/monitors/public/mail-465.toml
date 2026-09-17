@@ -1,0 +1,4 @@
+type = "port"
+name = "Mail SMTPS"
+hostname = "mail.chrissx.de"
+port = 465

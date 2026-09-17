@@ -1,0 +1,4 @@
+type = "port"
+name = "Mail IMAP"
+hostname = "mail.chrissx.de"
+port = 143

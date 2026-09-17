@@ -1,0 +1,4 @@
+type = "keyword"
+name = "redirector-metrics"
+url = "http://ruby.chrissx.de/metrics"
+keyword = "# HELP redirector_"

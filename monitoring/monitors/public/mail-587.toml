@@ -1,0 +1,4 @@
+type = "port"
+name = "Mail Submission"
+hostname = "mail.chrissx.de"
+port = 587

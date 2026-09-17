@@ -1,0 +1,4 @@
+type = "port"
+name = "Mail IMAPS"
+hostname = "mail.chrissx.de"
+port = 993

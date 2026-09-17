@@ -1,0 +1,4 @@
+type = "push"
+name = "Peer monitoring heartbeat"
+push_token = "{{ get_env(name='AUTOKUMA__ENV__OWN_PUSH_TOKEN') }}"
+max_retries = 3

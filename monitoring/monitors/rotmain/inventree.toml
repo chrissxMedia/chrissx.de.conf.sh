@@ -1,0 +1,5 @@
+type = "http"
+name = "inventree"
+url = "https://inv.chrissx.de/"
+max_retries = 20
+notification_name_list = "{{ get_env(name='AUTOKUMA__ENV__NOTIFICATIONS_LOW') | addslashes }}"

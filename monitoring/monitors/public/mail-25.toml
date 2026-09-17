@@ -1,0 +1,4 @@
+type = "port"
+name = "Mail SMTP"
+hostname = "mail.chrissx.de"
+port = 25

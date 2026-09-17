@@ -1,0 +1,11 @@
+type = "notification"
+name = "Discord low"
+active = true
+is_default = false
+
+[config]
+type = "discord"
+discordWebhookUrl = '''"{{ get_env(name='AUTOKUMA__ENV__DISCORD_WEBHOOK') | json_encode | split(pat='') | slice(start=2, end=-2) | join(sep='') }}"'''
+discordUsername = '''Monitoring {{ get_env(name='AUTOKUMA__ENV__SITE') }}'''
+discordSuppressNotifications = true
+applyExisting = false
