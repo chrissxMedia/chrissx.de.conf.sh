@@ -16,6 +16,7 @@ smtp       inet  n       -       y       -       -       smtpd
 #tlsproxy  unix  -       -       y       -       0       tlsproxy
 submission inet  n       -       y       -       -       smtpd
 smtps      inet  n       -       y       -       -       smtpd
+  -o smtpd_tls_wrappermode=yes
 #628       inet  n       -       y       -       -       qmqpd
 pickup     unix  n       -       y       60      1       pickup
 cleanup    unix  n       -       y       -       0       cleanup
