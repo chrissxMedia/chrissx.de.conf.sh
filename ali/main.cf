@@ -1,4 +1,5 @@
 compatibility_level = 3.7
+data_directory = /mail/postfix
 header_checks = regexp:/etc/postfix/header_checks
 inet_protocols = all
 mail_spool_directory = /mail
@@ -11,6 +12,7 @@ mydestination =
 mydomain = chrissx.de
 myhostname = mail.chrissx.de
 non_smtpd_milters = inet:localhost:12301
+queue_directory = /mail/queue
 recipient_delimiter = +-.
 smtp_sasl_security_options = noplaintext noanonymous
 smtp_tls_CAfile = /mail/cert.pem
