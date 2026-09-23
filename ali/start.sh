@@ -9,7 +9,8 @@ start_svc() {
 }
 
 mkdir -p /mail/queue /mail/dovecot
-# Create the queue and shared socket directory before Dovecot starts.
+# Prepare the queue before Dovecot binds its sockets there.
+postfix set-permissions
 postfix check
 
 start_svc postfix start-fg
