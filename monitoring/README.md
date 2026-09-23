@@ -13,8 +13,7 @@ On each host, in this directory:
 3. Generate two push tokens (`openssl rand -hex 16`). Each host's
    `OWN_PUSH_TOKEN` is the other's `PEER_PUSH_TOKEN`; `PEER_URL` is the other
    host's dedicated HTTPS name.
-4. `docker compose up -d kuma`, expose port 3001 via tunnel or proxy, and
-   create the admin account from `.env`.
+4. `docker compose up -d kuma`, then create the admin account from `.env`.
 5. `docker compose up -d autokuma`, then check its logs and the dashboard.
    Notifications may take one more sync cycle to attach.
 
@@ -26,10 +25,9 @@ default SMTP host.
 ## Proxy
 
 Serve `status-ruby`/`status-rotmain` per site and `status.chrissx.de` from
-both. Port 3001 binds localhost by default, which is fine; peer checks use
-the public `PEER_URL`. Only set `KUMA_BIND_ADDRESS` to the LAN address if
-Tobias proxies rotmain over LAN, and keep it private. On ruby join nginx to
-`monitoring_default`. Proxy needs WebSocket forwarding:
+both. Port 3001 is published on all host IPv4 interfaces. Tobias can proxy
+rotmain through its LAN address. On ruby join nginx to `monitoring_default`.
+Proxy needs WebSocket forwarding:
 
 ```nginx
 location / {
