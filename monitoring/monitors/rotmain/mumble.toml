@@ -1,0 +1,6 @@
+type = "port"
+name = "Mumble"
+hostname = "op.chrissx.de"
+port = 64738
+max_retries = 20
+notification_name_list = "{{ get_env(name='AUTOKUMA__ENV__NOTIFICATIONS_LOW') | addslashes }}"

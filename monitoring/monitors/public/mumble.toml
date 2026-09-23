@@ -1,4 +1,0 @@
-type = "port"
-name = "Mumble"
-hostname = "rosenhof.chrissx.de"
-port = 64738
