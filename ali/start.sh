@@ -8,6 +8,10 @@ start_svc() {
   pids="$pids $p"
 }
 
+mkdir -p /mail/queue /mail/dovecot
+# Create the queue and shared socket directory before Dovecot starts.
+postfix check
+
 start_svc postfix start-fg
 start_svc dovecot -F
 start_svc opendkim -f
