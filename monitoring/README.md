@@ -1,6 +1,6 @@
 # Monitoring
 
-Uptime Kuma 2 and AutoKuma 2 run on ruby and rotmain from this directory.
+Uptime Kuma 2 and AutoKuma 2 run on ruby and tobias from this directory.
 Each host keeps its own database and sends its own alerts.
 
 ## Setup
@@ -9,7 +9,7 @@ On each host, in this directory:
 
 1. Copy `.env.example` to `.env` (`chmod 600`), fill in Kuma, Discord, SMTP
    and Pushover credentials. Quote values containing `$`.
-2. Set `SITE` to `ruby` or `rotmain`. It selects that host's internal monitors.
+2. Set `SITE` to `ruby` or `tobias`. It selects that host's internal monitors.
 3. Generate two push tokens (`openssl rand -hex 16`). Each host's
    `OWN_PUSH_TOKEN` is the other's `PEER_PUSH_TOKEN`; `PEER_URL` is the other
    host's dedicated HTTPS name.
@@ -24,10 +24,9 @@ default SMTP host.
 
 ## Proxy
 
-Serve `status-ruby`/`status-rotmain` per site and `status.chrissx.de` from
-both. Port 3001 is published on all host IPv4 interfaces. Tobias can proxy
-rotmain through its LAN address. On ruby join nginx to `monitoring_default`.
-Proxy needs WebSocket forwarding:
+Serve `status-ruby`/`status-tobias` per site and `status.chrissx.de` from
+both. Port 3001 is published on all host IPv4 interfaces. On both hosts, join
+nginx to `monitoring_default`. Proxy needs WebSocket forwarding:
 
 ```nginx
 location / {
@@ -46,9 +45,9 @@ secrets.
 ## Alerts
 
 Checks run every 30s and report failures immediately. The Public group waits
-4 retries (~2min) before alerting; rotmain's internal group waits 20 retries
-(~10min). Only the Public and Rotmain internal groups send alerts. Each site's
-Public group contains its public checks and both peer checks; only rotmain has
+4 retries (~2min) before alerting; tobias's internal group waits 20 retries
+(~10min). Only the Public and Internal groups send alerts. Each site's
+Public group contains its public checks and both peer checks; only tobias has
 an internal group. A group alerts if any child is down after its retries
 and reports the failing checks. Any other checks still down at alert time
 join the same alert.
@@ -67,16 +66,16 @@ work, schedule maintenance for the affected groups on both instances.
 
 ## Coverage
 
-Public HTTP checks follow ruby's nginx config and Tobias's TLS names, reject
+Public HTTP checks follow ruby's nginx config and tobias's TLS names, reject
 4xx/5xx, and check TLS. Apex domains only, no `www` duplicates; anything
 without a file has no check. External destinations and imported
 assets have no checks. Metrics endpoints cover Erwin, Jasmin, redirector,
 Docker and Bucket (no history or per-container state). Mail checks TCP
-25/465/587/143/993, so they do not test mail delivery. Only rotmain checks
+25/465/587/143/993, so they do not test mail delivery. Only tobias checks
 Mumble over LAN at `op.chrissx.de:64738`; its TCP check does not test UDP
-voice traffic. Rotmain also checks Home Assistant, InvenTree and Tobias-direct
-Docker/Bucket. Jana, insp8n and aggregamus are excluded; nginx `stub_status`
-is not Prometheus format.
+voice traffic. tobias also checks Home Assistant and InvenTree, plus its direct
+Docker and Bucket endpoints. Jana, insp8n and aggregamus are excluded; nginx
+`stub_status` is not Prometheus format.
 
 ## Managing
 
