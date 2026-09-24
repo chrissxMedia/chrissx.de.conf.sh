@@ -1,0 +1,5 @@
+type = "port"
+name = "Mail IMAPS"
+parent_name = "public/group"
+hostname = "mail.chrissx.de"
+port = 993

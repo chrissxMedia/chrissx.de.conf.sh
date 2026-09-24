@@ -1,0 +1,41 @@
+name: monitoring
+
+services:
+  kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    environment:
+      UPTIME_KUMA_DB_TYPE: sqlite
+    ports:
+      - "0.0.0.0:3001:3001"
+    volumes:
+      - kuma-data:/app/data
+
+  autokuma:
+    image: ghcr.io/bigboot/autokuma:2.1.0-rc.2
+    restart: unless-stopped
+    depends_on:
+      kuma:
+        condition: service_started
+    environment:
+      AUTOKUMA__KUMA__USERNAME: ${KUMA_USERNAME:?Set KUMA_USERNAME in .env}
+      AUTOKUMA__KUMA__PASSWORD: ${KUMA_PASSWORD:?Set KUMA_PASSWORD in .env}
+      AUTOKUMA__ENV__SITE: ${SITE:?Set SITE to ruby or tobias}
+      AUTOKUMA__ENV__DISCORD_WEBHOOK: ${DISCORD_WEBHOOK:?Set DISCORD_WEBHOOK}
+      AUTOKUMA__ENV__DISCORD_MENTION: ${DISCORD_MENTION:-}
+      AUTOKUMA__ENV__SMTP_HOST: ${SMTP_HOST:-mail.chrissx.de}
+      AUTOKUMA__ENV__SMTP_USERNAME: ${SMTP_USERNAME:?Set SMTP_USERNAME}
+      AUTOKUMA__ENV__SMTP_PASSWORD: ${SMTP_PASSWORD:?Set SMTP_PASSWORD}
+      AUTOKUMA__ENV__SMTP_TO: ${SMTP_TO:?Set SMTP_TO}
+      AUTOKUMA__ENV__PUSHOVER_APP_TOKEN: ${PUSHOVER_APP_TOKEN:?Set PUSHOVER_APP_TOKEN}
+      AUTOKUMA__ENV__PUSHOVER_USER_KEY: ${PUSHOVER_USER_KEY:?Set PUSHOVER_USER_KEY}
+    volumes:
+      - ./autokuma.toml:/autokuma.toml:ro
+      - ./monitors/public:/etc/autokuma/monitors/public:ro
+      - ./monitors/notifications:/etc/autokuma/monitors/notifications:ro
+      - ./monitors/${SITE:?Set SITE to ruby or tobias}:/etc/autokuma/monitors/internal:ro
+      - autokuma-data:/data
+
+volumes:
+  kuma-data:
+  autokuma-data:

@@ -1,0 +1,7 @@
+type = "json-query"
+name = "Send monitoring heartbeat"
+parent_name = "public/group"
+url = "{{ get_env(name='AUTOKUMA__ENV__PEER_URL') }}/api/push/{{ get_env(name='AUTOKUMA__ENV__PEER_PUSH_TOKEN') }}"
+json_path = "ok"
+json_path_operator = "=="
+expected_value = "true"

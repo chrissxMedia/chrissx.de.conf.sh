@@ -1,0 +1,4 @@
+type = "http"
+name = "home-assistant"
+parent_name = "internal/group"
+url = "https://ha.chrissx.de/"

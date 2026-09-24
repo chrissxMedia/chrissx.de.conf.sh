@@ -1,0 +1,4 @@
+type = "http"
+name = "zerm.link"
+parent_name = "public/group"
+url = "https://zerm.link/"

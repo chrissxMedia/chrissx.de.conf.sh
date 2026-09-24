@@ -1,0 +1,4 @@
+type = "http"
+name = "screwed.chrissx.de"
+parent_name = "public/group"
+url = "https://screwed.chrissx.de/"

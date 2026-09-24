@@ -1,0 +1,4 @@
+type = "http"
+name = "meme.chrissx.de"
+parent_name = "public/group"
+url = "https://meme.chrissx.de/"

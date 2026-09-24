@@ -158,6 +158,7 @@ services:
         condition: service_healthy
     networks:
       - webservices
+      - monitoring_default
     ports:
       - 443:443
     volumes:
@@ -170,6 +171,8 @@ services:
 networks:
   webservices:
     enable_ipv6: true
+  monitoring_default:
+    external: true
 
 volumes:
   cert-data:

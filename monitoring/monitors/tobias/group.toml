@@ -1,0 +1,4 @@
+type = "group"
+name = "Internal"
+max_retries = 20
+notification_name_list = ["notifications/discord-low", "notifications/email", "notifications/pushover-low"]

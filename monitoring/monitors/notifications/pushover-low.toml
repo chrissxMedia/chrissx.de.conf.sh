@@ -1,0 +1,12 @@
+type = "notification"
+name = "Pushover low"
+active = true
+is_default = false
+
+[config]
+type = "pushover"
+pushoverapptoken = "{{ get_env(name='AUTOKUMA__ENV__PUSHOVER_APP_TOKEN') }}"
+pushoveruserkey = "{{ get_env(name='AUTOKUMA__ENV__PUSHOVER_USER_KEY') }}"
+pushovertitle = "Monitoring {{ get_env(name='AUTOKUMA__ENV__SITE') }}"
+pushoverpriority = -1
+applyExisting = false

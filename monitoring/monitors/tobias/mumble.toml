@@ -1,0 +1,5 @@
+type = "port"
+name = "Mumble"
+parent_name = "internal/group"
+hostname = "op.chrissx.de"
+port = 64738

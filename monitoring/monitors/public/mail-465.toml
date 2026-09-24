@@ -1,0 +1,5 @@
+type = "port"
+name = "Mail SMTPS"
+parent_name = "public/group"
+hostname = "mail.chrissx.de"
+port = 465

@@ -1,0 +1,5 @@
+type = "keyword"
+name = "bucket"
+parent_name = "public/group"
+url = "https://bucket.chrissx.de/metrics"
+keyword = "# HELP go_goroutines "

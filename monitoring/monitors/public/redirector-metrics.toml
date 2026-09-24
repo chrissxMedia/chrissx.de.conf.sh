@@ -1,0 +1,5 @@
+type = "keyword"
+name = "redirector-metrics"
+parent_name = "public/group"
+url = "http://ruby.chrissx.de/metrics"
+keyword = "# HELP redirector_"

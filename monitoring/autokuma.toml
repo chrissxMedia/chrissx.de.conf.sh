@@ -1,0 +1,19 @@
+static_monitors = "/etc/autokuma/monitors"
+data_path = "/data"
+on_delete = "delete"
+
+default_settings = '''
+*.interval: 30
+*.retry_interval: 30
+*.max_retries: 0
+*.resend_interval: 120
+http.timeout: 10
+keyword.timeout: 10
+json-query.timeout: 10
+'''
+
+[kuma]
+url = "http://kuma:3001"
+
+[docker]
+enabled = false
