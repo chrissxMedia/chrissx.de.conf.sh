@@ -47,7 +47,6 @@ location / {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
-    proxy_read_timeout 60s;
 }
 ```
 
@@ -80,14 +79,11 @@ instances.
 ## Coverage
 
 Public HTTP checks follow ruby's nginx config and tobias's TLS names, reject
-4xx/5xx, and check TLS. Apex domains only, no `www` duplicates; anything
-without a file has no check. External destinations and imported
-assets have no checks. Metrics endpoints cover Erwin, Jasmin, redirector,
-Docker and Bucket (no history or per-container state). Mail checks TCP
+4xx/5xx, and check TLS. Metrics endpoints cover erwin, jasmin, redirector,
+Docker and BUcKET (no history or per-container state). Mail checks TCP
 25/465/587/143/993, so they do not test mail delivery. Only tobias checks
-Mumble over LAN at `op.chrissx.de:64738`; its TCP check does not test UDP
-voice traffic. tobias also checks Home Assistant and InvenTree, plus its direct
-Docker and Bucket endpoints. Jana, insp8n and aggregamus are excluded; nginx
+Mumble TCP at `op.chrissx.de:64738`. tobias also checks Home Assistant and
+InvenTree, plus its direct Docker and BUcKET endpoints. Jana is excluded; nginx
 `stub_status` is not Prometheus format.
 
 ## Managing
