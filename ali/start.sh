@@ -8,11 +8,6 @@ start_svc() {
   pids="$pids $p"
 }
 
-mkdir -p /mail/queue /mail/dovecot
-# Prepare the queue before Dovecot binds its sockets there.
-postfix set-permissions
-postfix check
-
 start_svc postfix start-fg
 start_svc dovecot -F
 start_svc opendkim -f
