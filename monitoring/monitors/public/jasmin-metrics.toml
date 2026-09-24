@@ -1,4 +1,5 @@
 type = "keyword"
 name = "jasmin-metrics"
+parent_name = "public/group"
 url = "https://zerm.eu/metrics"
 keyword = "# HELP jasmin_"

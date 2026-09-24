@@ -1,4 +1,5 @@
 type = "port"
 name = "Mail IMAP"
+parent_name = "public/group"
 hostname = "mail.chrissx.de"
 port = 143

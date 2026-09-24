@@ -23,8 +23,6 @@ services:
       AUTOKUMA__KUMA__USERNAME: ${KUMA_USERNAME:?Set KUMA_USERNAME in .env}
       AUTOKUMA__KUMA__PASSWORD: ${KUMA_PASSWORD:?Set KUMA_PASSWORD in .env}
       AUTOKUMA__ENV__SITE: ${SITE:?Set SITE to ruby or rotmain}
-      AUTOKUMA__ENV__NOTIFICATIONS_HIGH: '["notifications/discord-high", "notifications/email", "notifications/pushover-high"]'
-      AUTOKUMA__ENV__NOTIFICATIONS_LOW: '["notifications/discord-low", "notifications/email", "notifications/pushover-low"]'
       AUTOKUMA__ENV__DISCORD_WEBHOOK: ${DISCORD_WEBHOOK:?Set DISCORD_WEBHOOK}
       AUTOKUMA__ENV__DISCORD_MENTION: ${DISCORD_MENTION:-}
       AUTOKUMA__ENV__SMTP_HOST: ${SMTP_HOST:-mail.chrissx.de}

@@ -1,6 +1,5 @@
 type = "keyword"
 name = "Bucket direct"
+parent_name = "internal/group"
 url = "http://op.chrissx.de:8022/metrics"
-max_retries = 20
-notification_name_list = "{{ get_env(name='AUTOKUMA__ENV__NOTIFICATIONS_LOW') | addslashes }}"
 keyword = "# HELP go_goroutines "

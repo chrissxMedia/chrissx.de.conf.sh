@@ -1,0 +1,4 @@
+type = "group"
+name = "Rotmain internal"
+max_retries = 16
+notification_name_list = ["notifications/discord-low", "notifications/email", "notifications/pushover-low"]

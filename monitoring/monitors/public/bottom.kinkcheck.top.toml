@@ -1,3 +1,4 @@
 type = "http"
 name = "bottom.kinkcheck.top"
+parent_name = "public/group"
 url = "https://bottom.kinkcheck.top/"

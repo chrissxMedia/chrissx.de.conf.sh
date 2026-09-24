@@ -2,13 +2,12 @@ static_monitors = "/etc/autokuma/monitors"
 data_path = "/data"
 on_delete = "keep"
 
-# Four retries at 30 seconds for urgent checks. Low-priority files use twenty.
+# Four retries at 30 seconds for checks; the internal group adds sixteen.
 default_settings = '''
 *.interval: 30
 *.retry_interval: 30
 *.max_retries: 4
 *.resend_interval: 120
-*.notification_name_list: {{ get_env(name='AUTOKUMA__ENV__NOTIFICATIONS_HIGH') | addslashes }}
 http.timeout: 10
 keyword.timeout: 10
 json-query.timeout: 10

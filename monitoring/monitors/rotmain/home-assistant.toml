@@ -1,5 +1,4 @@
 type = "http"
 name = "home-assistant"
+parent_name = "internal/group"
 url = "https://ha.chrissx.de/"
-max_retries = 20
-notification_name_list = "{{ get_env(name='AUTOKUMA__ENV__NOTIFICATIONS_LOW') | addslashes }}"

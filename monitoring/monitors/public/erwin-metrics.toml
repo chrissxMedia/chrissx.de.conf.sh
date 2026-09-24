@@ -1,4 +1,5 @@
 type = "keyword"
 name = "erwin-metrics"
+parent_name = "public/group"
 url = "https://erwin.chrissx.de/metrics"
 keyword = "# HELP erwin_requests"

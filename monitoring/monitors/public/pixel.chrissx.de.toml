@@ -1,3 +1,4 @@
 type = "http"
 name = "pixel.chrissx.de"
+parent_name = "public/group"
 url = "https://pixel.chrissx.de/"

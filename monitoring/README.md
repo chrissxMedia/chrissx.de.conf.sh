@@ -15,7 +15,7 @@ On each host, in this directory:
    host's dedicated HTTPS name.
 4. `docker compose up -d kuma`, then create the admin account from `.env`.
 5. `docker compose up -d autokuma`, then check its logs and the dashboard.
-   Notifications may take one more sync cycle to attach.
+   Notifications, groups and their child checks may need several sync cycles.
 
 Secrets stay out of Git, but Kuma stores credentials in its database, so back
 up both named volumes. Watchtower is disabled for both images.
@@ -45,13 +45,24 @@ secrets.
 
 ## Alerts
 
-Checks run every 30s. High allows 4 retries (~2min); internal services allow
-20 (~10min). High Pushover notifications, including recoveries, use emergency
-priority 2 (repeat 30s, expire after 1h); low stays at priority -1. Discord
-suppresses low; high optionally mentions `DISCORD_MENTION`. Email is one
-notification for both priorities, no importance headers. Each instance
-identifies itself; public outages normally alert from both sites. The peer
-heartbeat alerts after ~2min without a push, catching stalled loops too.
+Checks run every 30s and allow 4 retries (~2min). Rotmain's internal group
+adds 16 retries, so its first alert takes roughly 10 minutes. Only the Public
+and Rotmain internal groups send alerts. Each site's Public group contains its
+public checks and both peer checks; only rotmain has an internal group. A group
+goes down when any child goes down and reports the failing checks. Other
+checks that fail during the internal group's retries join its first alert.
+Failures after a group goes down appear in the hourly reminder rather than
+generating another immediate alert. With both sites running, a broad outage
+can trigger up to three group alerts per notification channel, plus recoveries
+and reminders.
+
+Public Pushover notifications, including recoveries, use emergency priority 2
+(repeat 30s, expire after 1h); internal stays at priority -1. Discord
+suppresses internal alerts; public optionally mentions `DISCORD_MENTION`.
+Email is one notification provider for both groups, with no importance
+headers. Each instance identifies itself; public outages normally alert from
+both sites. The peer heartbeat reports missing pushes after ~2min. For planned
+work, schedule maintenance for the affected groups on both instances.
 
 ## Coverage
 
@@ -74,16 +85,18 @@ new monitors; `on_delete = "keep"` guards missing mounts. Delete obsolete
 monitors manually in both instances; UI edits to managed objects are
 overwritten.
 
-`NOTIFICATIONS_HIGH`/`NOTIFICATIONS_LOW` in `docker-compose.yaml` route
-centrally; recreate AutoKuma after editing. There are no group aliases. New
-channels need a notification file plus credentials.
+The two `group.toml` files assign notification providers. New channels need
+a notification file, credentials, and an entry in the relevant group list.
+Individual checks have no notification providers. Monitor groups do not manage
+the status page layout.
 
 Templates mix AutoKuma Tera (credentials) with Kuma Liquid (content);
 `applyExisting = false` avoids endless notification updates.
 
 Create the `status` status page manually per instance with the same slug and
 domain, public monitors only. Its groups need numeric monitor IDs, so it stays
-UI-managed. Keep peer monitors off it, especially the sender with the token.
+UI-managed. Keep the peer monitors and alert groups off it, especially the
+sender with the token.
 
 Before relying on alerts, test each notification, trip a temporary failing
 monitor per priority, and pause the peer sender for two minutes. Back up the

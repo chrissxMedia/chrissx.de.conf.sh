@@ -1,0 +1,4 @@
+type = "group"
+name = "Public"
+max_retries = 0
+notification_name_list = ["notifications/discord-high", "notifications/email", "notifications/pushover-high"]

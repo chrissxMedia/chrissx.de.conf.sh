@@ -1,5 +1,6 @@
 type = "http"
 name = "elonisnwichser.de"
+parent_name = "public/group"
 url = "https://elonisnwichser.de/"
 max_redirects = 0
 accepted_statuscodes = ["301", "302", "307", "308"]

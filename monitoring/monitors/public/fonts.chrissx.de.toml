@@ -1,3 +1,4 @@
 type = "http"
 name = "fonts.chrissx.de"
+parent_name = "public/group"
 url = "https://fonts.chrissx.de/"
