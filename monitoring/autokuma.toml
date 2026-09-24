@@ -1,6 +1,6 @@
 static_monitors = "/etc/autokuma/monitors"
 data_path = "/data"
-on_delete = "keep"
+on_delete = "delete"
 
 default_settings = '''
 *.interval: 30

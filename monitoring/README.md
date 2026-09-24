@@ -81,9 +81,9 @@ Docker and Bucket endpoints. Jana, insp8n and aggregamus are excluded; nginx
 
 Deploy the same revision to both hosts. Restart AutoKuma after `autokuma.toml`
 changes, recreate after `.env`. Filenames are monitor IDs, so renames create
-new monitors; `on_delete = "keep"` guards missing mounts. Delete obsolete
-monitors manually in both instances; UI edits to managed objects are
-overwritten.
+new monitors and delete the old ones. Update status pages after renames. Check
+the monitor mounts before starting AutoKuma. Missing files cause deletion. UI
+edits to managed objects are overwritten.
 
 The two `group.toml` files assign notification providers. New channels need
 a notification file, credentials, and an entry in the relevant group list.
