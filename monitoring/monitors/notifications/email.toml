@@ -6,8 +6,8 @@ is_default = false
 [config]
 type = "smtp"
 smtpHost = '''"{{ get_env(name='AUTOKUMA__ENV__SMTP_HOST') | json_encode | split(pat='') | slice(start=2, end=-2) | join(sep='') }}"'''
-smtpPort = 587
-smtpSecure = false
+smtpPort = 465
+smtpSecure = true
 smtpIgnoreTLSError = false
 smtpUsername = '''"{{ get_env(name='AUTOKUMA__ENV__SMTP_USERNAME') | json_encode | split(pat='') | slice(start=2, end=-2) | join(sep='') }}"'''
 smtpPassword = '''"{{ get_env(name='AUTOKUMA__ENV__SMTP_PASSWORD') | json_encode | split(pat='') | slice(start=2, end=-2) | join(sep='') }}"'''
