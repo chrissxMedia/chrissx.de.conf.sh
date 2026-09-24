@@ -31,14 +31,10 @@ services:
       AUTOKUMA__ENV__SMTP_TO: ${SMTP_TO:?Set SMTP_TO}
       AUTOKUMA__ENV__PUSHOVER_APP_TOKEN: ${PUSHOVER_APP_TOKEN:?Set PUSHOVER_APP_TOKEN}
       AUTOKUMA__ENV__PUSHOVER_USER_KEY: ${PUSHOVER_USER_KEY:?Set PUSHOVER_USER_KEY}
-      AUTOKUMA__ENV__OWN_PUSH_TOKEN: ${OWN_PUSH_TOKEN:?Set OWN_PUSH_TOKEN}
-      AUTOKUMA__ENV__PEER_PUSH_TOKEN: ${PEER_PUSH_TOKEN:?Set PEER_PUSH_TOKEN}
-      AUTOKUMA__ENV__PEER_URL: ${PEER_URL:?Set PEER_URL to the other Kuma instance}
     volumes:
       - ./autokuma.toml:/autokuma.toml:ro
       - ./monitors/public:/etc/autokuma/monitors/public:ro
       - ./monitors/notifications:/etc/autokuma/monitors/notifications:ro
-      - ./monitors/peer:/etc/autokuma/monitors/peer:ro
       - ./monitors/${SITE:?Set SITE to ruby or tobias}:/etc/autokuma/monitors/internal:ro
       - autokuma-data:/data
     labels:

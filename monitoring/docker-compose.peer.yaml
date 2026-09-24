@@ -1,0 +1,8 @@
+services:
+  autokuma:
+    environment:
+      AUTOKUMA__ENV__OWN_PUSH_TOKEN: ${OWN_PUSH_TOKEN:?Set OWN_PUSH_TOKEN in .env}
+      AUTOKUMA__ENV__PEER_PUSH_TOKEN: ${PEER_PUSH_TOKEN:?Set PEER_PUSH_TOKEN in .env}
+      AUTOKUMA__ENV__PEER_URL: ${PEER_URL:?Set PEER_URL to the other Kuma instance}
+    volumes:
+      - ./monitors/peer:/etc/autokuma/monitors/peer:ro
