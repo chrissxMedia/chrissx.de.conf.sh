@@ -15,7 +15,7 @@ On each host, in this directory:
    Notifications, groups and their child checks may need several sync cycles.
 
 Secrets stay out of Git, but Kuma stores credentials in its database, so back
-up both named volumes. Watchtower is disabled for both images.
+up both named volumes.
 Email uses `SMTP_USERNAME` as the sender address and `mail.chrissx.de` as the
 default SMTP host.
 
