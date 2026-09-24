@@ -45,12 +45,13 @@ secrets.
 
 ## Alerts
 
-Checks run every 30s and allow 4 retries (~2min). Rotmain's internal group
-adds 16 retries, so its first alert takes roughly 10 minutes. Only the Public
-and Rotmain internal groups send alerts. Each site's Public group contains its
-public checks and both peer checks; only rotmain has an internal group. A group
-goes down when any child goes down and reports the failing checks. Other
-checks that fail during the internal group's retries join its first alert.
+Checks run every 30s and report failures immediately. The Public group waits
+4 retries (~2min) before alerting; rotmain's internal group waits 20 retries
+(~10min). Only the Public and Rotmain internal groups send alerts. Each site's
+Public group contains its public checks and both peer checks; only rotmain has
+an internal group. A group alerts if any child is down after its retries
+and reports the failing checks. Any other checks still down at alert time
+join the same alert.
 Failures after a group goes down appear in the hourly reminder rather than
 generating another immediate alert. With both sites running, a broad outage
 can trigger up to three group alerts per notification channel, plus recoveries

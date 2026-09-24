@@ -2,11 +2,10 @@ static_monitors = "/etc/autokuma/monitors"
 data_path = "/data"
 on_delete = "keep"
 
-# Four retries at 30 seconds for checks; the internal group adds sixteen.
 default_settings = '''
 *.interval: 30
 *.retry_interval: 30
-*.max_retries: 4
+*.max_retries: 0
 *.resend_interval: 120
 http.timeout: 10
 keyword.timeout: 10
