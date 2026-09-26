@@ -21,7 +21,6 @@ subgraph rosenhof["Rosenhof (cM Infra)"]
       inventree
       bucket
       watchtowertobias[watchtower]
-      inspiriererin
       jana -- 2333 --> lavalink
     end
     backup.timer
@@ -63,7 +62,6 @@ internet -- 443 --> nginxruby
 internet -- 80 --> redirector
 internet -- 8080 --> erwin
 discord(discord.com)
-inspiriererin --> discord
 jana --> discord
 
 classDef docker fill:#0092e7,stroke:#000
@@ -78,17 +76,13 @@ class tobias server
 class rotmain server
 class ruby server
 
-click tor-proxy "https://github.com/pixelcmtd/docker-containers/tree/master/tor-proxy" _blank
 click simon "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/simon" _blank
 click ali "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ali" _blank
 click murmur "https://github.com/mumble-voip/mumble-docker" _blank
-click minecraft "https://github.com/itzg/docker-minecraft-server" _blank
 click home-assistant "https://github.com/home-assistant/core" _blank
 click inventree "https://docs.inventree.org/en/latest/start/docker/" _blank
 click bucket "https://github.com/pixelcmtd/bucket" _blank
 click watchtowertobias "https://containrrr.dev/watchtower/" _blank
-click aggregamus "https://github.com/Ampless/aggregamus" _blank
-click inspiriererin "https://github.com/pixelcmtd/Inspiriererin" _blank
 click jana "https://github.com/chrissxMedia/jana" _blank
 click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
 click redirector "https://github.com/chrissxMedia/redirector" _blank
@@ -120,7 +114,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | ---- | -------------------- | ---------------- |
 | A    | `op.chrissx.de`      | `192.168.178.68` |
 | A    | `ppc.chrissx.de`     | `192.168.180.28` |
-| A    | `rotmain.chrissx.de` | `192.168.178.29` |
+| A    | `rotmain.chrissx.de` | `192.168.180.41` |
 
 ### External
 
@@ -151,14 +145,17 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `porn.chrissx.de`       | `ruby.chrissx.de`         |
 | CNAME | `qa.chrissx.de`         | `ruby.chrissx.de`         |
 | CNAME | `screwed.chrissx.de`    | `ruby.chrissx.de`         |
+| CNAME | `status.chrissx.de`     | `ruby.chrissx.de`         |
 | CNAME | `tor.chrissx.de`        | `op.chrissx.de`           |
 | CNAME | `wiki.chrissx.de`       | `ruby.chrissx.de`         |
 | CNAME | `chrissx.de`            | `ruby.chrissx.de`         |
 | CNAME | `chrisxeric.de`         | `ruby.chrissx.de`         |
 | CNAME | `elonisnwichser.de`     | `ruby.chrissx.de`         |
+| CNAME | `emilycatgirl.de`       | `ruby.chrissx.de`         |
 | CNAME | `fuxgames.com`          | `ruby.chrissx.de`         |
 | CNAME | `gock.dev`              | `ruby.chrissx.de`         |
 | CNAME | `kinkcheck.top`         | `ruby.chrissx.de`         |
+| CNAME | `bottom.kinkcheck.top`  | `ruby.chrissx.de`         |
 | CNAME | `lowlevelmusic.com`     | `ruby.chrissx.de`         |
 | CNAME | `zerm.eu`               | `ruby.chrissx.de`         |
 | CNAME | `zerm.link`             | `ruby.chrissx.de`         |
@@ -204,13 +201,7 @@ The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other
 There are a few possible solutions to this (e.g. OAuth authentication,
 `poToken`, the official YouTube API, ...), but the easiest is to migrate `jana`
 (and, to concentrate the Discord bots on a single server, also `inspiriererin`)
-back to Rosenhof. Therefore, Discord bots now run on `tobias`:
-
-```sh
-docker network create lavalink
-docker run -d --restart=unless-stopped --pull=always --name lavalink --network lavalink -v$PWD/lavalink.yml:/opt/Lavalink/application.yml ghcr.io/lavalink-devs/lavalink:4
-docker run -d --restart=unless-stopped --pull=always --name jana --network lavalink -e JANA_DISCORD_TOKEN=XXX -e JANA_LAVALINK_BASE=http://lavalink:2333 -e JANA_LAVALINK_PASSWORD=XXX chrissx/jana:latest
-docker run -d --restart=unless-stopped --pull=always --name insp -p8989:8989 -e INSP_DISCORD_TOKEN=XXX chrissx/inspiriererin:latest
-```
+back to Rosenhof.
+[Therefore, Discord bots now run on `tobias`.](discord-bots/docker-compose.yaml)
 
 <!-- vim: set wrap! : -->
