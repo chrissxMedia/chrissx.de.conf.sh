@@ -1,5 +1,5 @@
 type = "port"
-name = "Mail Submission"
+name = "Mail Submission (587)"
 parent_name = "public/email"
 hostname = "mail.chrissx.de"
 port = 587
