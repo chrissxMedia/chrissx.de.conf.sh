@@ -23,12 +23,6 @@ services:
       - ./lavalink.yml:/opt/Lavalink/application.yml:ro
     restart: unless-stopped
     pull_policy: always
-  insp8n:
-    container_name: insp8n
-    image: chrissx/inspiriererin:latest
-    env_file: .env
-    restart: unless-stopped
-    pull_policy: always
 
 networks:
   lavalink:

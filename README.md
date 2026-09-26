@@ -200,8 +200,7 @@ The Hetzner IP ranges make it impossible to run Lavalink and `jana`'s other
 ("Explode API" based) YouTube services. Therefore, it was disabled for a while.
 There are a few possible solutions to this (e.g. OAuth authentication,
 `poToken`, the official YouTube API, ...), but the easiest is to migrate `jana`
-(and, to concentrate the Discord bots on a single server, also `inspiriererin`)
 back to Rosenhof.
-[Therefore, Discord bots now run on `tobias`.](discord-bots/docker-compose.yaml)
+[We have a `docker-compose` setup for this now.](discord-bots/docker-compose.yaml)
 
 <!-- vim: set wrap! : -->
