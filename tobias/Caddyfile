@@ -39,7 +39,7 @@ rosenhof.chrissx.de {
 	redir /discord https://discord.gg/a2eAnvUscU 302
 	redir /twitter https://twitter.com/chrissxMedia 302
 	redir /instagram https://instagram.com/pixelcmtd 302
-	metrics
+	metrics /metrics
 	file_server browse
 }
 
