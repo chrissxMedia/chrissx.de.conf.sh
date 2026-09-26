@@ -1,0 +1,61 @@
+{
+	# ZeroSSL is also a default issuer, the CAA record only allows Let's Encrypt.
+	acme_ca https://acme-v02.api.letsencrypt.org/directory
+	email {$ACME_EMAIL}
+	metrics
+}
+
+(headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		Referrer-Policy "no-referrer-when-downgrade"
+		X-Frame-Options "SAMEORIGIN"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+	encode zstd gzip
+}
+
+(proxy) {
+	import headers
+	reverse_proxy {args[0]} {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-By {http.request.local}
+		header_up CLIENT_IP {remote_host}
+	}
+}
+
+rosenhof.chrissx.de {
+	import headers
+	root * /srv/dist/new/dist
+	redir /merch /shop 301
+	redir /dycc /discord 301
+	redir /discord https://discord.gg/a2eAnvUscU 302
+	redir /twitter https://twitter.com/chrissxMedia 302
+	redir /instagram https://instagram.com/pixelcmtd 302
+	metrics
+	file_server browse
+}
+
+bucket.chrissx.de {
+	import proxy bucket:8022
+}
+
+inv.chrissx.de {
+	import proxy host.docker.internal:1339
+}
+
+ha.chrissx.de {
+	import proxy host.docker.internal:8123
+}
+
+status-tobias.chrissx.de {
+	import proxy kuma:3001
+}
+
+# Only here so Caddy issues the certificate, see README.md.
+mail.chrissx.de {
+	import headers
+	respond 204
+}
