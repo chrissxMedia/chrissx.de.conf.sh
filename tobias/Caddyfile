@@ -9,8 +9,8 @@
 	}
 }
 
-(headers) {
-	log
+# Split out because log is not an ordered handler and handle_errors only takes those.
+(security) {
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 		Referrer-Policy "no-referrer-when-downgrade"
@@ -18,6 +18,11 @@
 		X-Content-Type-Options "nosniff"
 		-Server
 	}
+}
+
+(headers) {
+	log
+	import security
 	encode zstd gzip
 }
 
@@ -41,6 +46,12 @@ rosenhof.chrissx.de {
 	redir /instagram https://instagram.com/pixelcmtd 302
 	metrics /metrics
 	file_server browse
+	# 404.html is built from src/pages/404.astro in new.chrissx.de.
+	handle_errors {
+		import security
+		rewrite * /404.html
+		file_server
+	}
 }
 
 bucket.chrissx.de {
