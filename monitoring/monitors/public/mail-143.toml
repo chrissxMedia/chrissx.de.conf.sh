@@ -1,5 +1,5 @@
 type = "port"
-name = "Mail IMAP"
+name = "Mail IMAP (143)"
 parent_name = "public/email"
 hostname = "mail.chrissx.de"
 port = 143

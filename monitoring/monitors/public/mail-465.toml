@@ -1,5 +1,5 @@
 type = "port"
-name = "Mail SMTPS"
+name = "Mail Submissions (465)"
 parent_name = "public/group"
 active = "{{ get_env(name='AUTOKUMA__ENV__SITE') != 'ruby' }}"
 hostname = "mail.chrissx.de"
