@@ -1,0 +1,97 @@
+name: tobias
+
+services:
+  deployment:
+    container_name: deployment
+    image: chrissx/deployment:latest
+    init: true
+    command: -D -H /var/deployment -d /var/deployment/conf/tobias/deployments.csv
+    volumes:
+      - /var/deployment:/var/deployment
+    # FIXME: very hacky
+    healthcheck:
+      test: "while [ -n \"$(deployment -cnd /var/deployment/conf/tobias/deployments.csv || exit 1)\" ] ; do sleep 1 ; done ; true"
+      interval: 30s
+      timeout: 2m
+      retries: 3
+    restart: unless-stopped
+    pull_policy: always
+  caddy:
+    container_name: caddy
+    image: caddy:2-alpine
+    depends_on:
+      deployment:
+        condition: service_healthy
+    environment:
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - webservices
+      - monitoring_default
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - /var/deployment/conf/tobias/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/deployment/dist:/srv/dist:ro
+      - /home/pixel/caddy-data:/data
+      - /var/deployment/data/caddy-config:/config
+    restart: unless-stopped
+    pull_policy: always
+  bucket:
+    container_name: bucket
+    image: chrissx/bucket:latest
+    networks:
+      - webservices
+    restart: unless-stopped
+    pull_policy: always
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    # Zigbee radio on ttyUSB0, and mDNS discovery, need the host network.
+    network_mode: host
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    group_add:
+      - dialout
+    volumes:
+      - /home/pixel/ha:/config
+    restart: unless-stopped
+    pull_policy: always
+  mumble:
+    container_name: mumble
+    image: mumble-voip/mumble-server:latest
+    ports:
+      - 64738:64738/tcp
+      - 64738:64738/udp
+    volumes:
+      - /home/pixel/mumble:/data
+    restart: unless-stopped
+    pull_policy: always
+  simon:
+    container_name: simon
+    image: chrissx/simon:latest
+    # Needs working IPv4 and IPv6 outbound to read the public address.
+    network_mode: host
+    environment:
+      TOKEN: ${SIMON_TOKEN:?Set SIMON_TOKEN in .env}
+      RECORD4: ${SIMON_RECORD4:?Set SIMON_RECORD4 in .env}
+      RECORD6: ${SIMON_RECORD6:?Set SIMON_RECORD6 in .env}
+    restart: unless-stopped
+    pull_policy: always
+  watchtower:
+    container_name: watchtower
+    image: nickfedor/watchtower:latest
+    command: --interval 3600
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    pull_policy: always
+
+networks:
+  webservices:
+    enable_ipv6: true
+  monitoring_default:
+    external: true
