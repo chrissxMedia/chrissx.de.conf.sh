@@ -7,7 +7,7 @@ services:
     init: true
     command: -D -H /var/deployment -d /var/deployment/conf/tobias/deployments.csv
     volumes:
-      - /var/deployment:/var/deployment
+      - /home/pixel/deployment:/var/deployment
     # FIXME: very hacky
     healthcheck:
       test: "while [ -n \"$(deployment -cnd /var/deployment/conf/tobias/deployments.csv || exit 1)\" ] ; do sleep 1 ; done ; true"
@@ -34,10 +34,10 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - /var/deployment/conf/tobias/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /var/deployment/dist:/srv/dist:ro
+      - /home/pixel/deployment/conf/tobias/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /home/pixel/deployment/dist:/srv/dist:ro
       - /home/pixel/caddy-data:/data
-      - /var/deployment/data/caddy-config:/config
+      - /home/pixel/deployment/data/caddy-config:/config
     restart: unless-stopped
     pull_policy: always
   bucket:
@@ -62,7 +62,7 @@ services:
     pull_policy: always
   mumble:
     container_name: mumble
-    image: mumble-voip/mumble-server:latest
+    image: mumblevoip/mumble-server:latest
     ports:
       - 64738:64738/tcp
       - 64738:64738/udp
