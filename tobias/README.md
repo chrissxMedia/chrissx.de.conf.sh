@@ -1,15 +1,15 @@
 # tobias
 
-Most of tobias in one compose project. It replaces the nginx with caddy.
+Most of tobias in one compose project. It replaced the nginx with caddy.
 ali and inventree are not part of this.
 
 ## Setup
 
-1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf`
+1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /home/pixel/deployment/conf`
 2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL` and
    `SIMON_TOKEN`. Only public repositories are deployed here, so unlike ruby
    there is no Git key and no `/ghpass`.
-3. Switch nginx out (see below).
+3. Deploy the services (see below).
 4. Go to `http://192.168.178.68:8123`, Settings > System > Network.
 5. Set the external URL to `https://ha.chrissx.de`.
 6. In HTTP server, enable Trust X-Forwarded-For and add Caddy's Docker network
@@ -21,17 +21,12 @@ ali and inventree are not part of this.
    Home Assistant logs a different untrusted proxy IP, use the subnet containing
    that IP. Confirm the HTTP settings after Home Assistant restarts.
 
-## Switching nginx out
+## Deploy
 
 ```sh
-docker compose up -d deployment bucket homeassistant mumble simon watchtower
-docker compose run --rm --no-deps caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
-docker stop crazy_rosalind
-docker compose up -d caddy
+docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+docker compose up -d
 ```
-
-Home Assistant is the only site whose behavior changes: it was a 301 to
-`http://192.168.178.68:8123` and is now proxied properly.
 
 ## After changing the Caddyfile
 
