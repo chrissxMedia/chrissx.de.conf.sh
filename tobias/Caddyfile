@@ -54,6 +54,12 @@ rosenhof.chrissx.de {
 	}
 }
 
+autoconfig.chrissx.de {
+	import headers
+	root * /srv/dist/new/dist/.well-known/autoconfig
+	file_server
+}
+
 bucket.chrissx.de {
 	import proxy bucket:8022
 }
