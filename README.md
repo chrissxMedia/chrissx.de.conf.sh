@@ -118,50 +118,54 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 
 ### External
 
-| Type  | Name                    | Content                   |
-| ----- | ----------------------- | ------------------------- |
-| A     | `rosenhof.chrissx.de`   | (DynDNS)                  |
-| AAAA  | `rosenhof.chrissx.de`   | (DynDNS)                  |
-| A     | `ruby.chrissx.de`       | `188.34.186.24`           |
-| AAAA  | `ruby.chrissx.de`       | `2a01:4f8:c013:438f::1`   |
-| CAA   | `chrissx.de`            | `0 issue letsencrypt.org` |
-| MX    | `chrissx.de`            | `mail.chrissx.de`         |
-| CNAME | `autoconfig.chrissx.de` | `rosenhof.chrissx.de`     |
-| CNAME | `bucket.chrissx.de`     | `rosenhof.chrissx.de`     |
-| CNAME | `cpm.chrissx.de`        | `ruby.chrissx.de`         |
-| CNAME | `erwin.chrissx.de`      | `ruby.chrissx.de`         |
-| CNAME | `ferdium.chrissx.de`    | `rosenhof.chrissx.de`     |
-| CNAME | `fonts.chrissx.de`      | `ruby.chrissx.de`         |
-| CNAME | `git.chrissx.de`        | `rosenhof.chrissx.de`     |
-| CNAME | `ha.chrissx.de`         | `rosenhof.chrissx.de`     |
-| CNAME | `inv.chrissx.de`        | `rosenhof.chrissx.de`     |
-| CNAME | `lyrics.chrissx.de`     | `ruby.chrissx.de`         |
-| CNAME | `mail.chrissx.de`       | `rosenhof.chrissx.de`     |
-| CNAME | `media.chrissx.de`      | `ruby.chrissx.de`         |
-| CNAME | `meme.chrissx.de`       | `ruby.chrissx.de`         |
-| CNAME | `mumble.chrissx.de`     | `rosenhof.chrissx.de`     |
-| CNAME | `new.chrissx.de`        | `ruby.chrissx.de`         |
-| CNAME | `pixel.chrissx.de`      | `ruby.chrissx.de`         |
-| CNAME | `porn.chrissx.de`       | `ruby.chrissx.de`         |
-| CNAME | `qa.chrissx.de`         | `ruby.chrissx.de`         |
-| CNAME | `screwed.chrissx.de`    | `ruby.chrissx.de`         |
-| CNAME | `status.chrissx.de`     | `ruby.chrissx.de`         |
-| CNAME | `tor.chrissx.de`        | `op.chrissx.de`           |
-| CNAME | `wiki.chrissx.de`       | `ruby.chrissx.de`         |
-| CNAME | `chrissx.de`            | `ruby.chrissx.de`         |
-| CNAME | `chrisxeric.de`         | `ruby.chrissx.de`         |
-| CNAME | `elonisnwichser.de`     | `ruby.chrissx.de`         |
-| CNAME | `emilycatgirl.de`       | `ruby.chrissx.de`         |
-| CNAME | `fuxgames.com`          | `ruby.chrissx.de`         |
-| CNAME | `gock.dev`              | `ruby.chrissx.de`         |
-| CNAME | `kinkcheck.top`         | `ruby.chrissx.de`         |
-| CNAME | `bottom.kinkcheck.top`  | `ruby.chrissx.de`         |
-| CNAME | `lowlevelmusic.com`     | `ruby.chrissx.de`         |
-| CNAME | `zerm.eu`               | `ruby.chrissx.de`         |
-| CNAME | `zerm.link`             | `ruby.chrissx.de`         |
-| CNAME | `www.chrissx.de`        | `chrissx.de`              |
-| CNAME | …                       | …                         |
-| CNAME | `www.zerm.link`         | `zerm.link`               |
+| Type  | Name                           | Content                       |
+| ----- | ------------------------------ | ----------------------------- |
+| A     | `rosenhof.chrissx.de`          | (DynDNS)                      |
+| AAAA  | `rosenhof.chrissx.de`          | (DynDNS)                      |
+| A     | `ruby.chrissx.de`              | `188.34.186.24`               |
+| AAAA  | `ruby.chrissx.de`              | `2a01:4f8:c013:438f::1`       |
+| CAA   | `chrissx.de`                   | `0 issue letsencrypt.org`     |
+| MX    | `chrissx.de`                   | `10 rosenhof.chrissx.de`      |
+| SRV   | `_imap._tcp.chrissx.de`        | `0 0 143 rosenhof.chrissx.de` |
+| SRV   | `_imaps._tcp.chrissx.de`       | `0 0 993 rosenhof.chrissx.de` |
+| SRV   | `_submission._tcp.chrissx.de`  | `0 0 587 rosenhof.chrissx.de` |
+| SRV   | `_submissions._tcp.chrissx.de` | `0 0 465 rosenhof.chrissx.de` |
+| CNAME | `autoconfig.chrissx.de`        | `rosenhof.chrissx.de`         |
+| CNAME | `bucket.chrissx.de`            | `rosenhof.chrissx.de`         |
+| CNAME | `cpm.chrissx.de`               | `ruby.chrissx.de`             |
+| CNAME | `erwin.chrissx.de`             | `ruby.chrissx.de`             |
+| CNAME | `ferdium.chrissx.de`           | `rosenhof.chrissx.de`         |
+| CNAME | `fonts.chrissx.de`             | `ruby.chrissx.de`             |
+| CNAME | `git.chrissx.de`               | `rosenhof.chrissx.de`         |
+| CNAME | `ha.chrissx.de`                | `rosenhof.chrissx.de`         |
+| CNAME | `inv.chrissx.de`               | `rosenhof.chrissx.de`         |
+| CNAME | `lyrics.chrissx.de`            | `ruby.chrissx.de`             |
+| CNAME | `mail.chrissx.de`              | `rosenhof.chrissx.de`         |
+| CNAME | `media.chrissx.de`             | `ruby.chrissx.de`             |
+| CNAME | `meme.chrissx.de`              | `ruby.chrissx.de`             |
+| CNAME | `mumble.chrissx.de`            | `rosenhof.chrissx.de`         |
+| CNAME | `new.chrissx.de`               | `ruby.chrissx.de`             |
+| CNAME | `pixel.chrissx.de`             | `ruby.chrissx.de`             |
+| CNAME | `porn.chrissx.de`              | `ruby.chrissx.de`             |
+| CNAME | `qa.chrissx.de`                | `ruby.chrissx.de`             |
+| CNAME | `screwed.chrissx.de`           | `ruby.chrissx.de`             |
+| CNAME | `status.chrissx.de`            | `ruby.chrissx.de`             |
+| CNAME | `tor.chrissx.de`               | `op.chrissx.de`               |
+| CNAME | `wiki.chrissx.de`              | `ruby.chrissx.de`             |
+| CNAME | `chrissx.de`                   | `ruby.chrissx.de`             |
+| CNAME | `chrisxeric.de`                | `ruby.chrissx.de`             |
+| CNAME | `elonisnwichser.de`            | `ruby.chrissx.de`             |
+| CNAME | `emilycatgirl.de`              | `ruby.chrissx.de`             |
+| CNAME | `fuxgames.com`                 | `ruby.chrissx.de`             |
+| CNAME | `gock.dev`                     | `ruby.chrissx.de`             |
+| CNAME | `kinkcheck.top`                | `ruby.chrissx.de`             |
+| CNAME | `bottom.kinkcheck.top`         | `ruby.chrissx.de`             |
+| CNAME | `lowlevelmusic.com`            | `ruby.chrissx.de`             |
+| CNAME | `zerm.eu`                      | `ruby.chrissx.de`             |
+| CNAME | `zerm.link`                    | `ruby.chrissx.de`             |
+| CNAME | `www.chrissx.de`               | `chrissx.de`                  |
+| CNAME | …                              | …                             |
+| CNAME | `www.zerm.link`                | `zerm.link`                   |
 
 ## Software
 
