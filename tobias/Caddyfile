@@ -54,6 +54,12 @@ rosenhof.chrissx.de {
 	}
 }
 
+autoconfig.chrissx.de {
+	import headers
+	root * /srv/dist/new/dist/.well-known/autoconfig
+	file_server
+}
+
 bucket.chrissx.de {
 	import proxy bucket:8022
 }
@@ -68,10 +74,4 @@ ha.chrissx.de {
 
 status-tobias.chrissx.de {
 	import proxy kuma:3001
-}
-
-# Only here so Caddy issues the certificate, see README.md.
-mail.chrissx.de {
-	import headers
-	respond 204
 }

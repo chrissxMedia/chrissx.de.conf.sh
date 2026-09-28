@@ -1,4 +1,4 @@
 type = "http"
 name = "autoconfig.chrissx.de"
 parent_name = "public/group"
-url = "https://autoconfig.chrissx.de/"
+url = "https://autoconfig.chrissx.de/mail/config-v1.1.xml"
