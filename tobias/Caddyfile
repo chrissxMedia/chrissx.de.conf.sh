@@ -69,9 +69,3 @@ ha.chrissx.de {
 status-tobias.chrissx.de {
 	import proxy kuma:3001
 }
-
-# Only here so Caddy issues the certificate, see README.md.
-mail.chrissx.de {
-	import headers
-	respond 204
-}

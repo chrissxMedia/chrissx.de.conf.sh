@@ -35,23 +35,3 @@ docker compose up -d
 ```sh
 docker compose restart caddy
 ```
-
-## The mail certificate
-
-Caddy issues the certificate for `mail.chrissx.de`. After each renewal, copy it
-into Ali's `/mail` mount:
-
-```bash
-(
-  set -euo pipefail
-  docker compose exec -T caddy sh -c 'cat /data/caddy/certificates/*/mail.chrissx.de/mail.chrissx.de.crt' |
-    docker exec -i ali sh -c 'umask 077; cat > /mail/fullchain.pem'
-  docker compose exec -T caddy sh -c 'cat /data/caddy/certificates/*/mail.chrissx.de/mail.chrissx.de.key' |
-    docker exec -i ali sh -c 'umask 077; cat > /mail/privkey.pem'
-  docker exec ali sh -ec 'cp /mail/fullchain.pem /mail/cert.pem; chmod 0600 /mail/privkey.pem'
-  docker restart ali
-)
-```
-
-Until this is automated, a missed renewal means no mail for a while. Not pretty,
-but not a regression either.
