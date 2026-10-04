@@ -22,10 +22,15 @@ sudo docker run -d --restart=unless-stopped --pull=always -v$PWD:/mail \
 
 ## Adding new users
 
+Generate the password hash interactively, then paste only the `{SCHEME}...`
+hash at the `Password hash:` prompt.
+
 ```sh
 userid=$((1000 + $(wc -l <users.passwd)))
 grep $userid users.passwd # double-check that the uid isn't taken
-hash=$(sudo docker exec -it ali doveadm pw)
+sudo docker exec -it ali doveadm pw
+printf 'Password hash: '
+read -r hash
 echo "$username:$hash:$userid:8:,,,:/home/$username:/bin/bash" >> users.passwd
 mkdir $username
 sudo chown -R $userid:8 $username
