@@ -82,11 +82,11 @@ click murmur "https://github.com/mumble-voip/mumble-docker" _blank
 click home-assistant "https://github.com/home-assistant/core" _blank
 click inventree "https://docs.inventree.org/en/latest/start/docker/" _blank
 click bucket "https://github.com/pixelcmtd/bucket" _blank
-click watchtowertobias "https://containrrr.dev/watchtower/" _blank
+click watchtowertobias "https://watchtower.nickfedor.com/" _blank
 click jana "https://github.com/chrissxMedia/jana" _blank
 click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
 click redirector "https://github.com/chrissxMedia/redirector" _blank
-click watchtowerruby "https://containrrr.dev/watchtower/" _blank
+click watchtowerruby "https://watchtower.nickfedor.com/" _blank
 click kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top" _blank
 click bottom.kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top/tree/bottom" _blank
 click jasmin "https://github.com/ZERMZeitung/jasmin" _blank
@@ -178,7 +178,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 - /root/.gitconfig
 - watchtower
 
-> We have not been able to evaluate watchtower replacements yet.
+> We use the [nickfedor fork of Watchtower](https://github.com/nicholas-fedor/watchtower).
 
 The following steps are left to the admin:
 
