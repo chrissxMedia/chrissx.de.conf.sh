@@ -38,3 +38,40 @@ sudo docker restart ali
 echo 'bar@chrissx.de foo@chrissx.de' >> aliases
 sudo docker exec -it ali postmap hash:/mail/aliases
 ```
+
+## Sending mail
+
+Use port 587 with STARTTLS or port 465 with implicit TLS. Both require
+authentication. Port 25 accepts incoming mail and does not offer AUTH.
+
+The authenticated user must own both the SMTP envelope sender and the
+message's `From` address. The inline `smtpd_sender_login_maps` rule derives
+ownership from `username@chrissx.de`, so adding a user needs no extra map
+entry. Usernames may contain ASCII letters, digits, underscores, dots,
+plus signs and hyphens. Sender extensions do not grant ownership to the
+base username.
+
+The header filter uses Python's email parser and queries the same Postfix
+map. Authenticated messages must have exactly one valid `From` header
+containing one address. Empty envelope senders, such as read receipts,
+still require an owned `From` address. If the filter or lookup fails,
+submission temporarily fails. Incoming mail does not use this filter.
+The existing `soft_bounce=yes` setting also makes policy rejections
+temporary SMTP errors.
+
+Receiving an alias does not automatically grant permission to send as it.
+To let `foo` send as `bar@chrissx.de`, add an explicit rule before the
+general rule in `main.cf`:
+
+```ini
+smtpd_sender_login_maps = regexp:{ { /^bar@chrissx\.de$$/ foo }, { /^([a-z0-9_.+-]+)@chrissx\.de$$/ $$1 } }
+```
+
+Rebuild and replace the container after changing the rule. Both address
+checks use it. The doubled dollar signs escape Postfix's configuration
+expansion.
+
+See [Postfix sender ownership checks](https://www.postfix.org/postconf.5.html#smtpd_sender_login_maps),
+[inline regex tables](https://www.postfix.org/regexp_table.5.html#inline_specification),
+[Milter error handling](https://www.postfix.org/MILTER_README.html#per-milter),
+and [Dovecot's submission configuration](https://doc.dovecot.org/2.3/configuration_manual/howto/postfix_and_dovecot_sasl/).

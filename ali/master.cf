@@ -15,7 +15,14 @@ smtp       inet  n       -       y       -       -       smtpd
 #dnsblog   unix  -       -       y       -       0       dnsblog
 #tlsproxy  unix  -       -       y       -       0       tlsproxy
 submission inet  n       -       y       -       -       smtpd
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_tls_security_level=encrypt
+  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
+  -o smtpd_milters={inet:127.0.0.1:12302,default_action=tempfail},inet:localhost:12301
 smtps      inet  n       -       y       -       -       smtpd
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
+  -o smtpd_milters={inet:127.0.0.1:12302,default_action=tempfail},inet:localhost:12301
   -o smtpd_tls_wrappermode=yes
 #628       inet  n       -       y       -       -       qmqpd
 pickup     unix  n       -       y       60      1       pickup
