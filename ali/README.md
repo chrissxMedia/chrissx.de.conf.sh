@@ -10,7 +10,7 @@ First, make sure that the current directory contains the following files:
   passwords
 - `mail.private`: the private key for `opendkim` signing (please `chown 104:106`
   and `chmod 0600`)
-- `cert.pem`, `fullchain.pem` and `privkey.pem` from your TLS certificate
+- `fullchain.pem` and `privkey.pem` from your TLS certificate
 - a `maildir` for every user
 
 Then run the following command:
