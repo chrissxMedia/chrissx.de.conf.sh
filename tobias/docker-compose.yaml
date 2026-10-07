@@ -47,6 +47,27 @@ services:
       - webservices
     restart: unless-stopped
     pull_policy: always
+  ferdium:
+    container_name: ferdium
+    image: ferdium/ferdium-server:latest
+    environment:
+      NODE_ENV: production
+      APP_URL: https://ferdium.chrissx.de
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ferdium
+      DATA_DIR: /data
+      JWT_USE_PEM: "true"
+      IS_REGISTRATION_ENABLED: "false"
+      IS_CREATION_ENABLED: "false"
+      IS_DASHBOARD_ENABLED: "true"
+      CONNECT_WITH_FRANZ: "false"
+    networks:
+      - webservices
+    volumes:
+      - /home/pixel/deployment/data/ferdium:/data
+      - /home/pixel/deployment/data/ferdium/recipes:/app/build/recipes
+    restart: unless-stopped
+    pull_policy: always
   homeassistant:
     container_name: homeassistant
     image: ghcr.io/home-assistant/home-assistant:stable

@@ -64,6 +64,10 @@ bucket.chrissx.de {
 	import proxy bucket:8022
 }
 
+ferdium.chrissx.de {
+	import proxy ferdium:3333
+}
+
 inv.chrissx.de {
 	import proxy host.docker.internal:1339
 }
