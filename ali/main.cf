@@ -13,7 +13,6 @@ myhostname = mail.chrissx.de
 non_smtpd_milters = inet:localhost:12301
 recipient_delimiter = +-.
 smtp_sasl_security_options = noplaintext noanonymous
-smtp_tls_CAfile = /mail/cert.pem
 smtp_tls_mandatory_protocols = >=TLSv1.2
 smtp_tls_protocols = >=TLSv1.2
 smtp_tls_security_level = may
