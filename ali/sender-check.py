@@ -1,5 +1,6 @@
 from email import policy
 from email.errors import HeaderParseError
+import logging
 import subprocess
 
 import Milter
@@ -9,7 +10,11 @@ class SenderCheck(Milter.Base):
     def envfrom(self, sender, *params):
         self.login = self.getsymval("{auth_authen}")
         self.from_header = None
-        return Milter.CONTINUE if self.login else Milter.ACCEPT
+        if not self.login:
+            logging.error("Authenticated username missing from milter macros")
+            self.setreply("451", "4.3.0", "Authenticated username unavailable")
+            return Milter.TEMPFAIL
+        return Milter.CONTINUE
 
     def reject(self, message):
         self.setreply("550", "5.7.1", message)
@@ -37,13 +42,23 @@ class SenderCheck(Milter.Base):
             return self.reject("Exactly one valid From address is required")
 
         # Use the same ownership map as Postfix's envelope sender check.
-        result = subprocess.run(
-            ["postmap", "-q", header.addresses[0].addr_spec, self.sender_logins],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
+        try:
+            result = subprocess.run(
+                ["postmap", "-q", header.addresses[0].addr_spec, self.sender_logins],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            logging.exception("Sender ownership lookup failed")
+            self.setreply("451", "4.3.0", "Sender ownership lookup failed")
+            return Milter.TEMPFAIL
         if result.stderr or result.returncode not in (0, 1):
+            logging.error(
+                "Sender ownership lookup failed with exit code %s: %s",
+                result.returncode,
+                result.stderr.strip(),
+            )
             self.setreply("451", "4.3.0", "Sender ownership lookup failed")
             return Milter.TEMPFAIL
         owners = result.stdout.replace(",", " ").lower().split()
