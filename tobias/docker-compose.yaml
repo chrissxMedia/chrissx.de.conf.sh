@@ -45,6 +45,8 @@ services:
     image: chrissx/bucket:latest
     networks:
       - webservices
+    volumes:
+      - /home/pixel/bucket:/var/bucket
     restart: unless-stopped
     pull_policy: always
   ferdium:
