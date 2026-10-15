@@ -8,12 +8,6 @@ services:
     command: -D -H /var/deployment -d /var/deployment/conf/tobias/deployments.csv
     volumes:
       - /home/pixel/deployment:/var/deployment
-    # FIXME: very hacky
-    healthcheck:
-      test: "while [ -n \"$(deployment -cnd /var/deployment/conf/tobias/deployments.csv || exit 1)\" ] ; do sleep 1 ; done ; true"
-      interval: 30s
-      timeout: 2m
-      retries: 3
     restart: unless-stopped
     pull_policy: always
   caddy:
