@@ -84,12 +84,6 @@ services:
       - /ghpass:/ghpass:ro
     environment:
       - GIT_ASKPASS=/ghpass
-    # FIXME: very hacky
-    healthcheck:
-      test: "while [ -n \"$(deployment -cnd /var/deployment/conf/ruby/deployments.csv || exit 1)\" ] ; do sleep 1 ; done ; true"
-      interval: 30s
-      timeout: 2m
-      retries: 3
     restart: unless-stopped
     pull_policy: always
   redirector:
