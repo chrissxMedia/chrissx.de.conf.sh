@@ -24,9 +24,20 @@ ali and inventree are not part of this.
 ## Deploy
 
 ```sh
+sudo install -d -m 700 -o 1000 -g 1000 /home/pixel/deployment/data/matter-server
 docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 docker compose up -d
 ```
+
+## Matter
+
+Add the Matter integration in Home Assistant with `ws://127.0.0.1:5580/ws`.
+Pair through the Companion app. Thread devices need a border router.
+
+Keep the host, phone and devices on the same LAN with IPv6 and multicast enabled.
+See the [host networking requirements](https://github.com/matter-js/matterjs-server/blob/main/docs/os_requirements.md).
+
+Back up the Matter data directory with its container stopped.
 
 ## Ferdium accounts
 
