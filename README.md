@@ -53,11 +53,11 @@ subgraph falkenstein["Falkenstein (Hetzner Infra)"]
       autokumaruby[autokuma] -- 3001 --> kumaruby
       watchtowerruby[watchtower]
     end
+    nginxruby -- 3001 --> kumaruby
     nginxruby -- 4321 --> kinkcheck.top
     nginxruby -- 4321 --> bottom.kinkcheck.top
     nginxruby -- 8099 --> jasmin
     nginxruby -- 8080 --> erwin
-    nginxruby -- 3001 --> kumaruby
   end
 end
 
