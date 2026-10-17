@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #ARG DOMAIN=chrissx.de
 
 RUN apt update && apt upgrade -y && apt autoremove -y
-RUN apt install -y postfix dovecot-imapd dovecot-lmtpd opendkim
+RUN apt install -y postfix dovecot-imapd dovecot-lmtpd opendkim python3-milter
 
 RUN service postfix stop
 RUN service dovecot stop
@@ -22,4 +22,5 @@ COPY keytable /etc/postfix/dkim/keytable
 COPY signingtable /etc/postfix/dkim/signingtable
 
 COPY start.sh /start.sh
+COPY sender-check.py /sender-check.py
 CMD ["sh", "/start.sh"]
