@@ -8,28 +8,36 @@ infrastructure.
 ```mermaid
 graph LR
 
-subgraph rosenhof["Rosenhof (cM Infra)"]
-  rotmain
-
+subgraph rosenhof["Rosenhof (cM Infra)<br/>192.168.178.0/24"]
   subgraph tobias
     subgraph dockerop[docker]
       simon
-      nginxop[nginx]
+      caddy
+      deploymenttobias[deployment]
       ali
       murmur
-      home-assistant
+      home-assistant -- 5580 --> matter-server
       inventree
       bucket
+      ferdium
+      kumatobias[uptime-kuma]
+      autokumatobias[autokuma] -- 3001 --> kumatobias
       watchtowertobias[watchtower]
       jana -- 2333 --> lavalink
     end
     backup.timer
-    nginxop -- 1339 --> inventree
-    nginxop -- 8123 --> home-assistant
-    nginxop -- 8022 --> bucket
+    caddy -- 1339 --> inventree
+    caddy -- 8123 --> home-assistant
+    caddy -- 8022 --> bucket
+    caddy -- 3333 --> ferdium
+    caddy -- 3001 --> kumatobias
   end
-  backup.timer -- 873 --> rotmain
 end
+
+subgraph undisclosed["Undisclosed (cM Infra)<br/>192.168.180.0/24"]
+  rotmain
+end
+backup.timer -- "873 via IPsec VPN" --> rotmain
 
 subgraph falkenstein["Falkenstein (Hetzner Infra)"]
   subgraph ruby
@@ -41,12 +49,15 @@ subgraph falkenstein["Falkenstein (Hetzner Infra)"]
       bottom.kinkcheck.top
       jasmin
       erwin
+      kumaruby[uptime-kuma]
+      autokumaruby[autokuma] -- 3001 --> kumaruby
       watchtowerruby[watchtower]
     end
     nginxruby -- 4321 --> kinkcheck.top
-    nginxruby -- 4322 --> bottom.kinkcheck.top
+    nginxruby -- 4321 --> bottom.kinkcheck.top
     nginxruby -- 8099 --> jasmin
     nginxruby -- 8080 --> erwin
+    nginxruby -- 3001 --> kumaruby
   end
 end
 
@@ -55,8 +66,8 @@ simon --> cloudflare
 simon --> nginxruby
 
 internet(Users)
-internet -- "443, 80" --> nginxop[nginx]
-internet -- "993, 143, 587, 25" --> ali
+internet -- "443, 80" --> caddy
+internet -- "993, 143, 587, 465, 25" --> ali
 internet -- 64738 --> murmur
 internet -- 443 --> nginxruby
 internet -- 80 --> redirector
@@ -69,7 +80,7 @@ class dockerop docker
 class dockerruby docker
 classDef location fill:#000,stroke:#808080
 class rosenhof location
-class nuremberg location
+class undisclosed location
 class falkenstein location
 classDef server fill:#222,stroke:#000
 class tobias server
@@ -77,11 +88,19 @@ class rotmain server
 class ruby server
 
 click simon "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/simon" _blank
+click caddy "https://github.com/caddyserver/caddy" _blank
+click deploymenttobias "https://github.com/chrissxMedia/deployment" _blank
 click ali "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ali" _blank
 click murmur "https://github.com/mumble-voip/mumble-docker" _blank
 click home-assistant "https://github.com/home-assistant/core" _blank
+click matter-server "https://github.com/matter-js/matterjs-server" _blank
 click inventree "https://docs.inventree.org/en/latest/start/docker/" _blank
 click bucket "https://github.com/pixelcmtd/bucket" _blank
+click ferdium "https://github.com/ferdium/ferdium-server" _blank
+click kumatobias "https://github.com/louislam/uptime-kuma" _blank
+click autokumatobias "https://github.com/BigBoot/AutoKuma" _blank
+click kumaruby "https://github.com/louislam/uptime-kuma" _blank
+click autokumaruby "https://github.com/BigBoot/AutoKuma" _blank
 click watchtowertobias "https://watchtower.nickfedor.com/" _blank
 click jana "https://github.com/chrissxMedia/jana" _blank
 click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
@@ -100,7 +119,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | ----------- | ------------------------------------------- | ----------- | -------------------- | --------------------- | ------- |
 | ruby        | Hetzner CX23                                | Falkenstein | Ubuntu Server 24.04  | running               | 4.9€/mo |
 | tobias      | Lenovo ThinkCentre M710s                    | Rosenhof    | Ubuntu Server 22.04  | running               | 140€    |
-| rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Rosenhof    | DSM 7                | running               | 3500€   |
+| rotmain     | Synology DS1821+, 8x Seagate IronWolf 8TB   | Undisclosed | DSM 7                | running               | 3500€   |
 | veldenstein | Custom (Pentium G4400 based), 4x WD Red 4TB | Rosenhof    | Ubuntu Desktop 22.04 | emergency cold backup | 1000€   |
 
 ## DNS
@@ -149,7 +168,9 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `porn.chrissx.de`              | `ruby.chrissx.de`             |
 | CNAME | `qa.chrissx.de`                | `ruby.chrissx.de`             |
 | CNAME | `screwed.chrissx.de`           | `ruby.chrissx.de`             |
-| CNAME | `status.chrissx.de`            | `ruby.chrissx.de`             |
+| CNAME | `status-ruby.chrissx.de`       | `ruby.chrissx.de`             |
+| CNAME | `status-tobias.chrissx.de`     | `rosenhof.chrissx.de`         |
+| CNAME | `status.chrissx.de`            | `status-ruby.chrissx.de`      |
 | CNAME | `tor.chrissx.de`               | `op.chrissx.de`               |
 | CNAME | `wiki.chrissx.de`              | `ruby.chrissx.de`             |
 | CNAME | `chrissx.de`                   | `ruby.chrissx.de`             |
@@ -159,7 +180,7 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 | CNAME | `fuxgames.com`                 | `ruby.chrissx.de`             |
 | CNAME | `gock.dev`                     | `ruby.chrissx.de`             |
 | CNAME | `kinkcheck.top`                | `ruby.chrissx.de`             |
-| CNAME | `bottom.kinkcheck.top`         | `ruby.chrissx.de`             |
+| CNAME | `bottom.kinkcheck.top`         | `kinkcheck.top`               |
 | CNAME | `lowlevelmusic.com`            | `ruby.chrissx.de`             |
 | CNAME | `zerm.eu`                      | `ruby.chrissx.de`             |
 | CNAME | `zerm.link`                    | `ruby.chrissx.de`             |
@@ -178,7 +199,8 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 - /root/.gitconfig
 - watchtower
 
-> We use the [nickfedor fork of Watchtower](https://github.com/nicholas-fedor/watchtower).
+> We use the
+> [nickfedor fork of Watchtower](https://github.com/nicholas-fedor/watchtower).
 
 The following steps are left to the admin:
 
