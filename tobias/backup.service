@@ -1,0 +1,8 @@
+[Unit]
+Description=Data backup
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rsync -rltvhXPu --password-file /BACKUP_PASSWORD --exclude node_modules --exclude /tmp --exclude /var/tmp --exclude /proc --exclude /sys --exclude /dev --exclude /run --exclude /BACKUP_PASSWORD --exclude swapfile / tobias@rotmain.chrissx.de::home/backup
