@@ -1,6 +1,8 @@
 #!/bin/sh
 set -ue
 
+bash /update-aliases.sh
+
 pids=""
 start_svc() {
   ( "$@" ) &

@@ -23,4 +23,5 @@ COPY signingtable /etc/postfix/dkim/signingtable
 
 COPY start.sh /start.sh
 COPY sender-check.py /sender-check.py
+COPY update-aliases.sh /update-aliases.sh
 CMD ["sh", "/start.sh"]
