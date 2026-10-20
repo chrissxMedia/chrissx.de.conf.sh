@@ -5,6 +5,8 @@ ali and inventree are not part of this.
 
 ## Setup
 
+Use [cloud-init.yaml](cloud-init.yaml) to prepare the host, then skip step 1.
+
 1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /home/pixel/deployment/conf`
 2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL` and
    `SIMON_TOKEN`. Only public repositories are deployed here, so unlike ruby
@@ -20,6 +22,17 @@ ali and inventree are not part of this.
    Trusted proxies takes the network address, for example `172.20.0.0/16`. If
    Home Assistant logs a different untrusted proxy IP, use the subnet containing
    that IP. Confirm the HTTP settings after Home Assistant restarts.
+
+## Backup
+
+Create `/BACKUP_PASSWORD`, owned by `root:root` with mode `0600`, then run from
+`tobias/`:
+
+```sh
+sudo install -m 644 backup.service backup.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now backup.timer
+```
 
 ## Deploy
 
