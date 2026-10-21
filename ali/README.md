@@ -39,45 +39,14 @@ echo 'bar@chrissx.de foo@chrissx.de' >> aliases
 sudo docker exec ali bash /update-aliases.sh
 ```
 
-The script rebuilds `aliases.db`, generates `sender_logins` and reloads Postfix.
-It also runs at container startup. Run it after removing or changing an alias
-too. Both generated files live in `/mail`; edit only `aliases`.
+Run the script after adding, changing or removing aliases. Direct local
+recipients can also send as their aliases. Catchalls and alias chains do not
+grant sending rights.
 
 ## Sending mail
 
-Use port 587 with STARTTLS or port 465 with implicit TLS. Both require
-authentication. Port 25 accepts incoming mail and does not offer AUTH.
+Use port 587 with STARTTLS or port 465 with implicit TLS. Both require your
+mailbox login. Port 25 is for incoming mail.
 
-The authenticated user must own both the SMTP envelope sender and the message's
-`From` address. The generated `smtpd_sender_login_maps` rule derives ownership
-from `username@chrissx.de`, so adding a user needs no extra map entry. Usernames
-may contain ASCII letters, digits, underscores, dots and hyphens. Postfix
-rejects envelope senders whose local part starts with a hyphen. Dovecot rejects
-plus signs in logins. Sender extensions do not grant ownership to the base
-username.
-
-The header filter uses Python's email parser and queries the same Postfix map.
-Authenticated messages must have exactly one valid `From` header containing one
-address. Empty envelope senders, such as read receipts, still require an owned
-`From` address. If the authenticated username is unavailable, or the filter or
-lookup fails, submission temporarily fails. Check `docker logs ali` for lookup
-errors and timeouts. Incoming mail does not use this filter. The existing
-`soft_bounce=yes` setting also makes policy rejections temporary SMTP errors.
-
-Direct aliases to `username@chrissx.de` also let that user send as the alias.
-For the example above, both `foo` and `bar` may send as `bar@chrissx.de`. Shared
-aliases grant permission to each direct local recipient. Catchalls, external
-forwarding addresses and alias chains do not grant additional sending rights. No
-image rebuild is needed when aliases change.
-
-Keep the ownership map as `regexp:`. Both checks query the exact address with
-this map type. Indexed maps such as `hash:` let Postfix fall back to
-extension-stripped or bare-localpart keys, which the header filter does not
-query.
-
-See
-[Postfix sender ownership checks](https://www.postfix.org/postconf.5.html#smtpd_sender_login_maps),
-[regex tables](https://www.postfix.org/regexp_table.5.html),
-[Milter error handling](https://www.postfix.org/MILTER_README.html#per-milter),
-and
-[Dovecot's submission configuration](https://doc.dovecot.org/2.3/configuration_manual/howto/postfix_and_dovecot_sasl/).
+Both the envelope sender and the `From` address must be your
+`username@chrissx.de` or an alias you may send as.
