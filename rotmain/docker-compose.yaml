@@ -1,0 +1,25 @@
+name: rotmain
+
+services:
+  matter-server:
+    container_name: matter-server
+    image: ghcr.io/matter-js/matterjs-server:stable
+    # Matter needs IPv6 and mDNS multicast on the LAN.
+    network_mode: host
+    environment:
+      LISTEN_ADDRESS: 0.0.0.0
+    volumes:
+      - matter-data:/data
+    restart: unless-stopped
+    pull_policy: always
+  watchtower:
+    container_name: watchtower
+    image: nickfedor/watchtower:latest
+    command: --interval 3600 matter-server watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    pull_policy: always
+
+volumes:
+  matter-data:
