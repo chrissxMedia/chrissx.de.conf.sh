@@ -1,6 +1,8 @@
 #!/bin/sh
 set -ue
 
+bash /update-aliases.sh
+
 pids=""
 start_svc() {
   ( "$@" ) &
@@ -8,6 +10,7 @@ start_svc() {
   pids="$pids $p"
 }
 
+start_svc runuser -u nobody -- python3 /sender-check.py
 start_svc postfix start-fg
 start_svc dovecot -F
 start_svc opendkim -f
