@@ -35,7 +35,12 @@ subgraph rosenhof["Rosenhof (cM Infra)<br/>192.168.178.0/24"]
 end
 
 subgraph undisclosed["Undisclosed (cM Infra)<br/>192.168.180.0/24"]
-  rotmain
+  subgraph rotmain
+    subgraph dockerrotmain[docker]
+      matterrotmain[matter-server]
+      watchtowerrotmain[watchtower]
+    end
+  end
 end
 backup.timer -- "873 via IPsec VPN" --> rotmain
 
@@ -78,6 +83,7 @@ jana --> discord
 classDef docker fill:#0092e7,stroke:#000
 class dockerop docker
 class dockerruby docker
+class dockerrotmain docker
 classDef location fill:#000,stroke:#808080
 class rosenhof location
 class undisclosed location
@@ -94,6 +100,7 @@ click ali "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ali" _
 click murmur "https://github.com/mumble-voip/mumble-docker" _blank
 click home-assistant "https://github.com/home-assistant/core" _blank
 click matter-server "https://github.com/matter-js/matterjs-server" _blank
+click matterrotmain "https://github.com/matter-js/matterjs-server" _blank
 click inventree "https://docs.inventree.org/en/latest/start/docker/" _blank
 click bucket "https://github.com/pixelcmtd/bucket" _blank
 click ferdium "https://github.com/ferdium/ferdium-server" _blank
@@ -106,6 +113,7 @@ click jana "https://github.com/chrissxMedia/jana" _blank
 click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
 click redirector "https://github.com/chrissxMedia/redirector" _blank
 click watchtowerruby "https://watchtower.nickfedor.com/" _blank
+click watchtowerrotmain "https://watchtower.nickfedor.com/" _blank
 click kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top" _blank
 click bottom.kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top/tree/bottom" _blank
 click jasmin "https://github.com/ZERMZeitung/jasmin" _blank
