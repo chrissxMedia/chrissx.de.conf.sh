@@ -1,0 +1,5 @@
+type = "keyword"
+name = "caddy-ruby-metrics"
+parent_name = "public/group"
+url = "https://ruby.chrissx.de/metrics"
+keyword = "# HELP caddy_"

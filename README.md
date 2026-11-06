@@ -12,7 +12,7 @@ subgraph rosenhof["Rosenhof (cM Infra)<br/>192.168.178.0/24"]
   subgraph tobias
     subgraph dockerop[docker]
       simon
-      caddy
+      caddytobias[caddy]
       deploymenttobias[deployment]
       ali
       murmur
@@ -26,11 +26,11 @@ subgraph rosenhof["Rosenhof (cM Infra)<br/>192.168.178.0/24"]
       jana -- 2333 --> lavalink
     end
     backup.timer
-    caddy -- 1339 --> inventree
-    caddy -- 8123 --> home-assistant
-    caddy -- 8022 --> bucket
-    caddy -- 3333 --> ferdium
-    caddy -- 3001 --> kumatobias
+    caddytobias -- 1339 --> inventree
+    caddytobias -- 8123 --> home-assistant
+    caddytobias -- 8022 --> bucket
+    caddytobias -- 3333 --> ferdium
+    caddytobias -- 3001 --> kumatobias
   end
 end
 
@@ -47,8 +47,7 @@ backup.timer -- "873 via IPsec VPN" --> rotmain
 subgraph falkenstein["Falkenstein (Hetzner Infra)"]
   subgraph ruby
     subgraph dockerruby[docker]
-      nginxruby[nginx]
-      redirector
+      caddyruby[caddy]
       deployment
       kinkcheck.top
       bottom.kinkcheck.top
@@ -58,24 +57,23 @@ subgraph falkenstein["Falkenstein (Hetzner Infra)"]
       autokumaruby[autokuma] -- 3001 --> kumaruby
       watchtowerruby[watchtower]
     end
-    nginxruby -- 3001 --> kumaruby
-    nginxruby -- 4321 --> kinkcheck.top
-    nginxruby -- 4321 --> bottom.kinkcheck.top
-    nginxruby -- 8099 --> jasmin
-    nginxruby -- 8080 --> erwin
+    caddyruby -- 3001 --> kumaruby
+    caddyruby -- 4321 --> kinkcheck.top
+    caddyruby -- 4321 --> bottom.kinkcheck.top
+    caddyruby -- 8099 --> jasmin
+    caddyruby -- 8080 --> erwin
   end
 end
 
 cloudflare(cloudflare.com)
 simon --> cloudflare
-simon --> nginxruby
+simon --> caddyruby
 
 internet(Users)
-internet -- "443, 80" --> caddy
+internet -- "443, 80" --> caddytobias
 internet -- "993, 143, 587, 465, 25" --> ali
 internet -- 64738 --> murmur
-internet -- 443 --> nginxruby
-internet -- 80 --> redirector
+internet -- "443, 80" --> caddyruby
 internet -- 8080 --> erwin
 discord(discord.com)
 jana --> discord
@@ -94,7 +92,8 @@ class rotmain server
 class ruby server
 
 click simon "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/simon" _blank
-click caddy "https://github.com/caddyserver/caddy" _blank
+click caddytobias "https://github.com/caddyserver/caddy" _blank
+click caddyruby "https://github.com/caddyserver/caddy" _blank
 click deploymenttobias "https://github.com/chrissxMedia/deployment" _blank
 click ali "https://github.com/chrissxMedia/chrissx.de.conf.sh/tree/master/ali" _blank
 click murmur "https://github.com/mumble-voip/mumble-docker" _blank
@@ -111,7 +110,6 @@ click autokumaruby "https://github.com/BigBoot/AutoKuma" _blank
 click watchtowertobias "https://watchtower.nickfedor.com/" _blank
 click jana "https://github.com/chrissxMedia/jana" _blank
 click lavalink "https://github.com/lavalink-devs/Lavalink/pkgs/container/lavalink" _blank
-click redirector "https://github.com/chrissxMedia/redirector" _blank
 click watchtowerruby "https://watchtower.nickfedor.com/" _blank
 click watchtowerrotmain "https://watchtower.nickfedor.com/" _blank
 click kinkcheck.top "https://github.com/chrissxMedia/KinkCheck.Top" _blank
@@ -213,18 +211,16 @@ click deployment "https://github.com/chrissxMedia/deployment" _blank
 The following steps are left to the admin:
 
 - Git key (/ghpass)
-- Cloudflare key (.env)
+- ACME email (.env)
 
 [`docker-compose`](ruby/docker-compose.yaml) starts the following services:
 
-- 5x certbot
 - deployment
-- redirector
 - erwin
 - jasmin
 - bottom.kinkcheck.top
 - kinkcheck.top
-- nginx
+- caddy
 
 ### tobias
 
