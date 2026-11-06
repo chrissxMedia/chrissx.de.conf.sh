@@ -38,7 +38,7 @@ sudo systemctl enable --now backup.timer
 
 ```sh
 sudo install -d -m 700 -o 1000 -g 1000 /home/pixel/deployment/data/matter-server
-docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile
 docker compose up -d
 ```
 
@@ -83,10 +83,11 @@ write lock. To add another account, repeat the commands after `up`.
 In Ferdium, select Change Server and enter `https://ferdium.chrissx.de`.
 Back up the data directory, including its keys, with Ferdium stopped.
 
-## After changing the Caddyfile
+## After changing the Caddy configuration
 
 `deployment` pulls this repository, Caddy does not notice. Restart it:
 
 ```sh
+docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile
 docker compose restart caddy
 ```
