@@ -5,7 +5,7 @@ A straight-forward Docker-distribution of `postfix` and `dovecot` with
 
 First, make sure that the current directory contains the following files:
 
-- `aliases.db`: a compiled `postmap` (`hash:`) database of aliases
+- `aliases`: a text file mapping alias addresses to recipients, one per line
 - `users.passwd`: a `passwd` file with all the mail users and their (hashed)
   passwords
 - `mail.private`: the private key for `opendkim` signing (please `chown 104:106`
@@ -41,5 +41,17 @@ sudo docker restart ali
 
 ```sh
 echo 'bar@chrissx.de foo@chrissx.de' >> aliases
-sudo docker exec -it ali postmap hash:/mail/aliases
+sudo docker exec ali bash /update-aliases.sh
 ```
+
+Run the script after adding, changing or removing aliases. Direct local
+recipients can also send as their aliases. Catchalls and alias chains do not
+grant sending rights.
+
+## Sending mail
+
+Use port 587 with STARTTLS or port 465 with implicit TLS. Both require your
+mailbox login. Port 25 is for incoming mail.
+
+Both the envelope sender and the `From` address must be your
+`username@chrissx.de` or an alias you may send as.
