@@ -1,13 +1,13 @@
 # tobias
 
-Most of tobias in one compose project. It replaced the nginx with caddy.
-ali and inventree are not part of this.
+Most of tobias in one compose project. It replaced the nginx with caddy. ali and
+inventree are not part of this.
 
 ## Setup
 
 Use [cloud-init.yaml](cloud-init.yaml) to prepare the host, then skip step 1.
 
-1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /home/pixel/deployment/conf`
+1. `sudo git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf`
 2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL` and
    `SIMON_TOKEN`. Only public repositories are deployed here, so unlike ruby
    there is no Git key and no `/ghpass`.
@@ -37,27 +37,28 @@ sudo systemctl enable --now backup.timer
 ## Deploy
 
 ```sh
-sudo install -d -m 700 -o 1000 -g 1000 /home/pixel/deployment/data/matter-server
+sudo install -d -m 700 -o 1000 -g 1000 /var/matter-server
 docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 docker compose up -d
 ```
 
 ## Matter
 
-Add the Matter integration in Home Assistant with `ws://127.0.0.1:5580/ws`.
-Pair through the Companion app. Thread devices need a border router.
+Add the Matter integration in Home Assistant with `ws://127.0.0.1:5580/ws`. Pair
+through the Companion app. Thread devices need a border router.
 
-Keep the host, phone and devices on the same LAN with IPv6 and multicast enabled.
-See the [host networking requirements](https://github.com/matter-js/matterjs-server/blob/main/docs/os_requirements.md).
+Keep the host, phone and devices on the same LAN with IPv6 and multicast
+enabled. See the
+[host networking requirements](https://github.com/matter-js/matterjs-server/blob/main/docs/os_requirements.md).
 
 Back up the Matter data directory with its container stopped.
 
 ## Ferdium accounts
 
 Run these commands in Bash from `tobias/`. The first start creates the database
-`ferdium.sqlite` and signing keys in `/home/pixel/deployment/data/ferdium/`.
-Registration is disabled. SMTP is not configured, so email password recovery
-is unavailable. Replace the example email and password below.
+`ferdium.sqlite` and signing keys in `/var/ferdium/`. Registration is disabled.
+SMTP is not configured, so email password recovery is unavailable. Replace the
+example email and password below.
 
 ```bash
 docker compose up -d --wait ferdium
@@ -70,7 +71,7 @@ ferdium_key=$(openssl kdf -binary -keylen 64 \
   -kdfopt "hexsalt:$ferdium_salt_hex" \
   -kdfopt n:16384 -kdfopt r:8 -kdfopt p:1 SCRYPT | base64 -w 0 | tr -d '=')
 ferdium_hash='$scrypt$n=16384,r=8,p=1$'"${ferdium_salt//=}"'$'"$ferdium_key"
-sqlite3 -bail /home/pixel/deployment/data/ferdium/ferdium.sqlite <<SQL
+sqlite3 -bail /var/ferdium/ferdium.sqlite <<SQL
 .timeout 5000
 INSERT INTO users (username, email, password, lastname)
 VALUES ('${ferdium_email%%@*}', '$ferdium_email', '$ferdium_hash', '');
@@ -79,9 +80,9 @@ SQL
 
 The OpenSSL commands apply SHA-256/base64 and scrypt with Ferdium's default
 parameters. `.timeout 5000` waits up to five seconds if Ferdium holds a database
-write lock. To add another account, repeat the commands after `up`.
-In Ferdium, select Change Server and enter `https://ferdium.chrissx.de`.
-Back up the data directory, including its keys, with Ferdium stopped.
+write lock. To add another account, repeat the commands after `up`. In Ferdium,
+select Change Server and enter `https://ferdium.chrissx.de`. Back up the data
+directory, including its keys, with Ferdium stopped.
 
 ## After changing the Caddyfile
 
