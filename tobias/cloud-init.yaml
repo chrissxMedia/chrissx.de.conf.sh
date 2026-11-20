@@ -22,8 +22,8 @@ write_files:
 
 runcmd:
   - usermod -aG docker pixel
-  - mkdir -p /home/pixel/deployment
-  - git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /home/pixel/deployment/conf
-  - install -m 644 /home/pixel/deployment/conf/tobias/backup.service /home/pixel/deployment/conf/tobias/backup.timer /etc/systemd/system/
+  - mkdir -p /var/deployment
+  - git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf
+  - install -m 644 /var/deployment/conf/tobias/backup.service /var/deployment/conf/tobias/backup.timer /etc/systemd/system/
   - systemctl daemon-reload
   - systemctl enable --now docker
