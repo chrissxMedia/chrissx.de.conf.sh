@@ -7,7 +7,7 @@ services:
     init: true
     command: -D -H /var/deployment -d /var/deployment/conf/tobias/deployments.csv
     volumes:
-      - /home/pixel/deployment:/var/deployment
+      - /var/deployment:/var/deployment
     restart: unless-stopped
     pull_policy: always
   caddy:
@@ -29,10 +29,10 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - /home/pixel/deployment/conf/caddy:/etc/caddy:ro
-      - /home/pixel/deployment/dist:/srv/dist:ro
-      - /home/pixel/caddy-data:/data
-      - /home/pixel/deployment/data/caddy-config:/config
+      - /var/deployment/conf/caddy:/etc/caddy:ro
+      - /var/deployment/dist:/srv/dist:ro
+      - /var/caddy/data:/data
+      - /var/caddy/config:/config
     restart: unless-stopped
     pull_policy: always
   bucket:
@@ -41,7 +41,7 @@ services:
     networks:
       - webservices
     volumes:
-      - /home/pixel/bucket:/var/bucket
+      - /var/bucket:/var/bucket
     restart: unless-stopped
     pull_policy: always
   ferdium:
@@ -61,8 +61,8 @@ services:
     networks:
       - webservices
     volumes:
-      - /home/pixel/deployment/data/ferdium:/data
-      - /home/pixel/deployment/data/ferdium/recipes:/app/build/recipes
+      - /var/ferdium:/data
+      - /var/ferdium/recipes:/app/build/recipes
     restart: unless-stopped
     pull_policy: always
   homeassistant:
@@ -75,7 +75,7 @@ services:
     group_add:
       - dialout
     volumes:
-      - /home/pixel/ha:/config
+      - /var/hass:/config
     restart: unless-stopped
     pull_policy: always
   matter-server:
@@ -86,7 +86,7 @@ services:
     environment:
       LISTEN_ADDRESS: 127.0.0.1
     volumes:
-      - /home/pixel/deployment/data/matter-server:/data
+      - /var/matter-server:/data
     restart: unless-stopped
     pull_policy: always
   mumble:
@@ -96,7 +96,7 @@ services:
       - 64738:64738/tcp
       - 64738:64738/udp
     volumes:
-      - /home/pixel/mumble:/data
+      - /var/mumble:/data
     restart: unless-stopped
     pull_policy: always
   simon:
