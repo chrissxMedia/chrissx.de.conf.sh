@@ -36,46 +36,19 @@
 	}
 }
 
-rosenhof.chrissx.de {
-	import headers
-	root * /srv/dist/new/dist
-	redir /merch /shop 301
-	redir /dycc /discord 301
-	redir /discord https://discord.gg/a2eAnvUscU 302
-	redir /twitter https://twitter.com/chrissxMedia 302
-	redir /instagram https://instagram.com/pixelcmtd 302
-	metrics /metrics
-	file_server browse
-	# 404.html is built from src/pages/404.astro in new.chrissx.de.
-	handle_errors {
+(not-found) {
+	# The shared 404 page is built by new.chrissx.de.
+	handle_errors 404 {
 		import security
+		root * /srv/dist/new/dist
 		rewrite * /404.html
 		file_server
 	}
 }
 
-autoconfig.chrissx.de {
+(static) {
 	import headers
-	root * /srv/dist/new/dist/.well-known/autoconfig
+	root * /srv/dist/{args[0]}/dist
 	file_server
-}
-
-bucket.chrissx.de {
-	import proxy bucket:8022
-}
-
-ferdium.chrissx.de {
-	import proxy ferdium:3333
-}
-
-inv.chrissx.de {
-	import proxy host.docker.internal:1339
-}
-
-ha.chrissx.de {
-	import proxy host.docker.internal:8123
-}
-
-status-tobias.chrissx.de {
-	import proxy kuma:3001
+	import not-found
 }

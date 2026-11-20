@@ -13,6 +13,7 @@ services:
   caddy:
     container_name: caddy
     image: caddy:2-alpine
+    command: caddy run --config /etc/caddy/tobias.caddy --adapter caddyfile
     depends_on:
       deployment:
         condition: service_healthy
@@ -28,7 +29,7 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - /var/deployment/conf/tobias/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/deployment/conf/caddy:/etc/caddy:ro
       - /var/deployment/dist:/srv/dist:ro
       - /var/caddy/data:/data
       - /var/caddy/config:/config

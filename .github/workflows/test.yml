@@ -7,21 +7,26 @@ on:
 jobs:
   caddy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        host: [ruby, tobias]
     steps:
       - uses: actions/checkout@v7
       - name: Validate the Caddyfile
         run: |
           docker run --rm -e ACME_EMAIL=noreply@chrissx.de \
-            -v "$PWD/tobias/Caddyfile:/etc/caddy/Caddyfile:ro" \
-            caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+            -v "$PWD/caddy:/etc/caddy:ro" \
+            caddy:2-alpine caddy validate --config /etc/caddy/${{ matrix.host }}.caddy --adapter caddyfile
       - name: Check the Caddyfile formatting
         run: |
-          docker run --rm -v "$PWD/tobias/Caddyfile:/etc/caddy/Caddyfile:ro" \
-            caddy:2-alpine caddy fmt --diff /etc/caddy/Caddyfile
+          for file in ${{ matrix.host }}.caddy common.caddy sites.caddy; do
+            docker run --rm -v "$PWD/caddy:/etc/caddy:ro" \
+              caddy:2-alpine caddy fmt --diff "/etc/caddy/$file"
+          done
       - name: Validate the compose file
         env:
           ACME_EMAIL: noreply@chrissx.de
           SIMON_TOKEN: ci
           SIMON_RECORD4: ci
           SIMON_RECORD6: ci
-        run: docker compose -f tobias/docker-compose.yaml config -q
+        run: docker compose -f ${{ matrix.host }}/docker-compose.yaml config -q

@@ -1,0 +1,71 @@
+import common.caddy
+import sites.caddy
+
+chrissx.de www.chrissx.de ruby.chrissx.de media.chrissx.de new.chrissx.de {
+	import main
+	file_server
+}
+
+meme.chrissx.de {
+	import static meme
+}
+
+lyrics.chrissx.de {
+	import headers
+	redir https://chrissx.de/lyrics/ 301
+}
+
+fuxgames.com www.fuxgames.com {
+	import static fux
+}
+
+screwed.chrissx.de {
+	import static screwed
+}
+
+chrisxeric.de www.chrisxeric.de {
+	import static cxe
+}
+
+gock.dev pixel.chrissx.de www.gock.dev {
+	import pixel
+}
+
+elonisnwichser.de www.elonisnwichser.de {
+	import headers
+	redir https://twitter.com/pixelcmtd 302
+}
+
+emilycatgirl.de www.emilycatgirl.de {
+	import static emily
+}
+
+emilys-eichelkaese-und-boobmilk-shop.kinkcheck.top {
+	import headers
+	redir https://emilycatgirl.de/ 302
+}
+
+fonts.chrissx.de {
+	import fonts
+}
+
+erwin.chrissx.de {
+	import proxy erwin:8080
+}
+
+kinkcheck.top www.kinkcheck.top {
+	import proxy kct-main:4321
+}
+
+bottom.kinkcheck.top {
+	import proxy kct-bottom:4321
+}
+
+zerm.eu zerm.link www.zerm.eu www.zerm.link {
+	import proxy jasmin:8099
+	redir /P41531.pdf https://youtu.be/dQw4w9WgXcQ 301
+}
+
+status-ruby.chrissx.de status.chrissx.de {
+	import proxy kuma:3001
+}

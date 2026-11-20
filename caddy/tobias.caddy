@@ -1,0 +1,31 @@
+import common.caddy
+import sites.caddy
+
+rosenhof.chrissx.de {
+	import main
+	file_server browse
+}
+
+autoconfig.chrissx.de {
+	import autoconfig
+}
+
+bucket.chrissx.de {
+	import proxy bucket:8022
+}
+
+ferdium.chrissx.de {
+	import proxy ferdium:3333
+}
+
+inv.chrissx.de {
+	import proxy host.docker.internal:1339
+}
+
+ha.chrissx.de {
+	import proxy host.docker.internal:8123
+}
+
+status-tobias.chrissx.de {
+	import proxy kuma:3001
+}
