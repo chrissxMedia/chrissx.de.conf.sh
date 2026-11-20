@@ -3,11 +3,13 @@
 Most of tobias in one compose project. It replaced the nginx with caddy. ali and
 inventree are not part of this.
 
+Run the shell commands below as root. Enter a root shell with `sudo -i`.
+
 ## Setup
 
 Use [cloud-init.yaml](cloud-init.yaml) to prepare the host, then skip step 1.
 
-1. `sudo git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf`
+1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf`
 2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL` and
    `SIMON_TOKEN`. Only public repositories are deployed here, so unlike ruby
    there is no Git key and no `/ghpass`.
