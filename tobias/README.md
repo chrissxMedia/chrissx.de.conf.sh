@@ -96,27 +96,11 @@ docker compose restart caddy
 
 ## InvenTree proxy
 
-InvenTree still runs from `/home/pixel/inventree-26`. Caddy serves its static
-files and checks `/auth/` with InvenTree before serving media downloads.
-
-1. Get the IPv4 address Caddy uses for Docker's host gateway.
-
-   ```sh
-   docker exec caddy awk '$2 == "host.docker.internal" && $1 !~ /:/ { print $1; exit }' /etc/hosts
-   ```
-
-2. In `/home/pixel/inventree-26/.env`, set `INVENTREE_HOST_GATEWAY` to that
-   address, keep `INVENTREE_WEB_PORT=8000`, and set
-   `INVENTREE_USE_X_FORWARDED_PROTO=True`. Add this to the `inventree-server`
-   service in the standalone Compose file.
-
-   ```yaml
-   ports:
-     - "${INVENTREE_HOST_GATEWAY:?Set the Docker host gateway}:8000:8000"
-   ```
-
-   Run `docker compose up -d` from `/home/pixel/inventree-26`.
-3. Deploy the Tobias Compose project as above. Check the health endpoint and
+1. In `/home/pixel/inventree-26`, add `ports: ["8000:8000"]` to the
+   `inventree-server` service. Keep `INVENTREE_WEB_PORT=8000` and set
+   `INVENTREE_USE_X_FORWARDED_PROTO=True` in `.env`, then run
+   `docker compose up -d`.
+2. Deploy the Tobias Compose project as above. Check the health endpoint and
    open an existing attachment while signed in. Verify the attachment request
    fails in a signed-out window.
 
@@ -124,7 +108,7 @@ files and checks `/auth/` with InvenTree before serving media downloads.
    curl -fsS https://inv.chrissx.de/api/system/health/
    ```
 
-4. From `/home/pixel/inventree-26`, stop nginx with
+3. From `/home/pixel/inventree-26`, stop nginx with
    `docker compose stop inventree-proxy`, then remove the `inventree-proxy`
    service from the standalone Compose file. This retires the port `1339`
    mapping.
