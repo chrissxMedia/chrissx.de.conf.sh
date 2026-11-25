@@ -93,3 +93,22 @@ directory, including its keys, with Ferdium stopped.
 ```sh
 docker compose restart caddy
 ```
+
+## InvenTree proxy
+
+1. In `/home/pixel/inventree-26`, add `ports: ["8000:8000"]` to the
+   `inventree-server` service. Keep `INVENTREE_WEB_PORT=8000` and set
+   `INVENTREE_USE_X_FORWARDED_PROTO=True` in `.env`, then run
+   `docker compose up -d`.
+2. Deploy the Tobias Compose project as above. Check the health endpoint and
+   open an existing attachment while signed in. Verify the attachment request
+   fails in a signed-out window.
+
+   ```sh
+   curl -fsS https://inv.chrissx.de/api/system/health/
+   ```
+
+3. From `/home/pixel/inventree-26`, stop nginx with
+   `docker compose stop inventree-proxy`, then remove the `inventree-proxy`
+   service from the standalone Compose file. This retires the port `1339`
+   mapping.

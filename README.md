@@ -26,7 +26,7 @@ subgraph rosenhof["Rosenhof (cM Infra)<br/>192.168.178.0/24"]
       jana -- 2333 --> lavalink
     end
     backup.timer
-    caddy -- 1339 --> inventree
+    caddy -- 8000 --> inventree
     caddy -- 8123 --> home-assistant
     caddy -- 8022 --> bucket
     caddy -- 3333 --> ferdium
