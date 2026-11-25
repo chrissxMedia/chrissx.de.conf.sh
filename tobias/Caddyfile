@@ -69,7 +69,31 @@ ferdium.chrissx.de {
 }
 
 inv.chrissx.de {
-	import proxy host.docker.internal:1339
+	import proxy host.docker.internal:8000
+
+	request_body {
+		max_size 100MiB
+	}
+
+	handle_path /static/* {
+		root * /srv/inventree/static
+		header Cache-Control "public, max-age=2592000"
+		file_server browse
+	}
+
+	handle_path /media/* {
+		root * /srv/inventree/media
+		route {
+			forward_auth host.docker.internal:8000 {
+				uri /auth/
+			}
+			header Content-Disposition attachment
+			file_server
+		}
+	}
+
+	@inventree_auth path /auth /auth/*
+	respond @inventree_auth 404
 }
 
 ha.chrissx.de {
