@@ -3,6 +3,8 @@ import sites.caddy
 
 chrissx.de www.chrissx.de ruby.chrissx.de media.chrissx.de new.chrissx.de {
 	import main
+	@bridgy path_regexp ^/\.well-known/(host-meta|webfinger).*
+	redir @bridgy https://fed.brid.gy{uri} 302
 	file_server
 }
 
@@ -63,6 +65,8 @@ bottom.kinkcheck.top {
 
 zerm.eu zerm.link www.zerm.eu www.zerm.link {
 	import proxy jasmin:8099
+	@bridgy path_regexp ^/\.well-known/(host-meta|webfinger).*
+	redir @bridgy https://fed.brid.gy{uri} 302
 	redir /P41531.pdf https://youtu.be/dQw4w9WgXcQ 301
 }
 

@@ -12,6 +12,8 @@
 
 (pixel) {
 	import static pixel
+	@bridgy path_regexp ^/\.well-known/(host-meta|webfinger).*
+	redir @bridgy https://fed.brid.gy{uri} 302
 	redir /twitter https://twitter.com/pixelcmtd 302
 	redir /instagram https://instagram.com/pixelcmtd 302
 }
@@ -33,4 +35,32 @@
 	import headers
 	root * /srv/dist/new/dist/.well-known/autoconfig
 	file_server
+}
+
+(inventree) {
+	import proxy host.docker.internal:8000
+
+	request_body {
+		max_size 100MiB
+	}
+
+	handle_path /static/* {
+		root * /srv/inventree/static
+		header Cache-Control "public, max-age=2592000"
+		file_server browse
+	}
+
+	handle_path /media/* {
+		root * /srv/inventree/media
+		route {
+			forward_auth host.docker.internal:8000 {
+				uri /auth/
+			}
+			header Content-Disposition attachment
+			file_server
+		}
+	}
+
+	@inventree_auth path /auth /auth/*
+	respond @inventree_auth 404
 }

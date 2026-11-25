@@ -31,6 +31,8 @@ services:
     volumes:
       - /var/deployment/conf/caddy:/etc/caddy:ro
       - /var/deployment/dist:/srv/dist:ro
+      - /home/pixel/inventree-26/data/static:/srv/inventree/static:ro
+      - /home/pixel/inventree-26/data/media:/srv/inventree/media:ro
       - /var/caddy/data:/data
       - /var/caddy/config:/config
     restart: unless-stopped

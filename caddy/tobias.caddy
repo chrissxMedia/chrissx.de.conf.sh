@@ -19,7 +19,7 @@ ferdium.chrissx.de {
 }
 
 inv.chrissx.de {
-	import proxy host.docker.internal:1339
+	import inventree
 }
 
 ha.chrissx.de {
