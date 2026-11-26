@@ -98,26 +98,15 @@ docker compose restart caddy
 
 ## InvenTree
 
-### Move the standalone Compose project into Tobias
-
-1. Set `INVENTREE_DB_PASSWORD` in `tobias/.env` to the current `pguser`
-   password. The Tobias project uses the existing `inventree` database and
-   `/home/pixel/inventree-26/data`.
-2. Stop and remove the standalone containers, then deploy from `tobias/`.
-
-   ```sh
-   (cd /home/pixel/inventree-26 && docker compose down) &&
-     (cd /var/deployment/conf/tobias && docker compose up -d && docker compose restart caddy)
-   ```
-
-3. Check `https://inv.chrissx.de/api/system/health/`, then sign in and open an
-   existing part and attachment. Check that the attachment requires a login.
+InvenTree stores its files in `/var/inventree/app`. PostgreSQL stores its
+cluster in `/var/inventree/postgres/19/docker`.
 
 ### Initialize an empty InvenTree database
 
 Run from `tobias/` before the first deploy of a new installation.
 
 ```sh
+install -d /var/inventree/postgres
 docker compose run --rm -T inventree-server invoke update --skip-backup </dev/null
 docker compose run --rm inventree-server python3 src/backend/InvenTree/manage.py createsuperuser
 ```

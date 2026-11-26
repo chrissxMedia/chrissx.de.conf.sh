@@ -30,8 +30,8 @@ services:
     volumes:
       - /var/deployment/conf/tobias/Caddyfile:/etc/caddy/Caddyfile:ro
       - /var/deployment/dist:/srv/dist:ro
-      - /home/pixel/inventree-26/data/static:/srv/inventree/static:ro
-      - /home/pixel/inventree-26/data/media:/srv/inventree/media:ro
+      - /var/inventree/app/static:/srv/inventree/static:ro
+      - /var/inventree/app/media:/srv/inventree/media:ro
       - /var/caddy/data:/data
       - /var/caddy/config:/config
     restart: unless-stopped
@@ -70,14 +70,17 @@ services:
     container_name: inventree-db
     image: postgres:19
     environment:
-      PGDATA: /var/lib/postgresql/data/pgdb
       POSTGRES_DB: inventree
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: ${INVENTREE_DB_PASSWORD:?Set INVENTREE_DB_PASSWORD in .env}
     networks:
       - inventree
     volumes:
-      - /home/pixel/inventree-26/data:/var/lib/postgresql/data
+      - type: bind
+        source: /var/inventree/postgres
+        target: /var/lib/postgresql
+        bind:
+          create_host_path: false
     healthcheck:
       test: [CMD, pg_isready, -h, 127.0.0.1, -U, pguser, -d, inventree]
       interval: 5s
@@ -107,7 +110,7 @@ services:
       - webservices
       - inventree
     volumes:
-      - /home/pixel/inventree-26/data:/home/inventree/data
+      - /var/inventree/app:/home/inventree/data
     healthcheck:
       test: [CMD, curl, -fsS, -H, "Host: inv.chrissx.de", "http://127.0.0.1:8000/api/system/health/"]
       interval: 10s
@@ -126,7 +129,7 @@ services:
     networks:
       - inventree
     volumes:
-      - /home/pixel/inventree-26/data:/home/inventree/data
+      - /var/inventree/app:/home/inventree/data
     restart: unless-stopped
   homeassistant:
     container_name: homeassistant
