@@ -29,4 +29,5 @@ jobs:
           SIMON_TOKEN: ci
           SIMON_RECORD4: ci
           SIMON_RECORD6: ci
+          INVENTREE_DB_PASSWORD: ci
         run: docker compose -f ${{ matrix.host }}/docker-compose.yaml config -q

@@ -38,7 +38,7 @@
 }
 
 (inventree) {
-	import proxy host.docker.internal:8000
+	import proxy inventree-server:8000
 
 	request_body {
 		max_size 100MiB
@@ -53,7 +53,7 @@
 	handle_path /media/* {
 		root * /srv/inventree/media
 		route {
-			forward_auth host.docker.internal:8000 {
+			forward_auth inventree-server:8000 {
 				uri /auth/
 			}
 			header Content-Disposition attachment
