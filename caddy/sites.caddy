@@ -1,0 +1,66 @@
+(main) {
+	import headers
+	root * /srv/dist/new/dist
+	redir /merch /shop 301
+	redir /dycc /discord 301
+	redir /discord https://discord.gg/a2eAnvUscU 302
+	redir /twitter https://twitter.com/chrissxMedia 302
+	redir /instagram https://instagram.com/pixelcmtd 302
+	metrics /metrics
+	import not-found
+}
+
+(pixel) {
+	import static pixel
+	@bridgy path_regexp ^/\.well-known/(host-meta|webfinger).*
+	redir @bridgy https://fed.brid.gy{uri} 302
+	redir /twitter https://twitter.com/pixelcmtd 302
+	redir /instagram https://instagram.com/pixelcmtd 302
+}
+
+(fonts) {
+	import headers
+	root * /srv/dist/fonts/dist
+	header Access-Control-Allow-Origin "*"
+	@css not path /fonts/*
+	header @css Content-Type text/css
+	header @css Cache-Control "max-age=3600"
+	header /fonts/* Cache-Control "max-age=31536000"
+	file_server {
+		index index
+	}
+}
+
+(autoconfig) {
+	import headers
+	root * /srv/dist/new/dist/.well-known/autoconfig
+	file_server
+}
+
+(inventree) {
+	import proxy inventree-server:8000
+
+	request_body {
+		max_size 100MiB
+	}
+
+	handle_path /static/* {
+		root * /srv/inventree/static
+		header Cache-Control "public, max-age=2592000"
+		file_server browse
+	}
+
+	handle_path /media/* {
+		root * /srv/inventree/media
+		route {
+			forward_auth inventree-server:8000 {
+				uri /auth/
+			}
+			header Content-Disposition attachment
+			file_server
+		}
+	}
+
+	@inventree_auth path /auth /auth/*
+	respond @inventree_auth 404
+}

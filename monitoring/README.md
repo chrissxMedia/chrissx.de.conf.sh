@@ -36,19 +36,10 @@ monitors when they disappear from its configuration.
 
 ## Proxy
 
-Serve `status-ruby`/`status-tobias` per site and `status.chrissx.de` from
-both. Port 3001 is published on all host IPv4 interfaces. On both hosts, join
-nginx to `monitoring_default`. Proxy needs WebSocket forwarding:
-
-```nginx
-location / {
-    proxy_pass http://kuma:3001;
-    include /etc/nginx/conf.d/proxy_params;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-}
-```
+Each host serves its dedicated `status-ruby` or `status-tobias` name. Ruby also
+serves `status.chrissx.de`. Port 3001 is published on all host IPv4 interfaces.
+Both Caddy containers join `monitoring_default`. The shared `proxy` snippet in
+[common.caddy](../caddy/common.caddy) forwards WebSockets to `kuma:3001`.
 
 With peer monitoring enabled, each peer must reach `/api/push/` without extra
 login. Treat push URLs as secrets.
@@ -78,13 +69,12 @@ instances.
 
 ## Coverage
 
-Public HTTP checks follow ruby's nginx config and tobias's TLS names, reject
-4xx/5xx, and check TLS. Metrics endpoints cover erwin, jasmin, redirector,
+Public HTTP checks follow the hosts' Caddy configurations, reject
+4xx/5xx, and check TLS. Metrics endpoints cover erwin, jasmin, Caddy,
 Docker and BUcKET (no history or per-container state). Mail checks TCP
 25/465/587/143/993, so they do not test mail delivery. Only tobias checks
 Mumble TCP at `op.chrissx.de:64738`. tobias also checks Home Assistant and
-InvenTree, plus its direct Docker and BUcKET endpoints. Jana is excluded; nginx
-`stub_status` is not Prometheus format.
+InvenTree, plus its direct Docker and BUcKET endpoints. Jana is excluded.
 
 ## Managing
 
