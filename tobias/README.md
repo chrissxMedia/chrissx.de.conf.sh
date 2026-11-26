@@ -42,8 +42,8 @@ sudo systemctl enable --now backup.timer
 
 ```sh
 sudo install -d -m 700 -o 1000 -g 1000 /var/matter-server
-docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile
-docker compose up -d
+docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile &&
+  docker compose up -d
 ```
 
 ## Matter
@@ -93,8 +93,8 @@ directory, including its keys, with Ferdium stopped.
 `deployment` pulls this repository, Caddy does not notice. Restart it:
 
 ```sh
-docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile
-docker compose restart caddy
+docker compose run --rm --no-deps caddy caddy validate --config /etc/caddy/tobias.caddy --adapter caddyfile &&
+  docker compose restart caddy
 ```
 
 ## InvenTree
