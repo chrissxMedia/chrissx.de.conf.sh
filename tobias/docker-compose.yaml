@@ -66,6 +66,68 @@ services:
       - /var/ferdium/recipes:/app/build/recipes
     restart: unless-stopped
     pull_policy: always
+  inventree-db:
+    container_name: inventree-db
+    image: postgres:19
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdb
+      POSTGRES_DB: inventree
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: ${INVENTREE_DB_PASSWORD:?Set INVENTREE_DB_PASSWORD in .env}
+    networks:
+      - inventree
+    volumes:
+      - /home/pixel/inventree-26/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD, pg_isready, -h, 127.0.0.1, -U, pguser, -d, inventree]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  inventree-server:
+    container_name: inventree-server
+    image: inventree/inventree:stable
+    depends_on:
+      inventree-db:
+        condition: service_healthy
+    environment: &inventree-env
+      INVENTREE_DB_ENGINE: postgresql
+      INVENTREE_DB_HOST: inventree-db
+      INVENTREE_DB_PORT: "5432"
+      INVENTREE_DB_NAME: inventree
+      INVENTREE_DB_USER: pguser
+      INVENTREE_DB_PASSWORD: ${INVENTREE_DB_PASSWORD:?Set INVENTREE_DB_PASSWORD in .env}
+      INVENTREE_WEB_PORT: "8000"
+      INVENTREE_SITE_URL: https://inv.chrissx.de
+      INVENTREE_USE_X_FORWARDED_PROTO: "True"
+      INVENTREE_DEBUG: "False"
+      INVENTREE_LOG_LEVEL: WARNING
+      INVENTREE_PLUGINS_ENABLED: "True"
+    networks:
+      - webservices
+      - inventree
+    volumes:
+      - /home/pixel/inventree-26/data:/home/inventree/data
+    healthcheck:
+      test: [CMD, curl, -fsS, -H, "Host: inv.chrissx.de", "http://127.0.0.1:8000/api/system/health/"]
+      interval: 10s
+      timeout: 5s
+      start_period: 60s
+      retries: 6
+    restart: unless-stopped
+  inventree-worker:
+    container_name: inventree-worker
+    image: inventree/inventree:stable
+    command: invoke worker
+    depends_on:
+      inventree-server:
+        condition: service_healthy
+    environment: *inventree-env
+    networks:
+      - inventree
+    volumes:
+      - /home/pixel/inventree-26/data:/home/inventree/data
+    restart: unless-stopped
   homeassistant:
     container_name: homeassistant
     image: ghcr.io/home-assistant/home-assistant:stable
@@ -123,5 +185,6 @@ services:
 networks:
   webservices:
     enable_ipv6: true
+  inventree:
   monitoring_default:
     external: true

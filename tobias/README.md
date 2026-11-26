@@ -1,7 +1,7 @@
 # tobias
 
-Most of tobias in one compose project. It replaced the nginx with caddy. ali and
-inventree are not part of this.
+Most of tobias in one compose project. It replaced the nginx with caddy. ali
+still runs separately.
 
 Run the shell commands below as root. Enter a root shell with `sudo -i`.
 
@@ -10,10 +10,12 @@ Run the shell commands below as root. Enter a root shell with `sudo -i`.
 Use [cloud-init.yaml](cloud-init.yaml) to prepare the host, then skip step 1.
 
 1. `git clone https://github.com/chrissxMedia/chrissx.de.conf.sh.git /var/deployment/conf`
-2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL` and
-   `SIMON_TOKEN`. Only public repositories are deployed here, so unlike ruby
-   there is no Git key and no `/ghpass`.
-3. Deploy the services (see below).
+2. Copy `.env.example` to `.env` (`chmod 600`) and fill in `ACME_EMAIL`,
+   `SIMON_TOKEN`, and `INVENTREE_DB_PASSWORD`. Only public repositories are
+   deployed here, so unlike ruby there is no Git key and no `/ghpass`.
+3. For a fresh database,
+   [initialize InvenTree](#initialize-an-empty-inventree-database) before
+   deploying the services.
 4. Go to `http://192.168.178.68:8123`, Settings > System > Network.
 5. Set the external URL to `https://ha.chrissx.de`.
 6. In HTTP server, enable Trust X-Forwarded-For and add Caddy's Docker network
@@ -94,21 +96,28 @@ directory, including its keys, with Ferdium stopped.
 docker compose restart caddy
 ```
 
-## InvenTree proxy
+## InvenTree
 
-1. In `/home/pixel/inventree-26`, add `ports: ["8000:8000"]` to the
-   `inventree-server` service. Keep `INVENTREE_WEB_PORT=8000` and set
-   `INVENTREE_USE_X_FORWARDED_PROTO=True` in `.env`, then run
-   `docker compose up -d`.
-2. Deploy the Tobias Compose project as above. Check the health endpoint and
-   open an existing attachment while signed in. Verify the attachment request
-   fails in a signed-out window.
+### Move the standalone Compose project into Tobias
+
+1. Set `INVENTREE_DB_PASSWORD` in `tobias/.env` to the current `pguser`
+   password. The Tobias project uses the existing `inventree` database and
+   `/home/pixel/inventree-26/data`.
+2. Stop and remove the standalone containers, then deploy from `tobias/`.
 
    ```sh
-   curl -fsS https://inv.chrissx.de/api/system/health/
+   (cd /home/pixel/inventree-26 && docker compose down) &&
+     (cd /var/deployment/conf/tobias && docker compose up -d && docker compose restart caddy)
    ```
 
-3. From `/home/pixel/inventree-26`, stop nginx with
-   `docker compose stop inventree-proxy`, then remove the `inventree-proxy`
-   service from the standalone Compose file. This retires the port `1339`
-   mapping.
+3. Check `https://inv.chrissx.de/api/system/health/`, then sign in and open an
+   existing part and attachment. Check that the attachment requires a login.
+
+### Initialize an empty InvenTree database
+
+Run from `tobias/` before the first deploy of a new installation.
+
+```sh
+docker compose run --rm -T inventree-server invoke update --skip-backup </dev/null
+docker compose run --rm inventree-server python3 src/backend/InvenTree/manage.py createsuperuser
+```
